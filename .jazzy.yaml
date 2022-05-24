@@ -1,0 +1,16 @@
+author: 'Y Media Labs'
+author_url: https://yml.co
+min_acl: public
+hide_documentation_coverage: false
+theme: fullwidth
+output: ./docs
+documentation: ./*.md
+swift_build_tool: xcodebuild
+module: YMatterType
+xcodebuild_arguments:
+  - -scheme
+  - YMatterType
+  - -sdk
+  - iphonesimulator
+  - -destination
+  - 'platform=iOS Simulator,name=iPhone 13'
