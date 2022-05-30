@@ -29,7 +29,8 @@ let package = Package(
         ),
         .testTarget(
             name: "YMatterTypeTests",
-            dependencies: ["YMatterType"]
+            dependencies: ["YMatterType"],
+            resources: [.copy("Assets")]
         )
     ]
 )
