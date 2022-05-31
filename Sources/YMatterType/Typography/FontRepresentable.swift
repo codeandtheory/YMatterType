@@ -56,11 +56,15 @@ public protocol FontRepresentable {
     func accessibilityBoldWeight(for weight: Typography.FontWeight) -> Typography.FontWeight
 }
 
+extension Typography {
+    fileprivate static let logger = Logger(subsystem: "YMatterType", category: "fonts")
+}
+
 // MARK: - Default implementations
 
 extension FontRepresentable {
     public var fontNameSuffix: String { "" }
-    
+
     public func font(
         for weight: Typography.FontWeight,
         pointSize: CGFloat,
@@ -68,8 +72,8 @@ extension FontRepresentable {
     ) -> UIFont {
         let name = fontName(for: weight, compatibleWith: traitCollection)
         guard let font = UIFont(name: name, size: pointSize) else {
-            // Fallback to system font
-            print("Custom font \(name) not properly installed")
+            // Fallback to system font and log a message.
+            Typography.logger.warning("Custom font \(name) not properly installed.")
             return FontInfo.system.font(
                 for: weight,
                 pointSize: pointSize,
