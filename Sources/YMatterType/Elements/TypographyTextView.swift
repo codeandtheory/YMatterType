@@ -78,9 +78,7 @@ open class TypographyTextView: UITextView {
 
     /// :nodoc:
     override public var text: String! {
-        get {
-            return super.text
-        }
+        get { super.text }
         set {
             // When text is set, we may need to re-style it as attributedText
             // with the correct paragraph style to achieve the desired line height.
@@ -91,9 +89,7 @@ open class TypographyTextView: UITextView {
 
     /// :nodoc:
     override public var attributedText: NSAttributedString? {
-        get {
-            return super.attributedText
-        }
+        get { super.attributedText }
         set {
             // When text is set, we may need to re-style it as attributedText
             // with the correct paragraph style to achieve the desired line height.

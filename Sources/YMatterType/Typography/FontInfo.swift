@@ -33,6 +33,6 @@ public struct FontInfo: FontRepresentable {
     /// e.g. "Italic" is a typical suffix for Italic fonts.
     /// default = ""
     public var fontNameSuffix: String {
-        return isItalic ? FontInfo.italicSuffix : ""
+        isItalic ? FontInfo.italicSuffix : ""
     }
 }

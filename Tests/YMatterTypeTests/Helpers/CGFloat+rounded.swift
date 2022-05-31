@@ -19,7 +19,7 @@ extension CGFloat {
         _ rule: FloatingPointRoundingRule = .toNearestOrAwayFromZero,
         scale: CGFloat
     ) -> CGFloat {
-        return (self * scale).rounded(rule) / scale
+        (self * scale).rounded(rule) / scale
     }
     
     /// Floors float to 1/scale, e.g. round down to nearest 0.5 on 2x scale, or 0.333 on 3x scale.
