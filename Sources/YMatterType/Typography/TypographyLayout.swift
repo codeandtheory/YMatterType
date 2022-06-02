@@ -30,7 +30,7 @@ public struct TypographyLayout {
     /// Text decoration to apply
     public let textDecoration: Typography.TextDecoration
 
-    /// Paragraph style with the correct line height multiple (to achieve the desired line height)
+    /// Paragraph style with the correct line height for rendering multi-line text
     public let paragraphStyle: NSParagraphStyle
 
     /// Line height multiple to use with this font (to achieve the desired line height)

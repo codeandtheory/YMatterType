@@ -15,7 +15,7 @@ extension Typography {
     /// - Parameters:
     ///   - maximumPointSize: (optional) maximum point size for Dynamic Type, default = nil, means no maximum
     ///   - traitCollection: trait collection to apply (looking for preferredContentSizeCategory and legibilityWeight)
-    /// - Returns: Font, line height multiple, and paragraph style to render the Typography
+    /// - Returns: Font and various styles used to render the Typography
     public func generateLayout(
         maximumPointSize: CGFloat? = nil,
         compatibleWith traitCollection: UITraitCollection?
@@ -88,7 +88,7 @@ extension Typography {
     ///   - maximumScaleFactor: (optional) maximum scale factor for Dynamic Type,
     ///   e.g. `2.0` for a 16 pt font would mean limit maximum point size to 32 pts.
     ///   - traitCollection: trait collection to apply (looking for preferredContentSizeCategory and legibilityWeight)
-    /// - Returns: Font, line height multiple, and paragraph style to render the Typography
+    /// - Returns: Font and various styles used to render the Typography
     public func generateLayout(
         maximumScaleFactor: CGFloat,
         compatibleWith traitCollection: UITraitCollection?
@@ -109,7 +109,7 @@ extension Typography {
     ///   e.g. `2.0` for a 16 pt font would mean limit maximum point size to 32 pts.
     ///   - maximumPointSize: (optional) maximum point size for Dynamic Type, nil means no maximum point size.
     ///   - traitCollection: trait collection to apply (looking for preferredContentSizeCategory and legibilityWeight)
-    /// - Returns: Font, line height multiple, and paragraph style to render the Typography
+    /// - Returns: Font and various styles used to render the Typography
     internal func generateLayout(
         maximumScaleFactor: CGFloat?,
         maximumPointSize: CGFloat?,
