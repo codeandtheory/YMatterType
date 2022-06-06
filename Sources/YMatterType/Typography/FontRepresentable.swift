@@ -15,9 +15,10 @@ public protocol FontRepresentable {
     /// Font family root name, e.g. "AvenirNext"
     var familyName: String { get }
     
-    /// Optional suffix to use for Italic version of the font.
+    /// Optional suffix to use for the font name.
+    ///
     /// Used by `FontRepresentable.fontName(for:compatibleWith:)`
-    /// e.g. "Italic" is a typical suffix for Italic fonts.
+    /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     var fontNameSuffix: String { get }
     

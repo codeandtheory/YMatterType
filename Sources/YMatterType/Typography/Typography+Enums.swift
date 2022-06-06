@@ -8,6 +8,14 @@
 import UIKit
 
 extension Typography {
+    /// Font style (used together with font family name and font weight to load a specific font)
+    public enum FontStyle: String, CaseIterable {
+        /// Regular
+        case regular = "normal"
+        /// Italic
+        case italic
+    }
+
     /// The nine basic font weights. Not all fonts support all 9 weights.
     public enum FontWeight: CGFloat, CaseIterable {
         /// ultralight (aka extra light) weight (100)

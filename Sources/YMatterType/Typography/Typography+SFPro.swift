@@ -27,12 +27,16 @@ public struct SFProFontFamily: FontRepresentable {
         }
     }
     
-    /// Whether the font family is italic or not
-    public var isItalic: Bool {
+    /// Font style, e.g. regular or italic
+    public var style: Typography.FontStyle {
+        let style: Typography.FontStyle
         switch family {
-        case .displayItalic, .textItalic: return true
-        case .display, .text: return false
+        case .display, .text:
+            style = .regular
+        case .displayItalic, .textItalic:
+            style = .italic
         }
+        return style
     }
     
     fileprivate init(family: SFProFamily) {
@@ -66,12 +70,13 @@ public struct SFProFontFamily: FontRepresentable {
         }
     }
     
-    /// Optional suffix to use for Italic version of the font.
+    /// Optional suffix to use for the font name.
+    ///
     /// Used by `FontRepresentable.fontName(for:compatibleWith:)`
-    /// e.g. "Italic" is a typical suffix for Italic fonts.
+    /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     public var fontNameSuffix: String {
-        isItalic ? FontInfo.italicSuffix : ""
+        (style == .italic) ? FontInfo.italicSuffix : ""
     }
 }
 

@@ -27,24 +27,24 @@ final class TypographySFProTests: XCTestCase {
     }
     
     func testSFProDisplay() {
-        _testFontFamily(Typography.sfProDisplay)
+        _testFontFamily(Typography.sfProDisplay, style: .regular)
     }
 
     func testSFProDisplayItalic() {
-        _testFontFamily(Typography.sfProDisplayItalic, isItalic: true)
+        _testFontFamily(Typography.sfProDisplayItalic, style: .italic)
     }
 
     func testSFProText() {
-        _testFontFamily(Typography.sfProText)
+        _testFontFamily(Typography.sfProText, style: .regular)
     }
     
     func testSFProTextItalic() {
-        _testFontFamily(Typography.sfProTextItalic, isItalic: true)
+        _testFontFamily(Typography.sfProTextItalic, style: .italic)
     }
 }
 
 private extension TypographySFProTests {
-    func _testFontFamily(_ fontFamily: FontRepresentable, isItalic: Bool = false) {
+    func _testFontFamily(_ fontFamily: FontRepresentable, style: Typography.FontStyle) {
         Typography.FontWeight.allCases.forEach {
             let typography = Typography(
                 fontFamily: fontFamily,
@@ -54,12 +54,12 @@ private extension TypographySFProTests {
                 textStyle: .callout
             )
             
-            _testTypography(typography, isItalic: isItalic, traits: nil)
-            _testTypography(typography, isItalic: isItalic, traits: boldTraits)
+            _testTypography(typography, style: style, traits: nil)
+            _testTypography(typography, style: style, traits: boldTraits)
         }
     }
     
-    func _testTypography(_ typography: Typography, isItalic: Bool, traits: UITraitCollection?) {
+    func _testTypography(_ typography: Typography, style: Typography.FontStyle, traits: UITraitCollection?) {
         let layout = typography.generateLayout(compatibleWith: traits)
         
         // we expect a font
@@ -73,7 +73,7 @@ private extension TypographySFProTests {
 
         // we expect the font to be italic or not
         let fontName = layout.font.fontName
-        if isItalic {
+        if style == .italic {
             XCTAssertTrue(fontName.hasSuffix(FontInfo.italicSuffix))
         } else {
             XCTAssertFalse(fontName.hasSuffix(FontInfo.italicSuffix))

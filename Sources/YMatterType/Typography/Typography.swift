@@ -66,7 +66,7 @@ public struct Typography {
     /// Initializes a typography instance with the specified parameters
     /// - Parameters:
     ///   - familyName: font family name
-    ///   - isItalic: whether this font is italic or not (defaults to `.false`)
+    ///   - fontStyle: font style (defaults to `regular`)
     ///   - fontWeight: font weight to use
     ///   - fontSize: font size to use
     ///   - lineHeight: line height to use
@@ -77,7 +77,7 @@ public struct Typography {
     ///   - isFixed: `true` if this font should never scale, `false` if it should scale (defaults to `.false`)
     public init(
         familyName: String,
-        isItalic: Bool = false,
+        fontStyle: FontStyle = .regular,
         fontWeight: FontWeight,
         fontSize: CGFloat,
         lineHeight: CGFloat,
@@ -88,7 +88,7 @@ public struct Typography {
         isFixed: Bool = false
     ) {
         self.init(
-            fontFamily: FontInfo(familyName: familyName, isItalic: isItalic),
+            fontFamily: FontInfo(familyName: familyName, style: fontStyle),
             fontWeight: fontWeight,
             fontSize: fontSize,
             lineHeight: lineHeight,
