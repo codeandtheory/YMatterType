@@ -10,29 +10,30 @@ import UIKit
 
 /// Information about a font family. Default implementation of FontRepresentable.
 public struct FontInfo: FontRepresentable {
-    /// Suffix to use for Italic family font names "Italic"
+    /// Suffix to use for italic family font names "Italic"
     public static let italicSuffix = "Italic"
     
     /// Font family root name, e.g. "AvenirNext"
     public let familyName: String
     
-    /// Whether this is an Italic font
-    public let isItalic: Bool
+    /// Font style, e.g. regular or italic
+    public let style: Typography.FontStyle
     
     /// Initialize a `FontInfo` object
     /// - Parameters:
     ///   - familyName: font family name
-    ///   - isItalic: whether this font is Italic
-    public init(familyName: String, isItalic: Bool = false) {
+    ///   - style: font style (default = `.regular`)
+    public init(familyName: String, style: Typography.FontStyle = .regular) {
         self.familyName = familyName
-        self.isItalic = isItalic
+        self.style = style
     }
     
-    /// Optional suffix to use for Italic version of the font.
+    /// Optional suffix to use for the font name.
+    ///
     /// Used by `FontRepresentable.fontName(for:compatibleWith:)`
-    /// e.g. "Italic" is a typical suffix for Italic fonts.
+    /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     public var fontNameSuffix: String {
-        isItalic ? FontInfo.italicSuffix : ""
+        (style == .italic) ? FontInfo.italicSuffix : ""
     }
 }

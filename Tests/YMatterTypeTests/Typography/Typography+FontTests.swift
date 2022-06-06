@@ -44,7 +44,7 @@ final class TypographyFontTests: XCTestCase {
     }
         
     func testParagraphStyle() {
-        let fontInfo = FontInfo(familyName: "HelveticaNeue", isItalic: true)
+        let fontInfo = FontInfo(familyName: "HelveticaNeue", style: .italic)
         
         sizes.forEach {
             let typography = Typography(
