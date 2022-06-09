@@ -128,9 +128,7 @@ extension NSMutableAttributedString {
     ///   - subtext: text within the attributed string to add the attributes.
     func addAttributes(_ attributes: [NSAttributedString.Key: Any], to subtext: String) {
         guard let range = string.range(of: subtext) else { return }
-
-        let safeText = NSString(string: subtext) as String
-        addAttributes(attributes, range: NSRange(range, in: safeText))
+        addAttributes(attributes, range: NSRange(range, in: string))
     }
 
     /// Sets attributes to the first range of text matching `subtext`.
@@ -142,8 +140,6 @@ extension NSMutableAttributedString {
     ///   - subtext: text within the attributed string to set the attributes.
     func setAttributes(_ attributes: [NSAttributedString.Key: Any], to subtext: String) {
         guard let range = string.range(of: subtext) else { return }
-
-        let safeText = NSString(string: subtext) as String
-        setAttributes(attributes, range: NSRange(range, in: safeText))
+        setAttributes(attributes, range: NSRange(range, in: string))
     }
 }
