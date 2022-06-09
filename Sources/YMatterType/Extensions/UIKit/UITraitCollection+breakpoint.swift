@@ -25,7 +25,7 @@ extension UITraitCollection {
     /// - Parameter traitCollection: A trait collection that you want to compare to the current trait collection.
     /// - Returns: Returns a Boolean value indicating whether changing between the
     /// specified and current trait collections could affect breakpoints.
-    open func hasDifferentBreakpoint(comparedTo traitCollection: UITraitCollection?) -> Bool {
+    public func hasDifferentBreakpoint(comparedTo traitCollection: UITraitCollection?) -> Bool {
         horizontalSizeClass != traitCollection?.horizontalSizeClass ||
             verticalSizeClass != traitCollection?.verticalSizeClass
     }
