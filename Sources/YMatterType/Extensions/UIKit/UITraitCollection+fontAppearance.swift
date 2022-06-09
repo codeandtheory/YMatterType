@@ -22,7 +22,7 @@ extension UITraitCollection {
     /// - Parameter traitCollection: A trait collection that you want to compare to the current trait collection.
     /// - Returns: Returns a Boolean value indicating whether changing between the
     /// specified and current trait collections would affect fonts.
-    open func hasDifferentFontAppearance(comparedTo traitCollection: UITraitCollection?) -> Bool {
+    public func hasDifferentFontAppearance(comparedTo traitCollection: UITraitCollection?) -> Bool {
         preferredContentSizeCategory != traitCollection?.preferredContentSizeCategory ||
             legibilityWeight != traitCollection?.legibilityWeight
     }
