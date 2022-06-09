@@ -5,7 +5,7 @@
 
 Pod::Spec.new do |spec|
   spec.name             = "YMatterType"
-  spec.version          = "1.0.0"
+  spec.version          = "1.0.1"
   spec.summary          = "An opinionated take on Design System Typography for iOS."
   spec.description      = "This framework uses Figma's concept of Typography to create text-based UI elements (labels, buttons, text fields, and text views) that render themselves as described in Figma design files (especially sizing themselves according to line height) while also supporting Dynamic Type scaling and the Bold Text accessibility setting."
   spec.homepage         = "https://github.com/yml-org/YMatterType"
