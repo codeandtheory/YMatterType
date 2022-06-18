@@ -25,7 +25,7 @@ final class NSAttributedStringBaseAttributesTests: XCTestCase {
         .font: boldFont
     ]
 
-    func test() {
+    func testApplyBaseAttributes() {
         let sut = makeSUT()
         let updated = sut.attributedString(with: regularAttributes)
 
