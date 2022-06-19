@@ -1,5 +1,7 @@
 # Y-Matter Type
-An opinionated take on Design System Typography for iOS
+An opinionated take on Design System Typography for iOS.
+
+This framework uses Figma's concept of Typography to create text-based UI elements (labels, buttons, text fields, and text views) that render themselves as described in Figma design files (especially sizing themselves according to line height) while also supporting Dynamic Type scaling and the Bold Text accessibility setting.
 
 Documentation
 ----------
