@@ -141,10 +141,14 @@ extension FontRepresentable {
             return .black
         }
     }
-}
 
-internal extension FontRepresentable {
-    func isBoldTextEnabled(compatibleWith traitCollection: UITraitCollection?) -> Bool {
+    /// Determines whether the accessibility Bold Text feature is enabled within the given trait collection.
+    /// - Parameter traitCollection: the trait collection to evaluate (or nil to use system settings)
+    /// - Returns: `true` if the accessibility Bold Text feature is enabled.
+    ///
+    /// If `traitCollection` is not `nil`, it checks for `legibilityWeight == .bold`.
+    /// If `traitCollection` is `nil`, then it examines the system wide `UIAccessibility` setting of the same name.
+    public func isBoldTextEnabled(compatibleWith traitCollection: UITraitCollection?) -> Bool {
         guard let traitCollection = traitCollection else {
             return UIAccessibility.isBoldTextEnabled
         }

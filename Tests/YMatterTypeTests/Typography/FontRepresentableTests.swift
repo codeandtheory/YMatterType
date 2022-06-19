@@ -66,6 +66,28 @@ final class FontRepresentableTests: XCTestCase {
         XCTAssertEqual(font.pointSize, systemFont.pointSize)
         XCTAssertEqual(font.lineHeight, systemFont.lineHeight)
     }
+
+    func testIsBoldTextEnabled() {
+        let (sut, _, _) = makeSUT()
+
+        // given a traitCollection with legibilityWeight == .bold, it should return `true`
+        XCTAssertTrue(sut.isBoldTextEnabled(compatibleWith: UITraitCollection(legibilityWeight: .bold)))
+        XCTAssertTrue(sut.isBoldTextEnabled(compatibleWith: UITraitCollection(traitsFrom: [
+            UITraitCollection(preferredContentSizeCategory: .extraLarge),
+            UITraitCollection(legibilityWeight: .bold)
+        ])))
+
+        // given a traitCollection with legibilityWeight != .bold, it should return `false`
+        XCTAssertFalse(sut.isBoldTextEnabled(compatibleWith: UITraitCollection(legibilityWeight: .regular)))
+        XCTAssertFalse(sut.isBoldTextEnabled(compatibleWith: UITraitCollection(legibilityWeight: .unspecified)))
+
+        // given a traitCollection without legibilityWeight trait, it should return `false`
+        XCTAssertFalse(sut.isBoldTextEnabled(compatibleWith: UITraitCollection()))
+        XCTAssertFalse(sut.isBoldTextEnabled(compatibleWith: UITraitCollection(preferredContentSizeCategory: .small)))
+
+        // given traitCollection is nil, it should return the system setting
+        XCTAssertEqual(sut.isBoldTextEnabled(compatibleWith: nil), UIAccessibility.isBoldTextEnabled)
+    }
 }
 
 // We use large tuples in makeSUT()
