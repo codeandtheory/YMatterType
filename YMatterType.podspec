@@ -14,6 +14,6 @@ Pod::Spec.new do |spec|
   spec.social_media_url = "https://twitter.com/Yml_co"
   spec.platform         = :ios, "14.0"
   spec.swift_version    = '5.5'
-  spec.source           = { :git => "https://github.com/yml-org/YCoreUI.git", :tag => spec.version }
+  spec.source           = { :git => "https://github.com/yml-org/YMatterType.git", :tag => spec.version }
   spec.source_files     = "Sources/**/*"
 end
