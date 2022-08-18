@@ -287,8 +287,7 @@ You can add Y-MatterType to an Xcode project by adding it as a package dependenc
 
 1. From the **File** menu, select **Add Packages...**
 2. Enter "[https://github.com/yml-org/YMatterType](https://github.com/yml-org/YMatterType)" into the package repository URL text field
-3. It's recommended you leave the default **Dependency Rule** of **Up to Next Major**
-4. Click **Add Package**
+3. Click **Add Package**
 
 Contributing to Y-Matter Type
 ----------
