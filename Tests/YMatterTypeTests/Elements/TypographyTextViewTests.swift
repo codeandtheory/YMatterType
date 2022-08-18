@@ -45,9 +45,9 @@ final class TypographyTextViewTests: TypographyElementTests {
     }
 
     func testMultiLine() {
-        let sut = makeSUT()
-       // Given a text view with text that spans multiple lines
         [2, 3, 5, 8, 13].forEach {
+            // Given a text view with text that spans multiple lines
+            let sut = makeSUT()
             let array: [String] = Array(repeating: "Hello World", count: $0)
             sut.text = array.joined(separator: "\n")
 
