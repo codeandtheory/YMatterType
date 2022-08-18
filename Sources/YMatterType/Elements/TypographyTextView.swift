@@ -162,6 +162,16 @@ private extension TypographyTextView {
     }
 
     func configure() {
+        if #available(iOS 16.0, *) {
+            // Starting with iOS 16, UITextView uses TextKit 2 for layout,
+            // which does not behave properly with our attributed text
+            // setting line height. Accessing `layoutManager` forces the text view
+            // to render using the TextKit 1 layout manager.
+            // It would be more efficient to initialize via `UITextView.init(usingTextLayoutManager: false)`,
+            // but that is impossible because it is not a designated initializer.
+            // So for now we have the following solution.
+            _ = layoutManager
+        }
         adjustsFontForContentSizeCategory = true
         textContainerInset = .zero // Typography should provide sufficient insets
     }
