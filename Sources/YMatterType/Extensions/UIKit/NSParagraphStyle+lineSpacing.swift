@@ -39,10 +39,27 @@ extension NSParagraphStyle {
     /// Combines line height with the existing style
     /// - Parameter lineHeight: the line height to use
     /// - Returns: Current paragraph style combined with minimumLineHeight and maximumLineHeight both set to lineHeight
-    public func styleWithLineHeight(_ lineHeight: CGFloat) -> NSParagraphStyle {
+
+    /// Combines line height with the existing style
+    /// - Parameters:
+    ///   - lineHeight: the line height to use
+    ///   - indent: the indent to use (ignored if `0`)
+    ///   - spacing: the spacing to use (ignored if `0`)
+    /// - Returns: Current paragraph style combined with line height and (if non-zero) indent and spacing
+    public func styleWithLineHeight(
+        _ lineHeight: CGFloat,
+        indent: CGFloat = 0,
+        spacing: CGFloat = 0
+    ) -> NSParagraphStyle {
         let paragraphStyle = (mutableCopy() as? NSMutableParagraphStyle) ?? NSMutableParagraphStyle()
         paragraphStyle.minimumLineHeight = lineHeight
         paragraphStyle.maximumLineHeight = lineHeight
+        if indent != 0 {
+            paragraphStyle.firstLineHeadIndent = indent
+        }
+        if spacing != 0 {
+            paragraphStyle.paragraphSpacing = spacing
+        }
         return paragraphStyle
     }
 }

@@ -91,5 +91,7 @@ final class TypographyMutatorsTests: XCTestCase {
         XCTAssertEqual(modified.fontSize, original.fontSize)
         XCTAssertEqual(modified.lineHeight, original.lineHeight)
         XCTAssertEqual(modified.textStyle, original.textStyle)
+        XCTAssertEqual(modified.paragraphIndent, original.paragraphIndent)
+        XCTAssertEqual(modified.paragraphSpacing, original.paragraphSpacing)
     }
 }

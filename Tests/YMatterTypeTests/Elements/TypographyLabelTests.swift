@@ -46,7 +46,8 @@ final class TypographyLabelTests: TypographyElementTests {
     }
 
     func testMultiLine() {
-        let sut = makeSUT()
+        let spacing = CGFloat(Int.random(in: 1..<10))
+        let sut = makeSUT(spacing: spacing)
         sut.numberOfLines = 0
         
         // Given a label with text that spans multiple lines
@@ -54,8 +55,8 @@ final class TypographyLabelTests: TypographyElementTests {
             let array: [String] = Array(repeating: "Hello World", count: $0)
             sut.text = array.joined(separator: "\n")
 
-            // we expect label height to be a multiple of lineHeight
-            XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight * CGFloat($0))
+            // we expect label height to be a multiple of lineHeight + paragraph spacing
+            XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight * CGFloat($0) + spacing * CGFloat($0 - 1))
             // after calling sizeToFit we expect bounds to equal intrinsicContentSize
             sut.sizeToFit()
             XCTAssertEqual(sut.intrinsicContentSize, sut.bounds.size)
@@ -322,15 +323,39 @@ final class TypographyLabelTests: TypographyElementTests {
         sut.attributedText = NSAttributedString(string: "first name", attributes: [.underlineStyle: 1])
         XCTAssertEqual(sut.attributedText?.string, "First Name")
     }
+
+    func testParagraphIndent() {
+        // Given
+        let indent = CGFloat(Int.random(in: 1..<10))
+        let sut = makeSUT()
+        let sut2 = makeSUT(indent: indent)
+
+        // When
+        sut.text = "Hello World"
+        sut2.text = "Hello World"
+
+        // Then
+        XCTAssertEqual(
+            sut.intrinsicContentSize.width + indent,
+            sut2.intrinsicContentSize.width
+        )
+    }
 }
 
 private extension TypographyLabelTests {
-    func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> MockLabel {
+    func makeSUT(
+        indent: CGFloat = 0,
+        spacing: CGFloat = 0,
+        file: StaticString = #filePath,
+        line: UInt = #line
+    ) -> MockLabel {
         let typography = Typography(
             fontFamily: Typography.sfProDisplay,
             fontWeight: .regular,
             fontSize: 24,
             lineHeight: 32,
+            paragraphIndent: indent,
+            paragraphSpacing: spacing,
             isFixed: true
         )
         let sut = MockLabel(typography: typography)

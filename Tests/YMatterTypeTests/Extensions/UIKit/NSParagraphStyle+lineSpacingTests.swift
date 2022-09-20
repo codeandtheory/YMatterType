@@ -39,14 +39,24 @@ final class NSParagraphStyleLineSpacingTests: XCTestCase {
     func testStyleWithLineHeight() {
         let (sut, _, _, _, lineHeights) = makeSUT()
         lineHeights.forEach {
-            let style1 = sut.styleWithLineHeight($0)
-            let style2 = NSParagraphStyle.default.styleWithLineHeight($0)
-            let style3 = NonMutableParagraphStyle().styleWithLineHeight($0)
+            let indent = CGFloat(Int.random(in: 1..<10))
+            let spacing = CGFloat(Int.random(in: 10..<32))
+            let style1 = sut.styleWithLineHeight($0, indent: indent, spacing: spacing)
+            let style2 = NSParagraphStyle.default.styleWithLineHeight($0, indent: indent)
+            let style3 = NonMutableParagraphStyle().styleWithLineHeight($0, spacing: spacing)
 
             for style in [style1, style2, style3] {
                 XCTAssertEqual(style.minimumLineHeight, $0)
                 XCTAssertEqual(style.maximumLineHeight, $0)
             }
+
+            XCTAssertEqual(style1.firstLineHeadIndent, indent)
+            XCTAssertEqual(style2.firstLineHeadIndent, indent)
+            XCTAssertEqual(style3.firstLineHeadIndent, .zero)
+
+            XCTAssertEqual(style1.paragraphSpacing, spacing)
+            XCTAssertEqual(style2.paragraphSpacing, .zero)
+            XCTAssertEqual(style3.paragraphSpacing, spacing)
         }
     }
 }

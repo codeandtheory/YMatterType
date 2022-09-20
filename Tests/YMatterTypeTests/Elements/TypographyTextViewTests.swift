@@ -47,12 +47,13 @@ final class TypographyTextViewTests: TypographyElementTests {
     func testMultiLine() {
         [2, 3, 5, 8, 13].forEach {
             // Given a text view with text that spans multiple lines
-            let sut = makeSUT()
+            let spacing = CGFloat(Int.random(in: 1..<10))
+            let sut = makeSUT(spacing: spacing)
             let array: [String] = Array(repeating: "Hello World", count: $0)
             sut.text = array.joined(separator: "\n")
 
-            // we expect label height to be a multiple of lineHeight
-            XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight * CGFloat($0))
+            // we expect label height to be a multiple of lineHeight + paragraph spacing
+            XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight * CGFloat($0) + spacing * CGFloat($0 - 1))
             // after calling sizeToFit we expect bounds to equal intrinsicContentSize
             sut.sizeToFit()
             XCTAssertEqual(sut.intrinsicContentSize, sut.bounds.size)
@@ -285,8 +286,17 @@ final class TypographyTextViewTests: TypographyElementTests {
 }
 
 private extension TypographyTextViewTests {
-    func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> MockTextView {
-        let sut = MockTextView(typography: .title2.fixed)
+    func makeSUT(spacing: CGFloat = 0, file: StaticString = #filePath, line: UInt = #line) -> MockTextView {
+        let typography = Typography(
+            fontFamily: Typography.sfProDisplay,
+            fontWeight: .semibold,
+            fontSize: 22,
+            lineHeight: 28,
+            paragraphSpacing: spacing,
+            textStyle: .title2,
+            isFixed: true
+        )
+        let sut = MockTextView(typography: typography)
         sut.isScrollEnabled = false
         trackForMemoryLeak(sut, file: file, line: line)
         return sut

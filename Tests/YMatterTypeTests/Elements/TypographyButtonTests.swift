@@ -53,7 +53,8 @@ final class TypographyButtonTests: TypographyElementTests {
     }
 
     func testMultiLine() {
-        let sut = makeSUT()
+        let spacing = CGFloat(Int.random(in: 1..<10))
+        let sut = makeSUT(spacing: spacing)
         sut.titleLabel?.numberOfLines = 0
         
         // Given a label with text that spans multiple lines
@@ -61,10 +62,10 @@ final class TypographyButtonTests: TypographyElementTests {
             let array: [String] = Array(repeating: "Hello World", count: $0)
             sut.setTitle(array.joined(separator: "\n"), for: .normal)
 
-            // we expect label height to be a multiple of lineHeight
+            // we expect label height to be a multiple of lineHeight + paragraph spacing
             XCTAssertEqual(
                 sut.intrinsicContentSize.height,
-                sut.typography.lineHeight * CGFloat($0) + sut.contentEdgeInsets.vertical
+                sut.typography.lineHeight * CGFloat($0) + sut.contentEdgeInsets.vertical + spacing * CGFloat($0 - 1)
             )
             // after calling sizeToFit we expect bounds to equal intrinsicContentSize
             sut.sizeToFit()
@@ -409,12 +410,13 @@ final class TypographyButtonTests: TypographyElementTests {
 }
 
 private extension TypographyButtonTests {
-    func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> MockButton {
+    func makeSUT(spacing: CGFloat = 0, file: StaticString = #filePath, line: UInt = #line) -> MockButton {
         let typography = Typography(
             fontFamily: Typography.sfProText,
             fontWeight: .regular,
             fontSize: 16,
             lineHeight: 24,
+            paragraphSpacing: spacing,
             isFixed: true
         )
         let sut = MockButton(typography: typography)

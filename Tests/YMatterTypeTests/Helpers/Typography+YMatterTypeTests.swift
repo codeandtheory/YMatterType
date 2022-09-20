@@ -64,6 +64,8 @@ extension Typography {
         fontWeight: .regular,
         fontSize: 15,
         lineHeight: 20,
+        paragraphIndent: 8,
+        paragraphSpacing: 10,
         textStyle: .body
     )
 
@@ -73,6 +75,8 @@ extension Typography {
         fontWeight: .regular,
         fontSize: 14,
         lineHeight: 20,
+        paragraphIndent: 8,
+        paragraphSpacing: 8,
         textStyle: .callout
     )
 
