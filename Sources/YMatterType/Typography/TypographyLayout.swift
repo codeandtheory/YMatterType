@@ -24,6 +24,12 @@ public struct TypographyLayout {
     /// Kerning to apply for letter spacing with this font
     public let kerning: CGFloat
 
+    /// Paragraph indent to apply
+    public let paragraphIndent: CGFloat
+
+    /// Paragraph spacing to apply
+    public let paragraphSpacing: CGFloat
+    
     /// Text case to apply to text
     public let textCase: Typography.TextCase
 
@@ -41,6 +47,8 @@ public struct TypographyLayout {
         lineHeight: CGFloat,
         baselineOffset: CGFloat,
         kerning: CGFloat,
+        paragraphIndent: CGFloat,
+        paragraphSpacing: CGFloat,
         textCase: Typography.TextCase,
         textDecoration: Typography.TextDecoration
     ) {
@@ -48,9 +56,11 @@ public struct TypographyLayout {
         self.lineHeight = lineHeight
         self.baselineOffset = baselineOffset
         self.kerning = kerning
+        self.paragraphIndent = paragraphIndent
+        self.paragraphSpacing = paragraphSpacing
         self.textCase = textCase
         self.textDecoration = textDecoration
-        self.paragraphStyle = NSParagraphStyle.default.styleWithLineHeight(lineHeight)
+        self.paragraphStyle = NSParagraphStyle.default.styleWithLineHeight(lineHeight, indent: paragraphIndent, spacing: paragraphSpacing)
     }
 }
 

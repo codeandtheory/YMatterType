@@ -76,6 +76,8 @@ extension Typography {
             lineHeight: scaledLineHeight,
             baselineOffset: baselineOffset,
             kerning: letterSpacing,
+            paragraphIndent: paragraphIndent,
+            paragraphSpacing: paragraphSpacing,
             textCase: textCase,
             textDecoration: textDecoration
         )

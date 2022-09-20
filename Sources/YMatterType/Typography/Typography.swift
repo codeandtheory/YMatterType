@@ -20,6 +20,10 @@ public struct Typography {
     public let lineHeight: CGFloat
     /// Letter spacing (in points, not percentage)
     public let letterSpacing: CGFloat
+    /// Paragraph indent (in points)
+    public let paragraphIndent: CGFloat
+    /// Paragraph spacing (in points)
+    public let paragraphSpacing: CGFloat
     /// Text case
     public let textCase: TextCase
     /// Text decoration (none, underline, or strikethrough)
@@ -37,6 +41,8 @@ public struct Typography {
     ///   - fontSize: font size to use
     ///   - lineHeight: line height to use
     ///   - chaacterSpacing: letter spacing to use (defaults to `0`)
+    ///   - paragraphIndent: paragraph indent to use (defaults to `0`)
+    ///   - paragraphSpacing: paragraph spacing to use (defaults to `0`)
     ///   - textCase: text case to apply (defaults to `.none`)
     ///   - textDecoration: text decoration to apply (defaults to `.none`)
     ///   - textStyle: text style to use for scaling (defaults to `.body`)
@@ -47,6 +53,8 @@ public struct Typography {
         fontSize: CGFloat,
         lineHeight: CGFloat,
         letterSpacing: CGFloat = 0,
+        paragraphIndent: CGFloat = 0,
+        paragraphSpacing: CGFloat = 0,
         textCase: TextCase = .none,
         textDecoration: TextDecoration = .none,
         textStyle: UIFont.TextStyle = .body,
@@ -57,6 +65,8 @@ public struct Typography {
         self.fontSize = fontSize
         self.lineHeight = lineHeight
         self.letterSpacing = letterSpacing
+        self.paragraphIndent = paragraphIndent
+        self.paragraphSpacing = paragraphSpacing
         self.textCase = textCase
         self.textDecoration = textDecoration
         self.textStyle = textStyle
@@ -71,6 +81,8 @@ public struct Typography {
     ///   - fontSize: font size to use
     ///   - lineHeight: line height to use
     ///   - chaacterSpacing: letter spacing to use (defaults to `0`)
+    ///   - paragraphIndent: paragraph indent to use (defaults to `0`)
+    ///   - paragraphSpacing: paragraph spacing to use (defaults to `0`)
     ///   - textCase: text case to apply (defaults to `.none`)
     ///   - textDecoration: text decoration to apply (defaults to `.none`)
     ///   - textStyle: text style to use for scaling (defaults to `.body`)
@@ -82,6 +94,8 @@ public struct Typography {
         fontSize: CGFloat,
         lineHeight: CGFloat,
         letterSpacing: CGFloat = 0,
+        paragraphIndent: CGFloat = 0,
+        paragraphSpacing: CGFloat = 0,
         textCase: TextCase = .none,
         textDecoration: TextDecoration = .none,
         textStyle: UIFont.TextStyle = .body,
@@ -93,6 +107,8 @@ public struct Typography {
             fontSize: fontSize,
             lineHeight: lineHeight,
             letterSpacing: letterSpacing,
+            paragraphIndent: paragraphIndent,
+            paragraphSpacing: paragraphSpacing,
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
