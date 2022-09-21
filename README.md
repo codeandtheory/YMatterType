@@ -142,7 +142,7 @@ Just want to use the default system fonts? Y—MatterType has you covered.
 extension Typography {
     /// System font, Semibold 17/22 pts
     static let headline = Typography(
-        fontFamily: FontInfo.system,
+        fontFamily: Typography.systemFamily,
         fontWeight: .semibold,
         fontSize: 17,
         lineHeight: 22,
@@ -168,7 +168,7 @@ extension Typography {
 
 ## Custom Font Families
 
-Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The framework contains three different implementations of `FontFamily` for you to consider (`FontInfo`, `SystemFontInfo`, and `SFProFontFamily`).
+Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The framework contains three different implementations of `FontFamily` for you to consider (`FontInfo`, `SystemFontFamily`, and `SFProFontFamily`).
 
 In the event that the requested font cannot be loaded (either the name is incorrect or it was not registered), Y—MatterType will fall back to loading a system font of the specified point size and weight.
 

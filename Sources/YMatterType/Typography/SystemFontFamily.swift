@@ -1,5 +1,5 @@
 //
-//  SystemFontInfo.swift
+//  SystemFontFamily.swift
 //  YMatterType
 //
 //  Created by Mark Pospesel on 9/28/21.
@@ -34,13 +34,21 @@ public extension Typography.FontWeight {
     }
 }
 
-public extension FontInfo {
+public extension Typography {
     /// Information about the system font family
-    static let system: FontFamily = SystemFontInfo()
+    static let systemFamily: FontFamily = SystemFontFamily()
+}
+
+extension FontInfo {
+    /// Information about the system font family
+    ///
+    /// Renamed to `Typography.systemFamily`
+    @available(*, deprecated, renamed: "Typography.systemFamily")
+    static var system: FontFamily { Typography.systemFamily }
 }
 
 /// Information about the system font. System font implementation of FontFamily.
-public struct SystemFontInfo: FontFamily {
+public struct SystemFontFamily: FontFamily {
     // The system font has a private font family name (literally ".SFUI"), so
     // just return empty string for familyName. The system font can't be retrieved by name anyway.
     public var familyName: String { "" }
