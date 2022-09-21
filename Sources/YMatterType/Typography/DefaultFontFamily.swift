@@ -1,5 +1,5 @@
 //
-//  FontInfo.swift
+//  DefaultFontFamily.swift
 //  YMatterType
 //
 //  Created by Mark Pospesel on 8/23/21.
@@ -9,7 +9,7 @@
 import UIKit
 
 /// Information about a font family. Default implementation of FontFamily.
-public struct FontInfo: FontFamily {
+public struct DefaultFontFamily: FontFamily {
     /// Suffix to use for italic family font names "Italic"
     public static let italicSuffix = "Italic"
     
@@ -19,7 +19,7 @@ public struct FontInfo: FontFamily {
     /// Font style, e.g. regular or italic
     public let style: Typography.FontStyle
     
-    /// Initialize a `FontInfo` object
+    /// Initialize a `DefaultFontFamily` object
     /// - Parameters:
     ///   - familyName: font family name
     ///   - style: font style (default = `.regular`)
@@ -34,6 +34,12 @@ public struct FontInfo: FontFamily {
     /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     public var fontNameSuffix: String {
-        (style == .italic) ? FontInfo.italicSuffix : ""
+        (style == .italic) ? DefaultFontFamily.italicSuffix : ""
     }
 }
+
+/// Information about a font family. Default implementation of FontFamily.
+///
+/// Renamed to `DefaultFontFamily`
+@available(*, deprecated, renamed: "DefaultFontFamily")
+public typealias FontInfo = DefaultFontFamily

@@ -22,13 +22,13 @@ final class TypographyFontTests: XCTestCase {
     private let scaleFactors: [CGFloat] = [1.25, 1.5, 1.75, 2.0]
 
     func testGenerateLayout() {
-        let fontInfo = AppleSDGothicNeoInfo()
+        let fontFamily = AppleSDGothicNeoInfo()
         
         Typography.FontWeight.allCases.forEach {
             for isFixed in [true, false] {
                 for letterSpacing in [-0.5, 0, 1.2] {
                     let typography = Typography(
-                        fontFamily: fontInfo,
+                        fontFamily: fontFamily,
                         fontWeight: $0,
                         fontSize: 16,
                         lineHeight: 24,
@@ -44,11 +44,11 @@ final class TypographyFontTests: XCTestCase {
     }
         
     func testParagraphStyle() {
-        let fontInfo = FontInfo(familyName: "HelveticaNeue", style: .italic)
+        let fontFamily = DefaultFontFamily(familyName: "HelveticaNeue", style: .italic)
         
         sizes.forEach {
             let typography = Typography(
-                fontFamily: fontInfo,
+                fontFamily: fontFamily,
                 fontWeight: .bold,
                 fontSize: $0.fontSize,
                 lineHeight: $0.lineHeight
@@ -66,12 +66,12 @@ final class TypographyFontTests: XCTestCase {
     }
 
     func testMaximumPointSize() {
-        let fontInfo = FontInfo(familyName: "Menlo")
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let traits = UITraitCollection(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge)
         
         sizes.forEach {
             let typography = Typography(
-                fontFamily: fontInfo,
+                fontFamily: fontFamily,
                 fontWeight: .bold,
                 fontSize: $0.fontSize,
                 lineHeight: $0.lineHeight
@@ -95,12 +95,12 @@ final class TypographyFontTests: XCTestCase {
     }
 
     func testMaximumScaleFactor() {
-        let fontInfo = FontInfo(familyName: "Menlo")
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let traits = UITraitCollection(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge)
 
         sizes.forEach { size in
             let typography = Typography(
-                fontFamily: fontInfo,
+                fontFamily: fontFamily,
                 fontWeight: .bold,
                 fontSize: size.fontSize,
                 lineHeight: size.lineHeight
@@ -126,12 +126,12 @@ final class TypographyFontTests: XCTestCase {
     }
 
     func testScaleLessThanMaximum() {
-        let fontInfo = FontInfo(familyName: "Menlo")
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let traits = UITraitCollection(preferredContentSizeCategory: .extraExtraLarge) // 2 sizes above default
 
         sizes.forEach {
             let typography = Typography(
-                fontFamily: fontInfo,
+                fontFamily: fontFamily,
                 fontWeight: .bold,
                 fontSize: $0.fontSize,
                 lineHeight: $0.lineHeight

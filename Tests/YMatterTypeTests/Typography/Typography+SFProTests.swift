@@ -74,9 +74,9 @@ private extension TypographySFProTests {
         // we expect the font to be italic or not
         let fontName = layout.font.fontName
         if style == .italic {
-            XCTAssertTrue(fontName.hasSuffix(FontInfo.italicSuffix))
+            XCTAssertTrue(fontName.hasSuffix(DefaultFontFamily.italicSuffix))
         } else {
-            XCTAssertFalse(fontName.hasSuffix(FontInfo.italicSuffix))
+            XCTAssertFalse(fontName.hasSuffix(DefaultFontFamily.italicSuffix))
         }
     }
 

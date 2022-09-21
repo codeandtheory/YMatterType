@@ -151,9 +151,9 @@ final class TypographyButtonTests: TypographyElementTests {
             sut.typography.lineHeight * 2 + sut.contentEdgeInsets.vertical
         )
 
-        let fontInfo = FontInfo(familyName: "Verdana")
+        let fontFamily = DefaultFontFamily(familyName: "Verdana")
         let typography = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .bold,
             fontSize: 18,
             lineHeight: 28,
@@ -184,9 +184,9 @@ final class TypographyButtonTests: TypographyElementTests {
 
     func testMaximumPointSize() {
         let sut = makeSUT()
-        let fontInfo = FontInfo(familyName: "Menlo")
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let scaledType = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .regular,
             fontSize: 16,
             lineHeight: 24,
@@ -229,9 +229,9 @@ final class TypographyButtonTests: TypographyElementTests {
 
     func testMaximumScaleFactor() {
         let sut = makeSUT()
-        let fontInfo = FontInfo(familyName: "Menlo")
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let scaledType = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .regular,
             fontSize: 16,
             lineHeight: 24,
