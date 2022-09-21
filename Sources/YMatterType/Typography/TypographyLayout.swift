@@ -60,7 +60,11 @@ public struct TypographyLayout {
         self.paragraphSpacing = paragraphSpacing
         self.textCase = textCase
         self.textDecoration = textDecoration
-        self.paragraphStyle = NSParagraphStyle.default.styleWithLineHeight(lineHeight, indent: paragraphIndent, spacing: paragraphSpacing)
+        self.paragraphStyle = NSParagraphStyle.default.styleWithLineHeight(
+            lineHeight,
+            indent: paragraphIndent,
+            spacing: paragraphSpacing
+        )
     }
 }
 
