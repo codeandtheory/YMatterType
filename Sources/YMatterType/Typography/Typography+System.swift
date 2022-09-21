@@ -39,7 +39,7 @@ extension Typography {
     ) -> Typography {
         let lineHeight = ceil(fontSize * systemLineHeightMultiple)
         return Typography(
-            fontFamily: FontInfo.system,
+            fontFamily: Typography.systemFamily,
             fontWeight: weight,
             fontSize: fontSize,
             lineHeight: lineHeight,

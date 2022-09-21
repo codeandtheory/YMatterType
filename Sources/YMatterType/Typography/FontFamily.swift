@@ -75,7 +75,7 @@ extension FontFamily {
         guard let font = UIFont(name: name, size: pointSize) else {
             // Fallback to system font and log a message.
             Typography.logger.warning("Custom font \(name) not properly installed.")
-            return FontInfo.system.font(
+            return Typography.systemFamily.font(
                 for: weight,
                 pointSize: pointSize,
                 compatibleWith: traitCollection

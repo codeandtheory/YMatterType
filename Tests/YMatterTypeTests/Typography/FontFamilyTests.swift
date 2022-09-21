@@ -60,7 +60,7 @@ final class FontFamilyTests: XCTestCase {
         // This isn't a real font, so we expect it to fallback to the system font
         let (sut, _, _) = makeSUT()
         let font = sut.font(for: .regular, pointSize: 16, compatibleWith: .default)
-        let systemFont = FontInfo.system.font(for: .regular, pointSize: 16, compatibleWith: .default)
+        let systemFont = Typography.systemFamily.font(for: .regular, pointSize: 16, compatibleWith: .default)
         XCTAssertEqual(font.familyName, systemFont.familyName)
         XCTAssertEqual(font.fontName, systemFont.fontName)
         XCTAssertEqual(font.pointSize, systemFont.pointSize)

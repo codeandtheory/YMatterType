@@ -1,5 +1,5 @@
 //
-//  SystemFontInfoTests.swift
+//  SystemFontFamilyTests.swift
 //  YMatterTypeTests
 //
 //  Created by Mark Pospesel on 9/28/21.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import YMatterType
 
-final class SystemFontInfoTests: XCTestCase {
+final class SystemFontFamilyTests: XCTestCase {
     func testFont() throws {
         let (sut, pointSizes, traitCollections) = makeSUT()
         let systemFont = UIFont.systemFont(ofSize: 12)
@@ -34,10 +34,10 @@ final class SystemFontInfoTests: XCTestCase {
 // We use large tuples in makeSUT()
 // swiftlint:disable large_tuple
 
-private extension SystemFontInfoTests {
+private extension SystemFontFamilyTests {
     func makeSUT() -> (FontFamily, [CGFloat], [UITraitCollection?]) {
         super.setUp()
-        let sut = FontInfo.system
+        let sut = Typography.systemFamily
         let pointSizes: [CGFloat] = [10, 12, 14, 16, 18, 24, 28, 32]
         let traitCollections: [UITraitCollection?] = [
             nil,
