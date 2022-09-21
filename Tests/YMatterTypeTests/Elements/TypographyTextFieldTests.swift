@@ -74,9 +74,9 @@ final class TypographyTextFieldTests: TypographyElementTests {
         // we expect text field height to equal the old lineHeight
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight)
 
-        let fontInfo = FontInfo(familyName: "Verdana")
+        let fontFamily = DefaultFontFamily(familyName: "Verdana")
         let typography = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .bold,
             fontSize: 18,
             lineHeight: 28,
@@ -200,9 +200,9 @@ final class TypographyTextFieldTests: TypographyElementTests {
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight)
 
         // changing the typograhy will restyle the attributed text
-        let fontInfo = FontInfo(familyName: "Verdana")
+        let fontFamily = DefaultFontFamily(familyName: "Verdana")
         sut.typography = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .bold,
             fontSize: 18,
             lineHeight: 28,

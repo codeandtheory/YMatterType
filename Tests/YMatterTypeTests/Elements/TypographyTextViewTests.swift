@@ -100,9 +100,9 @@ final class TypographyTextViewTests: TypographyElementTests {
         // we expect label height to be a multiple of the old lineHeight
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight * 2)
 
-        let fontInfo = FontInfo(familyName: "Verdana")
+        let fontFamily = DefaultFontFamily(familyName: "Verdana")
         let typography = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .bold,
             fontSize: 18,
             lineHeight: 28,
@@ -128,9 +128,9 @@ final class TypographyTextViewTests: TypographyElementTests {
 
     func testMaximumPointSize() {
         let sut = makeSUT()
-        let fontInfo = FontInfo(familyName: "Menlo")
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let scaledType = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .regular,
             fontSize: 16,
             lineHeight: 18,
@@ -168,9 +168,9 @@ final class TypographyTextViewTests: TypographyElementTests {
 
     func testMaximumScaleFactor() {
         let sut = makeSUT()
-        let fontInfo = FontInfo(familyName: "Menlo")
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let scaledType = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .regular,
             fontSize: 16,
             lineHeight: 18,

@@ -102,7 +102,7 @@ public struct Typography {
         isFixed: Bool = false
     ) {
         self.init(
-            fontFamily: FontInfo(familyName: familyName, style: fontStyle),
+            fontFamily: DefaultFontFamily(familyName: familyName, style: fontStyle),
             fontWeight: fontWeight,
             fontSize: fontSize,
             lineHeight: lineHeight,

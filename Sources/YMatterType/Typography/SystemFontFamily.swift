@@ -39,7 +39,7 @@ public extension Typography {
     static let systemFamily: FontFamily = SystemFontFamily()
 }
 
-extension FontInfo {
+extension DefaultFontFamily {
     /// Information about the system font family
     ///
     /// Renamed to `Typography.systemFamily`

@@ -118,10 +118,10 @@ private extension TypographyLayoutTests {
         textCase: Typography.TextCase = .none,
         textDecoration: Typography.TextDecoration = .none
     ) -> TypographyLayout {
-        let fontInfo = FontInfo(familyName: "Futura")
+        let fontFamily = DefaultFontFamily(familyName: "Futura")
 
         let typography = Typography(
-            fontFamily: fontInfo,
+            fontFamily: fontFamily,
             fontWeight: .medium,
             fontSize: 16,
             lineHeight: 20,

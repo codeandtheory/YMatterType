@@ -12,7 +12,7 @@ import XCTest
 final class TypogaphyTests: XCTestCase {
     func testInit() {
         // test the default initializer
-        let avenir = FontInfo(familyName: "AvenirNext")
+        let avenir = DefaultFontFamily(familyName: "AvenirNext")
         let typeInfo = Typography(fontFamily: avenir, fontWeight: .bold, fontSize: 16, lineHeight: 24)
         
         XCTAssertNotNil(typeInfo.generateLayout(compatibleWith: .default))

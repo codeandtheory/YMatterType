@@ -76,7 +76,7 @@ public struct SFProFontFamily: FontFamily {
     /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     public var fontNameSuffix: String {
-        (style == .italic) ? FontInfo.italicSuffix : ""
+        (style == .italic) ? DefaultFontFamily.italicSuffix : ""
     }
 }
 
