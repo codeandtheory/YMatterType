@@ -56,7 +56,10 @@ final class TypographyLabelTests: TypographyElementTests {
             sut.text = array.joined(separator: "\n")
 
             // we expect label height to be a multiple of lineHeight + paragraph spacing
-            XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight * CGFloat($0) + spacing * CGFloat($0 - 1))
+            XCTAssertEqual(
+                sut.intrinsicContentSize.height,
+                sut.typography.lineHeight * CGFloat($0) + spacing * CGFloat($0 - 1)
+            )
             // after calling sizeToFit we expect bounds to equal intrinsicContentSize
             sut.sizeToFit()
             XCTAssertEqual(sut.intrinsicContentSize, sut.bounds.size)
