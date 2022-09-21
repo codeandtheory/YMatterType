@@ -9,7 +9,7 @@
 import Foundation
 
 /// Typographical information about Apple's SF family of fonts
-public struct SFProFontFamily: FontRepresentable {
+public struct SFProFontFamily: FontFamily {
     fileprivate enum SFProFamily {
         case display
         case displayItalic
@@ -72,7 +72,7 @@ public struct SFProFontFamily: FontRepresentable {
     
     /// Optional suffix to use for the font name.
     ///
-    /// Used by `FontRepresentable.fontName(for:compatibleWith:)`
+    /// Used by `FontFamily.fontName(for:compatibleWith:)`
     /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     public var fontNameSuffix: String {

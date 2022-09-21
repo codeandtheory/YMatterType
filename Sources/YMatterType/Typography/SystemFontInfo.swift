@@ -36,11 +36,11 @@ public extension Typography.FontWeight {
 
 public extension FontInfo {
     /// Information about the system font family
-    static let system: FontRepresentable = SystemFontInfo()
+    static let system: FontFamily = SystemFontInfo()
 }
 
-/// Information about the system font. System font implementation of FontRepresentable.
-public struct SystemFontInfo: FontRepresentable {
+/// Information about the system font. System font implementation of FontFamily.
+public struct SystemFontInfo: FontFamily {
     // The system font has a private font family name (literally ".SFUI"), so
     // just return empty string for familyName. The system font can't be retrieved by name anyway.
     public var familyName: String { "" }

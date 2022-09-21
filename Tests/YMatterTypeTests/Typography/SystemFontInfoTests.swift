@@ -35,7 +35,7 @@ final class SystemFontInfoTests: XCTestCase {
 // swiftlint:disable large_tuple
 
 private extension SystemFontInfoTests {
-    func makeSUT() -> (FontRepresentable, [CGFloat], [UITraitCollection?]) {
+    func makeSUT() -> (FontFamily, [CGFloat], [UITraitCollection?]) {
         super.setUp()
         let sut = FontInfo.system
         let pointSizes: [CGFloat] = [10, 12, 14, 16, 18, 24, 28, 32]

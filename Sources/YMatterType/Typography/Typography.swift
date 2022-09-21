@@ -11,7 +11,7 @@ import UIKit
 /// Represents a font as it would appear in a design document
 public struct Typography {
     /// Information about the font family
-    public let fontFamily: FontRepresentable
+    public let fontFamily: FontFamily
     /// Font weight
     public let fontWeight: FontWeight
     /// Font size (aka point size)
@@ -48,7 +48,7 @@ public struct Typography {
     ///   - textStyle: text style to use for scaling (defaults to `.body`)
     ///   - isFixed: `true` if this font should never scale, `false` if it should scale (defaults to `.false`)
     public init(
-        fontFamily: FontRepresentable,
+        fontFamily: FontFamily,
         fontWeight: FontWeight,
         fontSize: CGFloat,
         lineHeight: CGFloat,

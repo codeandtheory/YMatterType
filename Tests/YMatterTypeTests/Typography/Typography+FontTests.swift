@@ -157,7 +157,7 @@ final class TypographyFontTests: XCTestCase {
     }
 }
 
-struct AppleSDGothicNeoInfo: FontRepresentable {
+struct AppleSDGothicNeoInfo: FontFamily {
     let familyName: String = "AppleSDGothicNeo"
     
     func weightName(for weight: Typography.FontWeight) -> String {

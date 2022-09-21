@@ -1,5 +1,5 @@
 //
-//  FontRepresentableTests.swift
+//  FontFamilyTests.swift
 //  YMatterTypeTests
 //
 //  Created by Mark Pospesel on 8/24/21.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import YMatterType
 
-final class FontRepresentableTests: XCTestCase {
+final class FontFamilyTests: XCTestCase {
     func testFontName() {
         let (sut, weightNames, traitCollection) = makeSUT()
         for weight in Typography.FontWeight.allCases {
@@ -93,12 +93,12 @@ final class FontRepresentableTests: XCTestCase {
 // We use large tuples in makeSUT()
 // swiftlint:disable large_tuple
 
-private extension FontRepresentableTests {
+private extension FontFamilyTests {
     func makeSUT(
         file: StaticString = #filePath,
         line: UInt = #line
-    ) -> (FontRepresentable, [Typography.FontWeight: String], UITraitCollection) {
-        let sut = MockFontRepresentable()
+    ) -> (FontFamily, [Typography.FontWeight: String], UITraitCollection) {
+        let sut = MockFontFamily()
         let weightNames: [Typography.FontWeight: String] = [
             .ultralight: "ExtraLight",
             .thin: "Thin",
@@ -117,6 +117,6 @@ private extension FontRepresentableTests {
     }
 }
 
-final class MockFontRepresentable: FontRepresentable {
+final class MockFontFamily: FontFamily {
     let familyName: String = "MockSerifMono"
 }

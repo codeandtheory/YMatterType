@@ -8,8 +8,8 @@
 
 import UIKit
 
-/// Information about a font family. Default implementation of FontRepresentable.
-public struct FontInfo: FontRepresentable {
+/// Information about a font family. Default implementation of FontFamily.
+public struct FontInfo: FontFamily {
     /// Suffix to use for italic family font names "Italic"
     public static let italicSuffix = "Italic"
     
@@ -30,7 +30,7 @@ public struct FontInfo: FontRepresentable {
     
     /// Optional suffix to use for the font name.
     ///
-    /// Used by `FontRepresentable.fontName(for:compatibleWith:)`
+    /// Used by `FontFamily.fontName(for:compatibleWith:)`
     /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     public var fontNameSuffix: String {
