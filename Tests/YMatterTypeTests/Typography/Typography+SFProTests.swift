@@ -44,7 +44,7 @@ final class TypographySFProTests: XCTestCase {
 }
 
 private extension TypographySFProTests {
-    func _testFontFamily(_ fontFamily: FontRepresentable, style: Typography.FontStyle) {
+    func _testFontFamily(_ fontFamily: FontFamily, style: Typography.FontStyle) {
         Typography.FontWeight.allCases.forEach {
             let typography = Typography(
                 fontFamily: fontFamily,

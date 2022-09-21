@@ -1,5 +1,5 @@
 //
-//  FontRepresentable.swift
+//  FontFamily.swift
 //  YMatterType
 //
 //  Created by Mark Pospesel on 8/23/21.
@@ -10,20 +10,20 @@ import UIKit
 import os
 
 /// Information about a font family. When an app specifies a custom font, they will
-/// implement an instance of FontRepresentable to fully describe that font.
-public protocol FontRepresentable {
+/// implement an instance of FontFamily to fully describe that font.
+public protocol FontFamily {
     /// Font family root name, e.g. "AvenirNext"
     var familyName: String { get }
     
     /// Optional suffix to use for the font name.
     ///
-    /// Used by `FontRepresentable.fontName(for:compatibleWith:)`
+    /// Used by `FontFamily.fontName(for:compatibleWith:)`
     /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     var fontNameSuffix: String { get }
     
     // The following four methods have default implementations that
-    // can be overridden in custom implementations of FontRepresentable
+    // can be overridden in custom implementations of FontFamily
     
     /// Returns a font for the specified `weight` and `pointSize` that is compatible with the `traitCollection`
     /// - Parameters:
@@ -63,7 +63,7 @@ extension Typography {
 
 // MARK: - Default implementations
 
-extension FontRepresentable {
+extension FontFamily {
     public var fontNameSuffix: String { "" }
 
     public func font(
@@ -156,3 +156,10 @@ extension FontRepresentable {
         return traitCollection.legibilityWeight == .bold
     }
 }
+
+/// Information about a font family. When an app specifies a custom font, they will
+/// implement an instance of FontFamily to fully describe that font.
+///
+/// Renamed to `FontFamily`
+@available(*, deprecated, renamed: "FontFamily")
+public typealias FontRepresentable = FontFamily
