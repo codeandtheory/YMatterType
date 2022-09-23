@@ -11,10 +11,10 @@ import YMatterType
 
 extension UIFont {
     static func register(name: String) throws {
-        try UIFont.register(name: name, fileExtension: "otf", subpath: "Assets/Fonts", bundle: .module)
+        try UIFont.register(name: name, fileExtension: "ttf", subpath: "Assets/Fonts", bundle: .module)
     }
 
     static func unregister(name: String) throws {
-        try UIFont.unregister(name: name, fileExtension: "otf", subpath: "Assets/Fonts", bundle: .module)
+        try UIFont.unregister(name: name, fileExtension: "ttf", subpath: "Assets/Fonts", bundle: .module)
     }
 }

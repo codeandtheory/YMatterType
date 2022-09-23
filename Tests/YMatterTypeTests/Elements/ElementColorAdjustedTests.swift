@@ -20,23 +20,13 @@ extension MockTextView: ColorAdjustable { }
 
 final class ElementColorAdjustedTests: XCTestCase {
     private let typography = Typography(
-        fontFamily: Typography.sfProDisplay,
+        fontFamily: Typography.systemFamily,
         fontWeight: .medium,
         fontSize: 24,
         lineHeight: 32,
         textStyle: .title2,
         isFixed: true
     )
-
-    override func setUp() async throws {
-        try await super.setUp()
-        try UIFont.register(name: "SF-Pro-Display-Medium")
-    }
-
-    override func tearDown() async throws {
-        try await super.tearDown()
-        try UIFont.unregister(name: "SF-Pro-Display-Medium")
-    }
 
     func testLabel() {
         let sut = MockLabel(typography: typography)

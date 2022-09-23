@@ -11,7 +11,7 @@ import YMatterType
 extension Typography {
     /// SF Pro Display, Semibold 32/36 pts
     static let largeTitle = Typography(
-        fontFamily: Typography.sfProDisplay,
+        fontFamily: Typography.systemFamily,
         fontWeight: .semibold,
         fontSize: 32,
         lineHeight: 36,
@@ -20,7 +20,7 @@ extension Typography {
 
     /// SF Pro Display, Semibold 28/34 pts
     static let title1 = Typography(
-        fontFamily: Typography.sfProDisplay,
+        fontFamily: Typography.systemFamily,
         fontWeight: .semibold,
         fontSize: 28,
         lineHeight: 34,
@@ -29,7 +29,7 @@ extension Typography {
 
     /// SF Pro Display, Semibold 22/28 pts
     static let title2 = Typography(
-        fontFamily: Typography.sfProDisplay,
+        fontFamily: Typography.systemFamily,
         fontWeight: .semibold,
         fontSize: 22,
         lineHeight: 28,
@@ -38,7 +38,7 @@ extension Typography {
 
     /// SF Pro Text, Semibold 17/22 pts (underlined)
     static let headline = Typography(
-        fontFamily: Typography.sfProText,
+        fontFamily: Typography.systemFamily,
         fontWeight: .semibold,
         fontSize: 17,
         lineHeight: 22,
@@ -49,7 +49,7 @@ extension Typography {
 
     /// SF Pro Text, Regular 16/22 pts
     static let subhead = Typography(
-        fontFamily: Typography.sfProText,
+        fontFamily: Typography.systemFamily,
         fontWeight: .regular,
         fontSize: 16,
         lineHeight: 22,
@@ -60,7 +60,7 @@ extension Typography {
 
     /// SF Pro Text, Regular 15/20 pts
     static let body = Typography(
-        fontFamily: Typography.sfProText,
+        fontFamily: Typography.systemFamily,
         fontWeight: .regular,
         fontSize: 15,
         lineHeight: 20,
@@ -71,7 +71,7 @@ extension Typography {
 
     /// SF Pro Text, Regular 14/20 pts
     static let smallBody = Typography(
-        fontFamily: Typography.sfProText,
+        fontFamily: Typography.systemFamily,
         fontWeight: .regular,
         fontSize: 14,
         lineHeight: 20,

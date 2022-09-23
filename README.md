@@ -4,6 +4,12 @@ _An opinionated take on Design System Typography for iOS._
 
 This framework uses Figma's concept of Typography to create text-based UI elements (labels, buttons, text fields, and text views) that render themselves as described in Figma design files (especially sizing themselves according to line height) while also supporting Dynamic Type scaling and the Bold Text accessibility setting.
 
+Licensing
+----------
+Y—MatterType is licensed under the [Apache 2.0 license](LICENSE).
+
+The [Noto Sans font](https://fonts.google.com/noto/specimen/Noto+Sans/about) included in the test target is licensed under the [Open Font License](https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL)
+
 Documentation
 ----------
 
@@ -91,10 +97,10 @@ What you should _not_ do, however, is set the `font` property directly. Just set
 Any custom fonts need to be included as assets in your application and registered with the system. If you're building a simple app then you can just add them to your project and list them in your app's Info.plist file as you normally would. If, however, you want to build them into a separate Swift package, then that's fine too, and Y—MatterType has an extension on `UIFont` that makes it easier to register (and unregister) your font files. It throws an error if the font cannot be registered (and also if it has already been registered), so you'll know when you have a problem. Note that you will need to specify `subpath` if you use `.copy` for the resources in your Swift package file (and probably won't need to specify it if you use `.process`).
 
 ```
-// Register font file "SF-Pro-Text-Regular.otf"
+// Register font file "NotoSans-Regular.otf"
 try UIFont.register(
-    name: "SF-Pro-Text-Regular",
-    fileExtension: "otf",
+    name: "NotoSans-Regular",
+    fileExtension: "ttf",
     subpath: "Assets/Fonts",
     bundle: .module
 )
@@ -151,24 +157,9 @@ extension Typography {
 }
 ```
 
-Or do you wish to use SF Pro Display and Text fonts (in regular or italic)? (You would need to bundle and register the font files you will use.) Y—MatterType has a font family for this as well.
-
-```
-extension Typography {
-    /// SF Pro Text, Semibold 17/22 pts
-    static let headline = Typography(
-        fontFamily: .sfProText,
-        fontWeight: .semibold,
-        fontSize: 17,
-        lineHeight: 22,
-        textStyle: .headline
-    )
-}
-```
-
 ## Custom Font Families
 
-Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The framework contains three different implementations of `FontFamily` for you to consider (`DefaultFontFamily`, `SystemFontFamily`, and `SFProFontFamily`).
+Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The framework contains two different implementations of `FontFamily` for you to consider (`DefaultFontFamily` and `SystemFontFamily`).
 
 In the event that the requested font cannot be loaded (either the name is incorrect or it was not registered), Y—MatterType will fall back to loading a system font of the specified point size and weight.
 
