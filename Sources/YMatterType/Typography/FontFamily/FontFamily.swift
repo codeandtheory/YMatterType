@@ -21,9 +21,16 @@ public protocol FontFamily {
     /// e.g. "Italic" is a typical suffix for italic fonts.
     /// default = ""
     var fontNameSuffix: String { get }
-    
+
+    /// All font weights supported by this font family (or those that you choose to bundle in your project).
+    ///
+    /// Defaults to all 9 font weights, but can be overridden in custom implementations of `FontFamily`.
+    /// You must support at least one weight.
+    /// This is used in the default implementation of `accessibilityBoldWeight(for:)`
+    var supportedWeights: [Typography.FontWeight] { get }
+
     // The following four methods have default implementations that
-    // can be overridden in custom implementations of FontFamily
+    // can be overridden in custom implementations of `FontFamily`.
     
     /// Returns a font for the specified `weight` and `pointSize` that is compatible with the `traitCollection`
     /// - Parameters:
@@ -64,7 +71,11 @@ extension Typography {
 // MARK: - Default implementations
 
 extension FontFamily {
+    // returns no suffix
     public var fontNameSuffix: String { "" }
+
+    // returns all weights
+    public var supportedWeights: [Typography.FontWeight] { Typography.FontWeight.allCases }
 
     public func font(
         for weight: Typography.FontWeight,
@@ -120,26 +131,10 @@ extension FontFamily {
     }
     
     public func accessibilityBoldWeight(for weight: Typography.FontWeight) -> Typography.FontWeight {
-        // By default we will move up 1 weight when Accessibility Bold is enabled
-        // (Override to transform to different weights or only to those weighs available for a specific font family.)
-        switch weight {
-        case .ultralight:
-            return .thin
-        case .thin:
-            return .light
-        case .light:
-            return .regular
-        case .regular:
-            return .medium
-        case .medium:
-            return .semibold
-        case .semibold:
-            return .bold
-        case .bold:
-            return .heavy
-        case .heavy, .black:
-            return .black
-        }
+        // By default returns the next heavier supported weight (if any), otherwise the heaviest supported weight
+        let weights = supportedWeights.sorted(by: { $0.rawValue < $1.rawValue })
+        // return the next heavier supported weight
+        return weights.first(where: { $0.rawValue > weight.rawValue }) ?? weights.last ?? weight
     }
 
     /// Determines whether the accessibility Bold Text feature is enabled within the given trait collection.
