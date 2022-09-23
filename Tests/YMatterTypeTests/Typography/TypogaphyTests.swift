@@ -56,6 +56,8 @@ final class TypogaphyTests: XCTestCase {
 
 struct NotoSansFontFamily: FontFamily {
     let familyName = "NotoSans"
+
+    var supportedWeights: [Typography.FontWeight] { [.regular] }
 }
 
 extension Typography {

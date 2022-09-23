@@ -109,7 +109,13 @@ try UIFont.register(
 Because `Bundle.module` is only available from within your Swift package, we recommend that you expose a helper method from within your Swift package to register the fonts and that internally references `Bundle.module`.
 
 ```
-public struct NotoSansFontFamily {
+public struct NotoSansFontFamily: FontFamily {
+    /// Font family root name
+    let familyName: String = "NotoSans"
+    
+    // We've only bundled 3 weights for this font
+    var supportedWeights: [Typography.FontWeight] = [.regular, .medium, .semibold]
+
     /// Register all 3 NotoSans fonts
     public static func registerFonts() throws {
         let names = makeFontNames()
@@ -138,7 +144,9 @@ public struct NotoSansFontFamily {
 ```
 ## Which font weights to include
 
-Fonts can come in up to 9 different weights, ranging from ultralight (100) to black (900), but not all font families will support every weight. Also you might not wish to include fonts for weights which your design system does not use in order to keep your bundle size as small as possible. However, in order to support the Accessibility Bold Text feature (which allows users to request a heavier weight font), for each font weight in your design system, you need to include the next heavier font weight as well. For example, if your design system only uses regular (400) and bold (700) weight fonts, you would need to include (and register) font files for regular (400), medium (500), bold (700), and heavy (800) weight fonts.
+Fonts can come in up to 9 different weights, ranging from ultralight (100) to black (900), but not all font families will support every weight. Also you might not wish to include fonts for weights which your design system does not use in order to keep your bundle size as small as possible. However, in order to support the Accessibility Bold Text feature (which allows users to request a heavier weight font), for each font weight in your design system, you should include the next heavier font weight as well. For example, if your design system only uses regular (400) and bold (700) weight fonts, if possible you should include (and register) font files for regular (400), medium (500), bold (700), and heavy (800) weight fonts. 
+
+When Accessibility Bold Text is enabled, `FontFamily` will use the next heavier font weight listed in `supportedWeights` (if any), and otherwise use the heaviest supported font weight.
 
 ## Using System Fonts
 
@@ -159,7 +167,9 @@ extension Typography {
 
 ## Custom Font Families
 
-Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The framework contains two different implementations of `FontFamily` for you to consider (`DefaultFontFamily` and `SystemFontFamily`).
+Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). Or your font family might not include all 9 possible font weights. To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The `supportedWeights` property that can be overridden. If your font family does not have access to all 9 font weights, then you should override `supportedWeights` and return the weights of all fonts bundled in your project.
+
+The framework contains two different implementations of `FontFamily` for you to consider (`DefaultFontFamily` and `SystemFontFamily`).
 
 In the event that the requested font cannot be loaded (either the name is incorrect or it was not registered), Y—MatterType will fall back to loading a system font of the specified point size and weight.
 
@@ -168,6 +178,10 @@ struct AppleSDGothicNeoInfo: FontFamily {
     /// Font family root name
     let familyName: String = "AppleSDGothicNeo"
     
+    // This font family doesn't support weights higher than Bold
+    var supportedWeights: [Typography.FontWeight] = 
+        [.ultralight, .thin, .light, .regular, .medium, .semibold, .bold]
+
     /// Generates a weight name suffix as part of a full font name. Not all fonts support all 9 weights.
     /// - Parameter weight: desired font weight
     /// - Returns: The weight name to use

@@ -159,7 +159,10 @@ final class TypographyFontTests: XCTestCase {
 
 struct AppleSDGothicNeoInfo: FontFamily {
     let familyName: String = "AppleSDGothicNeo"
-    
+
+    // This font family doesn't support weights higher than Bold
+    var supportedWeights: [Typography.FontWeight] = [.ultralight, .thin, .light, .regular, .medium, .semibold, .bold]
+
     func weightName(for weight: Typography.FontWeight) -> String {
         switch weight {
         case .ultralight:
