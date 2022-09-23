@@ -25,7 +25,7 @@ extension MockTextView: BreakpointAdjustable { }
 
 final class ElementBreakpointAdjustedTests: XCTestCase {
     private let typography = Typography(
-        fontFamily: Typography.sfProText,
+        fontFamily: Typography.systemFamily,
         fontWeight: .light,
         fontSize: 22,
         lineHeight: 28,
@@ -33,16 +33,6 @@ final class ElementBreakpointAdjustedTests: XCTestCase {
         isFixed: true
     )
 
-    override func setUp() async throws {
-        try await super.setUp()
-        try UIFont.register(name: "SF-Pro-Text-Light")
-    }
-
-    override func tearDown() async throws {
-        try await super.tearDown()
-        try UIFont.unregister(name: "SF-Pro-Text-Light")
-    }
-    
     func testLabel() {
         let sut = MockLabel(typography: typography)
         _testElement(sut)

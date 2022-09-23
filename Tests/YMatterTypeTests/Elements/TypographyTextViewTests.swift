@@ -12,12 +12,12 @@ import XCTest
 final class TypographyTextViewTests: TypographyElementTests {
     override func setUp() async throws {
         try await super.setUp()
-        try UIFont.register(name: "SF-Pro-Display-Semibold")
+        try UIFont.register(name: "NotoSans-Regular")
     }
 
     override func tearDown() async throws {
         try await super.tearDown()
-        try UIFont.unregister(name: "SF-Pro-Display-Semibold")
+        try UIFont.unregister(name: "NotoSans-Regular")
     }
 
     func testInitWithCoder() throws {
@@ -291,8 +291,8 @@ final class TypographyTextViewTests: TypographyElementTests {
 private extension TypographyTextViewTests {
     func makeSUT(spacing: CGFloat = 0, file: StaticString = #filePath, line: UInt = #line) -> MockTextView {
         let typography = Typography(
-            fontFamily: Typography.sfProDisplay,
-            fontWeight: .semibold,
+            familyName: "NotoSans",
+            fontWeight: .regular,
             fontSize: 22,
             lineHeight: 28,
             paragraphSpacing: spacing,

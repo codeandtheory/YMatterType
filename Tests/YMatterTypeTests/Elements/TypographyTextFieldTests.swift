@@ -12,12 +12,12 @@ import XCTest
 final class TypographyTextFieldTests: TypographyElementTests {
     override func setUp() async throws {
         try await super.setUp()
-        try UIFont.register(name: "SF-Pro-Text-Regular")
+        try UIFont.register(name: "NotoSans-Regular")
     }
 
     override func tearDown() async throws {
         try await super.tearDown()
-        try UIFont.unregister(name: "SF-Pro-Text-Regular")
+        try UIFont.unregister(name: "NotoSans-Regular")
     }
 
     func testInitWithCoder() throws {
@@ -283,7 +283,15 @@ final class TypographyTextFieldTests: TypographyElementTests {
 
 private extension TypographyTextFieldTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> MockTextField {
-        let sut = MockTextField(typography: .smallBody.fixed)
+        let typography = Typography(
+            familyName: "NotoSans",
+            fontWeight: .regular,
+            fontSize: 13,
+            lineHeight: 20,
+            textStyle: .callout,
+            isFixed: true
+        )
+        let sut = MockTextField(typography: typography)
         trackForMemoryLeak(sut, file: file, line: line)
         return sut
     }

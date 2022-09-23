@@ -16,12 +16,12 @@ import XCTest
 final class TypographyButtonTests: TypographyElementTests {
     override func setUp() async throws {
         try await super.setUp()
-        try UIFont.register(name: "SF-Pro-Text-Regular")
+        try UIFont.register(name: "NotoSans-Regular")
     }
 
     override func tearDown() async throws {
         try await super.tearDown()
-        try UIFont.unregister(name: "SF-Pro-Text-Regular")
+        try UIFont.unregister(name: "NotoSans-Regular")
     }
 
     func testInitWithCoder() throws {
@@ -412,7 +412,7 @@ final class TypographyButtonTests: TypographyElementTests {
 private extension TypographyButtonTests {
     func makeSUT(spacing: CGFloat = 0, file: StaticString = #filePath, line: UInt = #line) -> MockButton {
         let typography = Typography(
-            fontFamily: Typography.sfProText,
+            familyName: "NotoSans",
             fontWeight: .regular,
             fontSize: 16,
             lineHeight: 24,
@@ -423,5 +423,11 @@ private extension TypographyButtonTests {
         sut.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
         trackForMemoryLeak(sut, file: file, line: line)
         return sut
+    }
+}
+
+extension String {
+    func removeSpaces() -> String {
+        replacingOccurrences(of: " ", with: "")
     }
 }

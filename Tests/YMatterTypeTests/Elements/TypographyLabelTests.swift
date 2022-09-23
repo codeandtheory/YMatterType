@@ -12,12 +12,12 @@ import XCTest
 final class TypographyLabelTests: TypographyElementTests {
     override func setUp() async throws {
         try await super.setUp()
-        try UIFont.register(name: "SF-Pro-Display-Regular")
+        try UIFont.register(name: "NotoSans-Regular")
     }
 
     override func tearDown() async throws {
         try await super.tearDown()
-        try UIFont.unregister(name: "SF-Pro-Display-Regular")
+        try UIFont.unregister(name: "NotoSans-Regular")
     }
 
     func testInitWithCoder() throws {
@@ -353,7 +353,7 @@ private extension TypographyLabelTests {
         line: UInt = #line
     ) -> MockLabel {
         let typography = Typography(
-            fontFamily: Typography.sfProDisplay,
+            familyName: "NotoSans",
             fontWeight: .regular,
             fontSize: 24,
             lineHeight: 32,

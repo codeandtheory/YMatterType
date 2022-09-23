@@ -20,7 +20,7 @@ extension MockTextView: FontAdjustable { }
 
 final class ElementFontAdjustedTests: XCTestCase {
     private let typography = Typography(
-        fontFamily: Typography.sfProDisplay,
+        fontFamily: Typography.systemFamily,
         fontWeight: .heavy,
         fontSize: 32,
         lineHeight: 40,
@@ -28,16 +28,6 @@ final class ElementFontAdjustedTests: XCTestCase {
         isFixed: true
     )
     
-    override func setUp() async throws {
-        try await super.setUp()
-        try UIFont.register(name: "SF-Pro-Display-Heavy")
-    }
-
-    override func tearDown() async throws {
-        try await super.tearDown()
-        try UIFont.unregister(name: "SF-Pro-Display-Heavy")
-    }
-
     func testLabel() {
         let sut = MockLabel(typography: typography)
         _testElement(sut)

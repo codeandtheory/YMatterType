@@ -53,8 +53,8 @@ final class UIFontRegisterTests: XCTestCase {
 }
 
 private extension UIFontRegisterTests {
-    var fileName: String { "SF-Pro-Text-Regular" }
-    var fileExtension: String { "otf" }
+    var fileName: String { "NotoSans-Regular" }
+    var fileExtension: String { "ttf" }
     var subpath: String { "Assets/Fonts" }
     var bundle: Bundle { .module }
 
