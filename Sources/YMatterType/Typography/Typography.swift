@@ -33,7 +33,15 @@ public struct Typography {
     public let textStyle: UIFont.TextStyle
     /// Whether this font is fixed in size or should be scaled through Dynamic Type
     public let isFixed: Bool
-    
+
+    /// The factory to use to convert from family name + font style into a `FontFamily`.
+    /// The default is to use `DefaultFontFamilyFactory`.
+    ///
+    /// If you use a custom font family (or families) in your project, create your own factory to
+    /// return the correct font family and then set it here, preferably as early as possible in the
+    /// app launch lifecycle.
+    public static var factory: FontFamilyFactory = DefaultFontFamilyFactory()
+
     /// Initializes a typography instance with the specified parameters
     /// - Parameters:
     ///   - fontFamily: font family to use
@@ -102,7 +110,7 @@ public struct Typography {
         isFixed: Bool = false
     ) {
         self.init(
-            fontFamily: DefaultFontFamily(familyName: familyName, style: fontStyle),
+            fontFamily: Self.factory.getFontFamily(familyName: familyName, style: fontStyle),
             fontWeight: fontWeight,
             fontSize: fontSize,
             lineHeight: lineHeight,
