@@ -52,7 +52,7 @@ public struct SystemFontFamily: FontFamily {
     // The system font has a private font family name (literally ".SFUI"), so
     // just return empty string for familyName. The system font can't be retrieved by name anyway.
     public var familyName: String { "" }
-    
+
     /// Returns a font for the specified `weight` and `pointSize` that is compatible with the `traitCollection`
     /// - Parameters:
     ///   - weight: desired font weight

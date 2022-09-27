@@ -80,7 +80,7 @@ public struct Typography {
         self.textStyle = textStyle
         self.isFixed = isFixed
     }
-    
+
     /// Initializes a typography instance with the specified parameters
     /// - Parameters:
     ///   - familyName: font family name

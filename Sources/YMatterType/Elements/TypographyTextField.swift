@@ -25,8 +25,17 @@ open class TypographyTextField: UITextField {
         }
     }
 
-    /// Insets to apply around the functional area of the `UITextField`. Defaults to `.zero`
-    public var textInsets: UIEdgeInsets = .zero {
+    /// Default text insets (values vary by platform)
+    public static var defaultTextInsets: UIEdgeInsets = {
+#if os(tvOS)
+        UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+#else
+        .zero
+#endif
+    }()
+
+    /// Insets to apply around the functional area of the `UITextField`.
+    public var textInsets: UIEdgeInsets = TypographyTextField.defaultTextInsets {
         didSet {
             if textInsets != oldValue {
                 invalidateIntrinsicContentSize()
@@ -162,12 +171,20 @@ open class TypographyTextField: UITextField {
 
     /// :nodoc
     open override func textRect(forBounds bounds: CGRect) -> CGRect {
+#if os(tvOS)
+        bounds.inset(by: textInsets)
+#else
         super.textRect(forBounds: bounds).inset(by: textInsets)
+#endif
     }
 
     /// :nodoc
     open override func editingRect(forBounds bounds: CGRect) -> CGRect {
+#if os(tvOS)
+        bounds.inset(by: textInsets)
+#else
         super.editingRect(forBounds: bounds).inset(by: textInsets)
+#endif
     }
 
     /// :nodoc

@@ -9,6 +9,7 @@
 import YMatterType
 
 extension Typography {
+#if !os(tvOS)
     /// SF Pro Display, Semibold 32/36 pts
     static let largeTitle = Typography(
         fontFamily: Typography.systemFamily,
@@ -17,6 +18,7 @@ extension Typography {
         lineHeight: 36,
         textStyle: .largeTitle
     )
+#endif
 
     /// SF Pro Display, Semibold 28/34 pts
     static let title1 = Typography(

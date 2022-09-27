@@ -110,7 +110,7 @@ private extension NSAttributedStringTextCaseTests {
         case .sentence:
             return [
                 .foregroundColor: UIColor.systemRed,
-                .backgroundColor: UIColor.systemBackground
+                .backgroundColor: UIColor.systemTeal
             ]
         case .asymmetric:
             return [.paragraphStyle: NSParagraphStyle.default.styleWithLineHeight(24)]

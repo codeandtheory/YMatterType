@@ -151,7 +151,7 @@ final class TypographyButtonTests: TypographyElementTests {
             sut.typography.lineHeight * 2 + sut.contentEdgeInsets.vertical
         )
 
-        let fontFamily = DefaultFontFamily(familyName: "Verdana")
+        let fontFamily = DefaultFontFamily(familyName: "AvenirNext")
         let typography = Typography(
             fontFamily: fontFamily,
             fontWeight: .bold,
@@ -174,7 +174,7 @@ final class TypographyButtonTests: TypographyElementTests {
         // we expect a font
         XCTAssertNotNil(sut.layout?.font)
         // we expect the font to have the new family
-        XCTAssertEqual(sut.layout?.font.familyName, typography.fontFamily.familyName)
+        XCTAssertEqual(sut.layout?.font.familyName.removeSpaces(), typography.fontFamily.familyName)
         // we expect label height to be a multiple of the new lineHeight
         XCTAssertEqual(
             sut.intrinsicContentSize.height,
@@ -182,6 +182,7 @@ final class TypographyButtonTests: TypographyElementTests {
         )
     }
 
+#if os(iOS)
     func testMaximumPointSize() {
         let sut = makeSUT()
         let fontFamily = DefaultFontFamily(familyName: "Menlo")
@@ -272,6 +273,7 @@ final class TypographyButtonTests: TypographyElementTests {
             )
         }
     }
+#endif
 
     func testSetText() {
         let sut = makeSUT()

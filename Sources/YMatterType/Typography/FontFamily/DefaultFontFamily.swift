@@ -12,13 +12,13 @@ import UIKit
 public struct DefaultFontFamily: FontFamily {
     /// Suffix to use for italic family font names "Italic"
     public static let italicSuffix = "Italic"
-    
+
     /// Font family root name, e.g. "AvenirNext"
     public let familyName: String
-    
+
     /// Font style, e.g. regular or italic
     public let style: Typography.FontStyle
-    
+
     /// Initialize a `DefaultFontFamily` object
     /// - Parameters:
     ///   - familyName: font family name
@@ -27,7 +27,7 @@ public struct DefaultFontFamily: FontFamily {
         self.familyName = familyName
         self.style = style
     }
-    
+
     /// Optional suffix to use for the font name.
     ///
     /// Used by `FontFamily.fontName(for:compatibleWith:)`

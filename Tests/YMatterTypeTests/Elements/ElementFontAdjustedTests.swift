@@ -24,7 +24,7 @@ final class ElementFontAdjustedTests: XCTestCase {
         fontWeight: .heavy,
         fontSize: 32,
         lineHeight: 40,
-        textStyle: .largeTitle,
+        textStyle: .title1,
         isFixed: true
     )
     

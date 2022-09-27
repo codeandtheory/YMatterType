@@ -13,14 +13,14 @@ import UIKit
 open class TypographyButton: UIButton {
     /// The current typographical layout
     public private(set) var layout: TypographyLayout!
-    
+
     /// Typography to be used for this buttons's title label
     public var typography: Typography {
         didSet {
             adjustFonts()
         }
     }
-    
+
     /// (Optional) maximum point size when scaling the font.
     ///
     /// Value should be greater than Typography.fontSize.
@@ -61,7 +61,7 @@ open class TypographyButton: UIButton {
         super.init(frame: .zero)
         build()
     }
-    
+
     /// :nodoc:
     required public init?(coder: NSCoder) { nil }
 
@@ -69,7 +69,7 @@ open class TypographyButton: UIButton {
         case text
         case attributedText
     }
-    
+
     private var textSetMode: TextSetMode = .text
 
     /// :nodoc:
@@ -79,7 +79,7 @@ open class TypographyButton: UIButton {
         textSetMode = .text
         styleText(title, for: state)
     }
-    
+
     /// :nodoc:
     override public func setAttributedTitle(_ title: NSAttributedString?, for state: UIControl.State) {
         // When text is set, we may need to re-style it as attributedText
@@ -87,7 +87,7 @@ open class TypographyButton: UIButton {
         textSetMode = .attributedText
         styleAttributedText(title, for: state)
     }
-    
+
     /// Gets or sets the text alignment of the button's title label.
     /// Default value = `.natural`
     public var textAlignment: NSTextAlignment = .natural {
@@ -99,7 +99,7 @@ open class TypographyButton: UIButton {
             }
         }
     }
-    
+
     /// Gets or sets the line break mode of the button's title label.
     /// Default value = `.byTruncatingTail`
     public var lineBreakMode: NSLineBreakMode = .byTruncatingTail {
@@ -119,7 +119,7 @@ open class TypographyButton: UIButton {
         if traitCollection.hasDifferentFontAppearance(comparedTo: previousTraitCollection) {
             adjustFonts()
         }
-        
+
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             adjustColors()
         }
@@ -212,16 +212,16 @@ private extension TypographyButton {
         adjustColors()
         adjustBreakpoint()
     }
-    
+
     func configure() {
         setTitleColor(.label, for: .normal)
         titleLabel?.adjustsFontForContentSizeCategory = true
     }
-    
+
     @objc func contentSizeDidChange() {
         adjustFonts()
     }
-    
+
     func restyleText() {
         styleAttributedText(currentAttributedTitle, for: state)
     }
@@ -240,7 +240,7 @@ private extension TypographyButton {
         let attributedText = layout.styleText(newValue, lineMode: lineMode)
         super.setAttributedTitle(attributedText, for: state)
     }
-    
+
     func styleAttributedText(_ newValue: NSAttributedString?, for state: UIControl.State) {
         defer { invalidateIntrinsicContentSize() }
         guard let layout = layout,
