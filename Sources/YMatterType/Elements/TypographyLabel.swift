@@ -20,7 +20,7 @@ open class TypographyLabel: UILabel {
             adjustFonts()
         }
     }
-    
+
     /// (Optional) maximum point size when scaling the font.
     ///
     /// Value should be greater than Typography.fontSize.
@@ -61,7 +61,7 @@ open class TypographyLabel: UILabel {
         super.init(frame: .zero)
         build()
     }
-    
+
     /// :nodoc:
     required public init?(coder: NSCoder) { nil }
 
@@ -69,7 +69,7 @@ open class TypographyLabel: UILabel {
         case text
         case attributedText
     }
-    
+
     private var textSetMode: TextSetMode = .text
 
     /// :nodoc:
@@ -82,7 +82,7 @@ open class TypographyLabel: UILabel {
             styleText(newValue)
         }
     }
-    
+
     /// :nodoc:
     override public var attributedText: NSAttributedString? {
         get { super.attributedText }
@@ -104,7 +104,7 @@ open class TypographyLabel: UILabel {
             }
         }
     }
-    
+
     /// :nodoc:
     override public var lineBreakMode: NSLineBreakMode {
         didSet {
@@ -123,7 +123,7 @@ open class TypographyLabel: UILabel {
         if traitCollection.hasDifferentFontAppearance(comparedTo: previousTraitCollection) {
             adjustFonts()
         }
-        
+
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             adjustColors()
         }
@@ -132,7 +132,7 @@ open class TypographyLabel: UILabel {
             adjustBreakpoint()
         }
     }
-    
+
     /// Call this if you've made a change that would require text to be re-styled. (Normally this is not necessary).
     /// Override this if you need to do something additional when preferred content size
     /// or legibility weight has changed
@@ -145,7 +145,7 @@ open class TypographyLabel: UILabel {
         font = layout.font
         restyleText()
     }
-    
+
     /// Override this if you have colors that will not automatically adjust to
     /// Light / Dark mode, etc. This can be the case for CGColor or
     /// non-template images (or backgroundImages).
@@ -167,11 +167,11 @@ private extension TypographyLabel {
         adjustColors()
         adjustBreakpoint()
     }
-    
+
     func configure() {
         adjustsFontForContentSizeCategory = true
     }
-    
+
     func restyleText() {
         if textSetMode == .text {
             styleText(text)
@@ -193,7 +193,7 @@ private extension TypographyLabel {
         // Set attributed text to match typography
         super.attributedText = layout.styleText(newValue, lineMode: lineMode)
     }
-    
+
     func styleAttributedText(_ newValue: NSAttributedString?) {
         defer { invalidateIntrinsicContentSize() }
         guard let layout = layout,

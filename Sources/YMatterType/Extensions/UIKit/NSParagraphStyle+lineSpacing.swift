@@ -17,7 +17,7 @@ extension NSParagraphStyle {
         paragraphStyle.lineSpacing = lineSpacing
         return paragraphStyle
     }
-    
+
     /// Combines line height multiple with the existing style
     /// - Parameter lineHeightMultiple: the line height multiple to use
     /// - Returns: Current paragraph style combined with line height multiple
@@ -26,7 +26,7 @@ extension NSParagraphStyle {
         paragraphStyle.lineHeightMultiple = lineHeightMultiple
         return paragraphStyle
     }
-    
+
     /// Combines text alignment with the existing style
     /// - Parameter alignment: the text alignment to use
     /// - Returns: Current paragraph style combined with text alignment

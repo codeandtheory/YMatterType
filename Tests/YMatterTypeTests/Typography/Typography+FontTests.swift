@@ -65,6 +65,7 @@ final class TypographyFontTests: XCTestCase {
         }
     }
 
+#if os(iOS)
     func testMaximumPointSize() {
         let fontFamily = DefaultFontFamily(familyName: "Menlo")
         let traits = UITraitCollection(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge)
@@ -155,6 +156,7 @@ final class TypographyFontTests: XCTestCase {
             XCTAssertEqual(layout.baselineOffset.ceiled(), layout.baselineOffset)
         }
     }
+#endif
 }
 
 struct AppleSDGothicNeoInfo: FontFamily {

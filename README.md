@@ -1,6 +1,6 @@
 ![Y-Matter Type](https://mpospese.com/wp-content/uploads/2022/08/YMatterType-hero-compact.jpeg)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyml-org%2FYMatterType%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/yml-org/YMatterType) [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fyml-org%2FYMatterType%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/yml-org/YMatterType)  
-_An opinionated take on Design System Typography for iOS._
+_An opinionated take on Design System Typography for iOS and tvOS._
 
 This framework uses Figma's concept of Typography to create text-based UI elements (labels, buttons, text fields, and text views) that render themselves as described in Figma design files (especially sizing themselves according to line height) while also supporting Dynamic Type scaling and the Bold Text accessibility setting.
 
@@ -17,7 +17,7 @@ Documentation is automatically generated from source code comments and rendered 
 
 ## What is Y—MatterType?
 
-Y—MatterType is a framework that assists in getting typography done right when constructing iOS user interfaces from Figma-based designs.
+Y—MatterType is a framework that assists in getting typography done right when constructing iOS and tvOS user interfaces from Figma-based designs.
 
 Y—MatterType aims to achieve the following goals:
 

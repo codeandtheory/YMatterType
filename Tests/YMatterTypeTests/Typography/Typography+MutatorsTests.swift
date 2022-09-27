@@ -10,17 +10,22 @@ import XCTest
 @testable import YMatterType
 
 final class TypographyMutatorsTests: XCTestCase {
-    private let types: [Typography] = [
-        .largeTitle,
-        .title1,
-        .title2,
-        .headline,
-        .subhead,
-        .body,
-        .bodyBold,
-        .smallBody,
-        .smallBodyBold
-    ]
+    private let types: [Typography] = {
+        var styles: [Typography] = [
+            .title1,
+            .title2,
+            .headline,
+            .subhead,
+            .body,
+            .bodyBold,
+            .smallBody,
+            .smallBodyBold
+        ]
+#if !os(tvOS)
+        styles.insert(.largeTitle, at: 0)
+#endif
+        return styles
+    }()
 
     func testRegular() {
         types.forEach {

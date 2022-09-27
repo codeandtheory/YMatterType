@@ -18,15 +18,18 @@ extension UITraitCollection {
     // Traits affecting a variety of things but not Dynamic Type Size or Bold Text
     static func generateSimilarFontTraits(to startingTraits: UITraitCollection) -> [UITraitCollection] {
         // return each of these traits combined with startingTraits
-        [
+        var traits = [
             UITraitCollection(horizontalSizeClass: .compact),
             UITraitCollection(verticalSizeClass: .compact),
             UITraitCollection(userInterfaceIdiom: .pad),
             UITraitCollection(userInterfaceStyle: .dark),
             UITraitCollection(displayGamut: .P3),
-            UITraitCollection(accessibilityContrast: .high),
-            UITraitCollection(userInterfaceLevel: .elevated)
-        ].map({ UITraitCollection(traitsFrom: [startingTraits, $0]) })
+            UITraitCollection(accessibilityContrast: .high)
+            ]
+#if os(iOS)
+        traits.append(UITraitCollection(userInterfaceLevel: .elevated))
+#endif
+        return traits.map({ UITraitCollection(traitsFrom: [startingTraits, $0]) })
     }
 
     // Traits with different values for Dynamic Type Size or Bold Text
@@ -63,13 +66,20 @@ extension UITraitCollection {
     // userInterfaceIdiom, userInterfaceStyle, displayGamut, accessibilityContrast, userInterfaceLevel
     // and more could be added in the future.
 
-    static let startingColorTraits = UITraitCollection(traitsFrom: [
-        UITraitCollection(userInterfaceIdiom: .phone),
-        UITraitCollection(userInterfaceStyle: .light),
-        UITraitCollection(displayGamut: .SRGB),
-        UITraitCollection(accessibilityContrast: .normal),
-        UITraitCollection(userInterfaceLevel: .base)
-    ])
+    static let startingColorTraits: UITraitCollection = {
+        var traits = [
+            UITraitCollection(userInterfaceIdiom: .phone),
+            UITraitCollection(userInterfaceStyle: .light),
+            UITraitCollection(displayGamut: .SRGB),
+            UITraitCollection(accessibilityContrast: .normal)
+            ]
+
+#if os(iOS)
+        traits.append(UITraitCollection(userInterfaceLevel: .base))
+#endif
+
+        return UITraitCollection(traitsFrom: traits)
+    }()
 
     // Traits affecting a variety of things but not anything that could change color appearance
     static func generateSimilarColorTraits(to startingTraits: UITraitCollection) -> [UITraitCollection] {
@@ -84,49 +94,56 @@ extension UITraitCollection {
 
     // Traits with different values for traits that could affect color
     static func generateDifferentColorTraits() -> [UITraitCollection] {
-        [
+        var traits = [
             UITraitCollection(),
             UITraitCollection(traitsFrom: [
                 UITraitCollection(userInterfaceIdiom: .pad),
                 UITraitCollection(userInterfaceStyle: .light),
                 UITraitCollection(displayGamut: .SRGB),
-                UITraitCollection(accessibilityContrast: .normal),
-                UITraitCollection(userInterfaceLevel: .base)
+                UITraitCollection(accessibilityContrast: .normal)
             ]),
             UITraitCollection(traitsFrom: [
                 UITraitCollection(userInterfaceIdiom: .phone),
                 UITraitCollection(userInterfaceStyle: .dark),
                 UITraitCollection(displayGamut: .SRGB),
-                UITraitCollection(accessibilityContrast: .normal),
-                UITraitCollection(userInterfaceLevel: .base)
+                UITraitCollection(accessibilityContrast: .normal)
             ]),
             UITraitCollection(traitsFrom: [
                 UITraitCollection(userInterfaceIdiom: .phone),
                 UITraitCollection(userInterfaceStyle: .light),
                 UITraitCollection(displayGamut: .P3),
-                UITraitCollection(accessibilityContrast: .normal),
-                UITraitCollection(userInterfaceLevel: .base)
+                UITraitCollection(accessibilityContrast: .normal)
             ]),
             UITraitCollection(traitsFrom: [
                 UITraitCollection(userInterfaceIdiom: .phone),
                 UITraitCollection(userInterfaceStyle: .light),
                 UITraitCollection(displayGamut: .SRGB),
-                UITraitCollection(accessibilityContrast: .high),
-                UITraitCollection(userInterfaceLevel: .base)
-            ]),
-            UITraitCollection(traitsFrom: [
-                UITraitCollection(userInterfaceIdiom: .phone),
-                UITraitCollection(userInterfaceStyle: .light),
-                UITraitCollection(displayGamut: .SRGB),
-                UITraitCollection(accessibilityContrast: .normal),
-                UITraitCollection(userInterfaceLevel: .elevated)
+                UITraitCollection(accessibilityContrast: .high)
             ]),
             UITraitCollection(userInterfaceIdiom: .tv),
             UITraitCollection(userInterfaceStyle: .dark),
             UITraitCollection(displayGamut: .P3),
-            UITraitCollection(accessibilityContrast: .high),
-            UITraitCollection(userInterfaceLevel: .elevated)
+            UITraitCollection(accessibilityContrast: .high)
         ]
+
+#if os(iOS)
+        traits.append(
+            contentsOf: [
+                UITraitCollection(
+                    traitsFrom: [
+                        UITraitCollection(userInterfaceIdiom: .phone),
+                        UITraitCollection(userInterfaceStyle: .light),
+                        UITraitCollection(displayGamut: .SRGB),
+                        UITraitCollection(accessibilityContrast: .normal),
+                        UITraitCollection(userInterfaceLevel: .elevated)
+                    ]
+                ),
+                UITraitCollection(userInterfaceLevel: .elevated)
+            ]
+        )
+#endif
+
+        return traits
     }
 
     // MARK: - Breakpoints
@@ -139,15 +156,18 @@ extension UITraitCollection {
     // Traits affecting a variety of things but not horizontal or vertical size class
     static func generateSimilarBreakpointTraits(to startingTraits: UITraitCollection) -> [UITraitCollection] {
         // return each of these traits combined with startingTraits
-        [
+        var traits = [
             UITraitCollection(preferredContentSizeCategory: .accessibilityMedium),
             UITraitCollection(legibilityWeight: .bold),
             UITraitCollection(userInterfaceIdiom: .pad),
             UITraitCollection(userInterfaceStyle: .dark),
             UITraitCollection(displayGamut: .P3),
-            UITraitCollection(accessibilityContrast: .high),
-            UITraitCollection(userInterfaceLevel: .elevated)
-        ].map({ UITraitCollection(traitsFrom: [startingTraits, $0]) })
+            UITraitCollection(accessibilityContrast: .high)
+        ]
+#if os(iOS)
+        traits.append(UITraitCollection(userInterfaceLevel: .elevated))
+#endif
+        return traits.map({ UITraitCollection(traitsFrom: [startingTraits, $0]) })
     }
 
     // Traits with different values for traits that could affect breakpoints

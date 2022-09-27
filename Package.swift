@@ -6,7 +6,8 @@ let package = Package(
     name: "YMatterType",
     defaultLocalization: "en",
     platforms: [
-        .iOS(.v14)
+        .iOS(.v14),
+        .tvOS(.v14)
     ],
     products: [
         .library(

@@ -14,7 +14,7 @@ import UIKit
 public struct TypographyLayout {
     /// Font to use (potentially scaled and considering Accessibility Bold Text)
     public let font: UIFont
-    
+
     /// Scaled line height to use with this font
     public let lineHeight: CGFloat
 
@@ -29,7 +29,7 @@ public struct TypographyLayout {
 
     /// Paragraph spacing to apply
     public let paragraphSpacing: CGFloat
-    
+
     /// Text case to apply to text
     public let textCase: Typography.TextCase
 

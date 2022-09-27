@@ -14,7 +14,7 @@ import os
 public protocol FontFamily {
     /// Font family root name, e.g. "AvenirNext"
     var familyName: String { get }
-    
+
     /// Optional suffix to use for the font name.
     ///
     /// Used by `FontFamily.fontName(for:compatibleWith:)`
@@ -31,7 +31,7 @@ public protocol FontFamily {
 
     // The following four methods have default implementations that
     // can be overridden in custom implementations of `FontFamily`.
-    
+
     /// Returns a font for the specified `weight` and `pointSize` that is compatible with the `traitCollection`
     /// - Parameters:
     ///   - weight: desired font weight
@@ -50,12 +50,12 @@ public protocol FontFamily {
     /// If `nil` then `UIAccessibility.isBoldTextEnabled` will be considered instead
     /// - Returns: The font name formulated from `familyName` and `weight`
     func fontName(for weight: Typography.FontWeight, compatibleWith traitCollection: UITraitCollection?) -> String
-    
+
     /// Generates a weight name suffix as part of a full font name. Not all fonts support all 9 weights.
     /// - Parameter weight: desired font weight
     /// - Returns: The weight name to use
     func weightName(for weight: Typography.FontWeight) -> String
-    
+
     /// Returns the alternate weight to use if user has requested a bold font. e.g. might convert `.regular`
     /// to `.semibold`. Not all fonts support all 9 weights.
     /// - Parameter weight: desired font weight
@@ -94,7 +94,7 @@ extension FontFamily {
         }
         return font
     }
-    
+
     public func fontName(
         for weight: Typography.FontWeight,
         compatibleWith traitCollection: UITraitCollection?
@@ -105,7 +105,7 @@ extension FontFamily {
         let weightName = weightName(for: actualWeight)
         return "\(familyName)-\(weightName)\(fontNameSuffix)"
     }
-    
+
     public func weightName(for weight: Typography.FontWeight) -> String {
         // Default font name suffix by weight
         switch weight {
@@ -129,7 +129,7 @@ extension FontFamily {
             return "Black"
         }
     }
-    
+
     public func accessibilityBoldWeight(for weight: Typography.FontWeight) -> Typography.FontWeight {
         // By default returns the next heavier supported weight (if any), otherwise the heaviest supported weight
         let weights = supportedWeights.sorted(by: { $0.rawValue < $1.rawValue })
@@ -147,7 +147,7 @@ extension FontFamily {
         guard let traitCollection = traitCollection else {
             return UIAccessibility.isBoldTextEnabled
         }
-        
+
         return traitCollection.legibilityWeight == .bold
     }
 }

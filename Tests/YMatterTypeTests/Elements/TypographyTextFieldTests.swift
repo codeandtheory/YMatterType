@@ -74,7 +74,7 @@ final class TypographyTextFieldTests: TypographyElementTests {
         // we expect text field height to equal the old lineHeight
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight)
 
-        let fontFamily = DefaultFontFamily(familyName: "Verdana")
+        let fontFamily = DefaultFontFamily(familyName: "AvenirNext")
         let typography = Typography(
             fontFamily: fontFamily,
             fontWeight: .bold,
@@ -95,11 +95,12 @@ final class TypographyTextFieldTests: TypographyElementTests {
         // we expect a font
         XCTAssertNotNil(sut.font)
         // we expect the font to have the new family
-        XCTAssertEqual(sut.font?.familyName, typography.fontFamily.familyName)
+        XCTAssertEqual(sut.font?.familyName.removeSpaces(), typography.fontFamily.familyName)
         // we expect text field height to equal the new lineHeight
         XCTAssertEqual(sut.intrinsicContentSize.height, typography.lineHeight)
     }
 
+#if os(iOS)
     func testMaximumPointSize() {
         let sut = makeSUT()
         let scaledType = Typography.body
@@ -166,7 +167,8 @@ final class TypographyTextFieldTests: TypographyElementTests {
             XCTAssertEqual(sut.intrinsicContentSize.height, $0 * scaledType.lineHeight)
         }
     }
-
+#endif
+    
     func testSetText() {
         let sut = makeSUT()
         // Given a text field
@@ -200,7 +202,7 @@ final class TypographyTextFieldTests: TypographyElementTests {
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight)
 
         // changing the typograhy will restyle the attributed text
-        let fontFamily = DefaultFontFamily(familyName: "Verdana")
+        let fontFamily = DefaultFontFamily(familyName: "AvenirNext")
         sut.typography = Typography(
             fontFamily: fontFamily,
             fontWeight: .bold,
@@ -226,11 +228,14 @@ final class TypographyTextFieldTests: TypographyElementTests {
 
     func testTextInsets() {
         let sut = makeSUT()
+#if os(iOS)
+        // setting placeholder triggers a memory leak on tvOS (true for plain vanilla UITextField)!
         sut.placeholder = "First Name"
+#endif
         sut.text = "John"
 
         // text insets should be zero by default
-        XCTAssertEqual(sut.textInsets, .zero)
+        XCTAssertEqual(sut.textInsets, TypographyTextField.defaultTextInsets)
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight)
 
         // but if we apply different text insets, the height should adjust accordingly
@@ -250,6 +255,7 @@ final class TypographyTextFieldTests: TypographyElementTests {
             XCTAssertEqual(sut.editingRect(forBounds: bounds), insetBounds)
             XCTAssertEqual(sut.leftViewRect(forBounds: bounds).minX, insetBounds.minX)
             XCTAssertEqual(sut.rightViewRect(forBounds: bounds).maxX, insetBounds.maxX)
+            XCTAssertEqual(sut.clearButtonRect(forBounds: bounds).maxX, insetBounds.maxX - 5)
         }
     }
 
