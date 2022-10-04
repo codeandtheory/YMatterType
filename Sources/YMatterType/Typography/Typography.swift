@@ -48,7 +48,7 @@ public struct Typography {
     ///   - fontWeight: font weight to use
     ///   - fontSize: font size to use
     ///   - lineHeight: line height to use
-    ///   - chaacterSpacing: letter spacing to use (defaults to `0`)
+    ///   - letterSpacing: letter spacing to use (defaults to `0`)
     ///   - paragraphIndent: paragraph indent to use (defaults to `0`)
     ///   - paragraphSpacing: paragraph spacing to use (defaults to `0`)
     ///   - textCase: text case to apply (defaults to `.none`)
@@ -88,7 +88,7 @@ public struct Typography {
     ///   - fontWeight: font weight to use
     ///   - fontSize: font size to use
     ///   - lineHeight: line height to use
-    ///   - chaacterSpacing: letter spacing to use (defaults to `0`)
+    ///   - letterSpacing: letter spacing to use (defaults to `0`)
     ///   - paragraphIndent: paragraph indent to use (defaults to `0`)
     ///   - paragraphSpacing: paragraph spacing to use (defaults to `0`)
     ///   - textCase: text case to apply (defaults to `.none`)
