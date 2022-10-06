@@ -84,8 +84,13 @@ open class TypographyTextField: UITextField {
         build()
     }
 
-    /// :nodoc:
-    required public init?(coder: NSCoder) { nil }
+    /// Adding support for Interface Builder
+    /// Initializes a button using the default Typography `Typography.systemLabel`
+    required public init?(coder: NSCoder) {
+        self.typography = Typography.systemLabel
+        super.init(coder: coder)
+        build()
+    }
 
     private enum TextSetMode {
         case text
