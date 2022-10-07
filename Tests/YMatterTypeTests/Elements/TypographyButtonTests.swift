@@ -27,15 +27,15 @@ final class TypographyButtonTests: TypographyElementTests {
     func testInitWithCoder() throws {
         let sut = TypographyButton(coder: try makeCoder(for: makeSUT()))
         XCTAssertNotNil(sut)
-        #if os(tvOS)
-            XCTAssertEqual(sut?.typography.fontSize, 38.0)
-            XCTAssertEqual(sut?.typography.fontWeight, .medium)
-            XCTAssertEqual(sut?.typography.textStyle, .subheadline)
-        #else
-            XCTAssertEqual(sut?.typography.fontSize, 18.0)
-            XCTAssertEqual(sut?.typography.fontWeight, .regular)
-            XCTAssertEqual(sut?.typography.textStyle, .subheadline)
-        #endif
+#if os(tvOS)
+        XCTAssertEqual(sut?.typography.fontSize, 38.0)
+        XCTAssertEqual(sut?.typography.fontWeight, .medium)
+        XCTAssertEqual(sut?.typography.textStyle, .subheadline)
+#else
+        XCTAssertEqual(sut?.typography.fontSize, 18.0)
+        XCTAssertEqual(sut?.typography.fontWeight, .regular)
+        XCTAssertEqual(sut?.typography.textStyle, .subheadline)
+#endif
     }
 
     func testSingleLine() {

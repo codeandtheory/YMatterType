@@ -62,7 +62,6 @@ open class TypographyButton: UIButton {
         build()
     }
 
-    /// Adding support for Interface Builder
     /// Initializes a button using the default Typography `Typography.systemButton`
     required public init?(coder: NSCoder) {
         self.typography = Typography.systemButton
