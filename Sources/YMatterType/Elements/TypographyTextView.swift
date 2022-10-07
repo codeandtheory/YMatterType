@@ -66,8 +66,7 @@ open class TypographyTextView: UITextView {
         build()
     }
 
-    /// Adding support for Interface Builder
-    /// Initializes a button using the default Typography `Typography.systemLabel`
+    /// Initializes a text view using the default Typography `Typography.systemLabel`
     required public init?(coder: NSCoder) {
         self.typography = Typography.systemLabel
         super.init(coder: coder)
