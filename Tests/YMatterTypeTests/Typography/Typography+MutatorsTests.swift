@@ -51,7 +51,6 @@ final class TypographyMutatorsTests: XCTestCase {
         types.forEach {
             let newFontSize = $0.fontSize + 1
             _test(original: $0, modified: $0.fontSize(newFontSize), fontSize: newFontSize)
-            
         }
     }
 
