@@ -56,7 +56,8 @@ final class TypographyMutatorsTests: XCTestCase {
     
     func testLineHeight() {
         types.forEach {
-            _test(original: $0, modified: $0.lineHeight($0.lineHeight + 1), lineHeight: ($0.lineHeight + 1))
+            let newLineHeight = $0.lineHeight + 2
+            _test(original: $0, modified: $0.lineHeight(newLineHeight), lineHeight: newLineHeight)
         }
     }
 
@@ -109,7 +110,7 @@ final class TypographyMutatorsTests: XCTestCase {
         let textCase = textCase ?? original.textCase
         let textDecoration = textDecoration ?? original.textDecoration
 
-        // fontWeight, fontSize, isFixed, letterSpacing, textCase, and textDecoration should be as expected
+        // fontWeight, fontSize, lineHeight, isFixed, letterSpacing, textCase, and textDecoration should be as expected
         XCTAssertEqual(modified.fontWeight, weight)
         XCTAssertEqual(modified.fontSize, fontSize)
         XCTAssertEqual(modified.lineHeight, lineHeight)
