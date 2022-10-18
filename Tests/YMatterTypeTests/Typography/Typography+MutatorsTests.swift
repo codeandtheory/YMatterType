@@ -46,6 +46,12 @@ final class TypographyMutatorsTests: XCTestCase {
             }
         }
     }
+    
+    func testFontSize() {
+        types.forEach {
+            _test(original: $0, modified: $0.fontSize($0.fontSize + 1), fontSize: ($0.fontSize + 1))
+        }
+    }
 
     func testFixed() {
         types.forEach {
@@ -81,19 +87,22 @@ final class TypographyMutatorsTests: XCTestCase {
         original: Typography,
         modified: Typography,
         weight: Typography.FontWeight? = nil,
+        fontSize: CGFloat? = nil,
         isFixed: Bool? = nil,
         letterSpacing: CGFloat? = nil,
         textCase: Typography.TextCase? = nil,
         textDecoration: Typography.TextDecoration? = nil
     ) {
         let weight = weight ?? original.fontWeight
+        let fontSize = fontSize ?? original.fontSize
         let isFixed = isFixed ?? original.isFixed
         let kerning = letterSpacing ?? original.letterSpacing
         let textCase = textCase ?? original.textCase
         let textDecoration = textDecoration ?? original.textDecoration
 
-        // fontWeight, isFixed, letterSpacing, textCase, and textDecoration should be as expected
+        // fontWeight, fontSize, isFixed, letterSpacing, textCase, and textDecoration should be as expected
         XCTAssertEqual(modified.fontWeight, weight)
+        XCTAssertEqual(modified.fontSize, fontSize)
         XCTAssertEqual(modified.isFixed, isFixed)
         XCTAssertEqual(modified.letterSpacing, kerning)
         XCTAssertEqual(modified.textCase, textCase)
@@ -101,7 +110,6 @@ final class TypographyMutatorsTests: XCTestCase {
 
         // the other variables should be the same
         XCTAssertEqual(modified.fontFamily.familyName, original.fontFamily.familyName)
-        XCTAssertEqual(modified.fontSize, original.fontSize)
         XCTAssertEqual(modified.lineHeight, original.lineHeight)
         XCTAssertEqual(modified.textStyle, original.textStyle)
         XCTAssertEqual(modified.paragraphIndent, original.paragraphIndent)
