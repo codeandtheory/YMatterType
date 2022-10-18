@@ -38,6 +38,14 @@ final class TypographyMutatorsTests: XCTestCase {
             _test(original: $0, modified: $0.bold, weight: .bold)
         }
     }
+    
+    func testFontWeight() {
+        types.forEach {
+            for fontweight in Typography.FontWeight.allCases {
+                _test(original: $0, modified: $0.fontWeight(fontweight), weight: fontweight)
+            }
+        }
+    }
 
     func testFixed() {
         types.forEach {

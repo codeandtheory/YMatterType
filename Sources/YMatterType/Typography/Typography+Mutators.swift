@@ -11,30 +11,23 @@ import UIKit
 public extension Typography {
     /// Returns a copy of the Typography but with `.regular` font weight
     var regular: Typography {
-        if fontWeight == .regular { return self }
-
-        return Typography(
-            fontFamily: fontFamily,
-            fontWeight: .regular,
-            fontSize: fontSize,
-            lineHeight: lineHeight,
-            letterSpacing: letterSpacing,
-            paragraphIndent: paragraphIndent,
-            paragraphSpacing: paragraphSpacing,
-            textCase: textCase,
-            textDecoration: textDecoration,
-            textStyle: textStyle,
-            isFixed: isFixed
-        )
+        fontWeight(.regular)
     }
 
     /// Returns a copy of the Typography but with `.bold` font weight
     var bold: Typography {
-        if fontWeight == .bold { return self }
-
+        fontWeight(.bold)
+    }
+    
+    /// Returns a copy of the Typography but with the new `FontWeight` applied.
+    /// - Parameter value: font weight to use
+    /// - Returns: an updated copy of the Typography
+    func fontWeight(_ value: FontWeight) -> Typography {
+        if fontWeight == value { return self }
+        
         return Typography(
             fontFamily: fontFamily,
-            fontWeight: .bold,
+            fontWeight: value,
             fontSize: fontSize,
             lineHeight: lineHeight,
             letterSpacing: letterSpacing,
