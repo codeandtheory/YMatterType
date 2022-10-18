@@ -49,7 +49,9 @@ final class TypographyMutatorsTests: XCTestCase {
     
     func testFontSize() {
         types.forEach {
-            _test(original: $0, modified: $0.fontSize($0.fontSize + 1), fontSize: ($0.fontSize + 1))
+            let newFontSize = $0.fontSize + 1
+            _test(original: $0, modified: $0.fontSize(newFontSize), fontSize: newFontSize)
+            
         }
     }
 
