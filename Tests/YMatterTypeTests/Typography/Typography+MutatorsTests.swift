@@ -53,6 +53,12 @@ final class TypographyMutatorsTests: XCTestCase {
             _test(original: $0, modified: $0.fontSize(newFontSize), fontSize: newFontSize)
         }
     }
+    
+    func testLineHeight() {
+        types.forEach {
+            _test(original: $0, modified: $0.lineHeight($0.lineHeight + 1), lineHeight: ($0.lineHeight + 1))
+        }
+    }
 
     func testFixed() {
         types.forEach {
@@ -89,6 +95,7 @@ final class TypographyMutatorsTests: XCTestCase {
         modified: Typography,
         weight: Typography.FontWeight? = nil,
         fontSize: CGFloat? = nil,
+        lineHeight: CGFloat? = nil,
         isFixed: Bool? = nil,
         letterSpacing: CGFloat? = nil,
         textCase: Typography.TextCase? = nil,
@@ -96,6 +103,7 @@ final class TypographyMutatorsTests: XCTestCase {
     ) {
         let weight = weight ?? original.fontWeight
         let fontSize = fontSize ?? original.fontSize
+        let lineHeight = lineHeight ?? original.lineHeight
         let isFixed = isFixed ?? original.isFixed
         let kerning = letterSpacing ?? original.letterSpacing
         let textCase = textCase ?? original.textCase
@@ -104,6 +112,7 @@ final class TypographyMutatorsTests: XCTestCase {
         // fontWeight, fontSize, isFixed, letterSpacing, textCase, and textDecoration should be as expected
         XCTAssertEqual(modified.fontWeight, weight)
         XCTAssertEqual(modified.fontSize, fontSize)
+        XCTAssertEqual(modified.lineHeight, lineHeight)
         XCTAssertEqual(modified.isFixed, isFixed)
         XCTAssertEqual(modified.letterSpacing, kerning)
         XCTAssertEqual(modified.textCase, textCase)
@@ -111,7 +120,6 @@ final class TypographyMutatorsTests: XCTestCase {
 
         // the other variables should be the same
         XCTAssertEqual(modified.fontFamily.familyName, original.fontFamily.familyName)
-        XCTAssertEqual(modified.lineHeight, original.lineHeight)
         XCTAssertEqual(modified.textStyle, original.textStyle)
         XCTAssertEqual(modified.paragraphIndent, original.paragraphIndent)
         XCTAssertEqual(modified.paragraphSpacing, original.paragraphSpacing)

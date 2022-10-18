@@ -60,6 +60,27 @@ public extension Typography {
             isFixed: isFixed
         )
     }
+    
+    /// Returns a copy of the Typography but with the new `lineHeight` applied.
+    /// - Parameter value: the line height to use
+    /// - Returns: an updated copy of the Typography
+    func lineHeight(_ value: CGFloat) -> Typography {
+        if lineHeight == value { return self }
+        
+        return Typography(
+            fontFamily: fontFamily,
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            lineHeight: value,
+            letterSpacing: letterSpacing,
+            paragraphIndent: paragraphIndent,
+            paragraphSpacing: paragraphSpacing,
+            textCase: textCase,
+            textDecoration: textDecoration,
+            textStyle: textStyle,
+            isFixed: isFixed
+        )
+    }
 
     /// Returns a copy of the Typography but with `isFixed` set to `true`
     var fixed: Typography {
