@@ -19,8 +19,8 @@ public extension Typography {
         fontWeight(.bold)
     }
     
-    /// Returns a copy of the Typography but with the new `FontWeight` applied.
-    /// - Parameter value: font weight to use
+    /// Returns a copy of the Typography but with the new `fontWeight` applied.
+    /// - Parameter value: the font weight to use
     /// - Returns: an updated copy of the Typography
     func fontWeight(_ value: FontWeight) -> Typography {
         if fontWeight == value { return self }
