@@ -39,6 +39,27 @@ public extension Typography {
             isFixed: isFixed
         )
     }
+    
+    /// Returns a copy of the Typography but with the new `fontSize` applied.
+    /// - Parameter value: the font size to use
+    /// - Returns: an updated copy of the Typography
+    func fontSize(_ value: CGFloat) -> Typography {
+        if fontSize == value { return self }
+        
+        return Typography(
+            fontFamily: fontFamily,
+            fontWeight: fontWeight,
+            fontSize: value,
+            lineHeight: lineHeight,
+            letterSpacing: letterSpacing,
+            paragraphIndent: paragraphIndent,
+            paragraphSpacing: paragraphSpacing,
+            textCase: textCase,
+            textDecoration: textDecoration,
+            textStyle: textStyle,
+            isFixed: isFixed
+        )
+    }
 
     /// Returns a copy of the Typography but with `isFixed` set to `true`
     var fixed: Typography {
