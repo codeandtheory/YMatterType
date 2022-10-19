@@ -9,11 +9,33 @@
 import UIKit
 
 public extension Typography {
+    /// Returns a copy of the Typography but with the new `familyName` applied.
+    /// - Parameter value: the family name to use
+    /// - Returns: an updated copy of the Typography
+    func familyName(_ value: String) -> Typography {
+        if fontFamily.familyName == value { return self }
+        
+        return Typography(
+            familyName: value,
+            fontStyle: fontFamily.fontNameSuffix.isEmpty ? .regular : .italic,
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            lineHeight: lineHeight,
+            letterSpacing: letterSpacing,
+            paragraphIndent: paragraphIndent,
+            paragraphSpacing: paragraphSpacing,
+            textCase: textCase,
+            textDecoration: textDecoration,
+            textStyle: textStyle,
+            isFixed: isFixed
+        )
+    }
+    
     /// Returns a copy of the Typography but with `.regular` font weight
     var regular: Typography {
         fontWeight(.regular)
     }
-
+    
     /// Returns a copy of the Typography but with `.bold` font weight
     var bold: Typography {
         fontWeight(.bold)
