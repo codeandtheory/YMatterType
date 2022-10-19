@@ -27,6 +27,16 @@ final class TypographyMutatorsTests: XCTestCase {
         return styles
     }()
 
+    func testFamilyName() {
+        types.forEach {
+            let familyName = "AppleSDGothicNeo"
+            let typography = $0.familyName(familyName)
+            _test(original: $0, modified: typography, familyName: familyName)
+           let layout = typography.generateLayout(compatibleWith: UITraitCollection(legibilityWeight: .regular))
+            XCTAssertEqual(layout.font.familyName.removeSpaces(), familyName)
+        }
+    }
+    
     func testRegular() {
         types.forEach {
             _test(original: $0, modified: $0.regular, weight: .regular)
@@ -94,6 +104,7 @@ final class TypographyMutatorsTests: XCTestCase {
     private func _test(
         original: Typography,
         modified: Typography,
+        familyName: String? = nil,
         weight: Typography.FontWeight? = nil,
         fontSize: CGFloat? = nil,
         lineHeight: CGFloat? = nil,
@@ -102,6 +113,7 @@ final class TypographyMutatorsTests: XCTestCase {
         textCase: Typography.TextCase? = nil,
         textDecoration: Typography.TextDecoration? = nil
     ) {
+        let familyName = familyName ?? original.fontFamily.familyName
         let weight = weight ?? original.fontWeight
         let fontSize = fontSize ?? original.fontSize
         let lineHeight = lineHeight ?? original.lineHeight
@@ -110,7 +122,9 @@ final class TypographyMutatorsTests: XCTestCase {
         let textCase = textCase ?? original.textCase
         let textDecoration = textDecoration ?? original.textDecoration
 
-        // fontWeight, fontSize, lineHeight, isFixed, letterSpacing, textCase, and textDecoration should be as expected
+        // familyName, fontWeight, fontSize, lineHeight, isFixed,
+        // letterSpacing, textCase, and textDecoration should be as expected
+        XCTAssertEqual(modified.fontFamily.familyName, familyName)
         XCTAssertEqual(modified.fontWeight, weight)
         XCTAssertEqual(modified.fontSize, fontSize)
         XCTAssertEqual(modified.lineHeight, lineHeight)
@@ -120,7 +134,6 @@ final class TypographyMutatorsTests: XCTestCase {
         XCTAssertEqual(modified.textDecoration, textDecoration)
 
         // the other variables should be the same
-        XCTAssertEqual(modified.fontFamily.familyName, original.fontFamily.familyName)
         XCTAssertEqual(modified.textStyle, original.textStyle)
         XCTAssertEqual(modified.paragraphIndent, original.paragraphIndent)
         XCTAssertEqual(modified.paragraphSpacing, original.paragraphSpacing)
