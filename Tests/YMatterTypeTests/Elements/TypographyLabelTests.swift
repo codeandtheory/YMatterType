@@ -354,6 +354,44 @@ final class TypographyLabelTests: TypographyElementTests {
             sut2.intrinsicContentSize.width
         )
     }
+    
+    func testFamilyName() {
+        let sut = makeSUT()
+        XCTAssertEqual(sut.familyName, "NotoSans")
+        sut.familyName = "AppleSDGothicNeo"
+        XCTAssertEqual(sut.familyName, "AppleSDGothicNeo")
+    }
+    
+    func testFontWeight() {
+        let sut = makeSUT()
+        XCTAssertEqual(sut.fontWeight, 400)
+        sut.fontWeight = 700
+        XCTAssertEqual(sut.typography.fontWeight, .bold)
+    }
+    
+    func testFontSize() {
+        let sut = makeSUT()
+        XCTAssertEqual(sut.fontSize, 24)
+        sut.fontSize = 50
+        XCTAssertEqual(sut.fontSize, 50)
+    }
+    
+    func testLineHeight() {
+        let sut = makeSUT()
+        XCTAssertEqual(sut.lineHeight, 32)
+        sut.lineHeight = 40
+        XCTAssertEqual(sut.lineHeight, 40)
+    }
+    
+    func testLetterSpacing() {
+        let sut = makeSUT()
+        XCTAssertEqual(sut.letterSpacing, 0)
+        sut.letterSpacing = 5
+        XCTAssertEqual(sut.letterSpacing, 5)
+    }
+    
+    
+    
 }
 
 private extension TypographyLabelTests {

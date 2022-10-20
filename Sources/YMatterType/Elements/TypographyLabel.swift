@@ -22,35 +22,45 @@ open class TypographyLabel: UILabel {
         }
     }
     
-    /// The familyName attribute
+    /// The typography's familyName
+    ///
+    /// Intended for use from Interface Builder only. From code you should just use `typography` directly.
     @IBInspectable
     public var familyName: String {
         get { typography.fontFamily.familyName }
         set { typography = typography.familyName(newValue) }
     }
     
-    /// The fontWeight attribute
+    /// The typography's font weight (100 - 900)
+    ///
+    /// Intended for use from Interface Builder only. From code you should just use `typography` directly.
     @IBInspectable
     public var fontWeight: CGFloat {
         get { typography.fontWeight.rawValue }
         set { typography = typography.fontWeight(Typography.FontWeight(rawValue: newValue) ?? .regular) }
     }
     
-    /// The fontSize attribute
+    /// The typography's font size (typically should be less than line height)
+    ///
+    /// Intended for use from Interface Builder only. From code you should just use `typography` directly.
     @IBInspectable
     public var fontSize: CGFloat {
         get { typography.fontSize }
         set { typography = typography.fontSize(newValue) }
     }
     
-    /// The lineHeight attribute
+    /// The typography's line height (typically should be greater than font size)
+    ///
+    /// Intended for use from Interface Builder only. From code you should just use `typography` directly.
     @IBInspectable
     public var lineHeight: CGFloat {
         get { typography.lineHeight }
         set { typography = typography.lineHeight(newValue) }
     }
     
-    /// The letterSpacing attribute
+    /// The typography's letter spacing (kerning)
+    ///
+    /// Intended for use from Interface Builder only. From code you should just use `typography` directly.
     @IBInspectable
     public var letterSpacing: CGFloat {
         get { typography.letterSpacing }
