@@ -1,0 +1,40 @@
+name: Run linter and unit tests
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+    
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  
+jobs:
+  build:
+
+    runs-on: macos-12
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set Xcode version
+      run: |
+        ls -l /Applications | grep 'Xcode'
+        sudo xcode-select -s /Applications/Xcode_14.0.1.app
+    - name: Lint code using SwiftLint
+      run: swiftlint --strict --reporter github-actions-logging
+
+    - name: Build iOS
+      run:  |
+          xcodebuild -scheme YMatterType -sdk iphonesimulator16.0 -destination 'platform=iOS Simulator,name=iPhone 14' build-for-testing
+          
+    - name: Run tests iOS
+      run: |
+          xcodebuild -scheme YMatterType -sdk iphonesimulator16.0 -destination 'platform=iOS Simulator,name=iPhone 14' test-without-building
+    - name: Build tvOS
+      run:  |
+          xcodebuild -scheme YMatterType -sdk appletvsimulator16.0 -destination 'platform=tvOS Simulator,name=Apple TV 4K (2nd generation)' build-for-testing
+          
+    - name: Run tests tvOS
+      run: |
+          xcodebuild -scheme YMatterType -sdk appletvsimulator16.0 -destination 'platform=tvOS Simulator,name=Apple TV 4K (2nd generation)' test-without-building
