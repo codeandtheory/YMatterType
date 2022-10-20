@@ -22,7 +22,7 @@ open class TypographyLabel: UILabel {
         }
     }
     
-    /// The typography's familyName
+    /// The typography's family name
     ///
     /// Intended for use from Interface Builder only. From code you should just use `typography` directly.
     @IBInspectable
