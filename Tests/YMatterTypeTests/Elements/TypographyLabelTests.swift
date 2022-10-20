@@ -9,6 +9,10 @@
 import XCTest
 @testable import YMatterType
 
+// It's not a problem having too many tests!
+// swiftlint:disable file_length
+// swiftlint:disable type_body_length
+
 final class TypographyLabelTests: TypographyElementTests {
     override func setUp() async throws {
         try await super.setUp()
