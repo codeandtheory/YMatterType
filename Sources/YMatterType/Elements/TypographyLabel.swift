@@ -10,8 +10,8 @@ import UIKit
 
 /// A text label that supports `Typography`.
 /// You can optionally set `maximumPointSize` or `maximumScaleFactor` to set a cap on Dynamic Type scaling.
-@IBDesignable open class TypographyLabel: UILabel {
-    
+@IBDesignable
+open class TypographyLabel: UILabel {
     /// The current typographical layout
     public private(set) var layout: TypographyLayout!
     
@@ -22,27 +22,37 @@ import UIKit
         }
     }
     
-    @IBInspectable var familyName: String {
+    /// The familyName attribute
+    @IBInspectable
+    public var familyName: String {
         get { typography.fontFamily.familyName }
         set { typography = typography.familyName(newValue) }
     }
     
-    @IBInspectable var fontWeight: CGFloat {
+    /// The fontWeight attribute
+    @IBInspectable
+    public var fontWeight: CGFloat {
         get { typography.fontWeight.rawValue }
         set { typography = typography.fontWeight(Typography.FontWeight(rawValue: newValue) ?? .regular) }
     }
     
-    @IBInspectable var fontSize: CGFloat {
+    /// The fontSize attribute
+    @IBInspectable
+    public var fontSize: CGFloat {
         get { typography.fontSize }
         set { typography = typography.fontSize(newValue) }
     }
     
-    @IBInspectable var lineHeight: CGFloat {
+    /// The lineHeight attribute
+    @IBInspectable
+    public var lineHeight: CGFloat {
         get { typography.lineHeight }
         set { typography = typography.lineHeight(newValue) }
     }
     
-    @IBInspectable var letterSpacing: CGFloat {
+    /// The letterSpacing attribute
+    @IBInspectable
+    public var letterSpacing: CGFloat {
         get { typography.letterSpacing }
         set { typography = typography.letterSpacing(newValue) }
     }
@@ -62,10 +72,6 @@ import UIKit
                 adjustFonts()
             }
         }
-    }
-    
-    open override class func prepareForInterfaceBuilder() {
-
     }
 
     /// (Optional) maximum scale factor to use when scaling the font.
