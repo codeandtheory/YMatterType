@@ -377,21 +377,21 @@ final class TypographyLabelTests: TypographyElementTests {
         let sut = makeSUT()
         XCTAssertEqual(sut.fontSize, 24)
         sut.fontSize = 50
-        XCTAssertEqual(sut.fontSize, 50)
+        XCTAssertEqual(sut.typography.fontSize, 50)
     }
     
     func testLineHeight() {
         let sut = makeSUT()
         XCTAssertEqual(sut.lineHeight, 32)
         sut.lineHeight = 40
-        XCTAssertEqual(sut.lineHeight, 40)
+        XCTAssertEqual(sut.typography.lineHeight, 40)
     }
     
     func testLetterSpacing() {
         let sut = makeSUT()
         XCTAssertEqual(sut.letterSpacing, 0)
         sut.letterSpacing = 5
-        XCTAssertEqual(sut.letterSpacing, 5)
+        XCTAssertEqual(sut.typography.letterSpacing, 5)
     }
 }
 
