@@ -389,9 +389,6 @@ final class TypographyLabelTests: TypographyElementTests {
         sut.letterSpacing = 5
         XCTAssertEqual(sut.letterSpacing, 5)
     }
-    
-    
-    
 }
 
 private extension TypographyLabelTests {
