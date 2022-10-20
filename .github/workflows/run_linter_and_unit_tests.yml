@@ -21,6 +21,7 @@ jobs:
       run: |
         ls -l /Applications | grep 'Xcode'
         sudo xcode-select -s /Applications/Xcode_14.0.1.app
+
     - name: Lint code using SwiftLint
       run: swiftlint --strict --reporter github-actions-logging
 
