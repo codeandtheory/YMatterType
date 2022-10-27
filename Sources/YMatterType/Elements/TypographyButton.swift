@@ -200,6 +200,7 @@ open class TypographyButton: UIButton {
         // This should be a no-op, but it's needed to force the attributed title
         // to redraw itself when button state changes
         setTitleColor(currentTitleColor, for: state)
+        adjustFonts()
     }
 }
 
