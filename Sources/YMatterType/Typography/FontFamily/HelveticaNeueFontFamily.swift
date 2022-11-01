@@ -33,13 +33,13 @@ public struct HelveticaNeueFontFamily: FontFamily {
 
     /// HelveticaNeue supports 6 font weights (nothing heavier than bold)
     public var supportedWeights: [Typography.FontWeight] {
-        [.ultralight, .thin, .light, .regular, .medium, .bold]
+        [.extraLight, .thin, .light, .regular, .medium, .bold]
     }
 
     public func weightName(for weight: Typography.FontWeight) -> String {
         // Default font name suffix by weight
         switch weight {
-        case .ultralight:
+        case .extraLight:
             return "UltraLight"
         case .thin:
             return "Thin"
@@ -51,7 +51,7 @@ public struct HelveticaNeueFontFamily: FontFamily {
             return "Medium"
         case .bold:
             return "Bold"
-        case .semibold, .heavy, .black:
+        case .semibold, .extraBold, .black, .extraBlack:
             return "" // HelveticaNeue does not support these weights
         }
     }

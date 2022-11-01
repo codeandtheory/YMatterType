@@ -14,7 +14,7 @@ final class FontFamilyTests: XCTestCase {
         let (sut, weightNames, traitCollection) = makeSUT()
         for weight in Typography.FontWeight.allCases {
             guard let weightName = weightNames[weight] else {
-                XCTFail("No name associated with weight")
+                XCTFail("No name associated with weight \(weight)")
                 continue
             }
             let expected = "\(sut.familyName)-\(weightName)"
@@ -34,27 +34,27 @@ final class FontFamilyTests: XCTestCase {
     func testA11yBoldWeight() {
         let (sut, _, _) = makeSUT()
         Typography.FontWeight.allCases.forEach {
-            let expectedWeight = min($0.rawValue + 100, 900)
+            let expectedWeight = min($0.rawValue + 100, 950)
             XCTAssertEqual(sut.accessibilityBoldWeight(for: $0).rawValue, expectedWeight)
         }
     }
 
     func testSupportedWeights() {
         let sut = MockFontFamily()
-        sut.supportedWeights = [.light, .semibold, .heavy]
+        sut.supportedWeights = [.light, .semibold, .extraBold]
 
         // Given any weight, we expect it to return the next heavier supported weight
-        XCTAssertEqual(sut.accessibilityBoldWeight(for: .ultralight), .light)
+        XCTAssertEqual(sut.accessibilityBoldWeight(for: .extraLight), .light)
         XCTAssertEqual(sut.accessibilityBoldWeight(for: .thin), .light)
         XCTAssertEqual(sut.accessibilityBoldWeight(for: .light), .semibold)
         XCTAssertEqual(sut.accessibilityBoldWeight(for: .regular), .semibold)
         XCTAssertEqual(sut.accessibilityBoldWeight(for: .medium), .semibold)
-        XCTAssertEqual(sut.accessibilityBoldWeight(for: .semibold), .heavy)
-        XCTAssertEqual(sut.accessibilityBoldWeight(for: .bold), .heavy)
+        XCTAssertEqual(sut.accessibilityBoldWeight(for: .semibold), .extraBold)
+        XCTAssertEqual(sut.accessibilityBoldWeight(for: .bold), .extraBold)
 
         // If there is no heavier weight, then we expect it to return the heaviest weight
-        XCTAssertEqual(sut.accessibilityBoldWeight(for: .heavy), .heavy)
-        XCTAssertEqual(sut.accessibilityBoldWeight(for: .black), .heavy)
+        XCTAssertEqual(sut.accessibilityBoldWeight(for: .extraBold), .extraBold)
+        XCTAssertEqual(sut.accessibilityBoldWeight(for: .black), .extraBold)
 
         // Given no supported weights we expect it to return the weight passed in
         sut.supportedWeights = []
@@ -148,15 +148,16 @@ private extension FontFamilyTests {
     ) -> (FontFamily, [Typography.FontWeight: String], UITraitCollection) {
         let sut = MockFontFamily()
         let weightNames: [Typography.FontWeight: String] = [
-            .ultralight: "ExtraLight",
+            .extraLight: "ExtraLight",
             .thin: "Thin",
             .light: "Light",
             .regular: "Regular",
             .medium: "Medium",
             .semibold: "SemiBold",
             .bold: "Bold",
-            .heavy: "ExtraBold",
-            .black: "Black"
+            .extraBold: "ExtraBold",
+            .black: "Black",
+            .extraBlack: "ExtraBlack"
         ]
         let traitCollection: UITraitCollection = .default
 

@@ -63,11 +63,11 @@ struct NotoSansFontFamily: FontFamily {
 struct AvenirNextFontFamily: FontFamily {
     let familyName = "AvenirNext"
 
-    var supportedWeights: [Typography.FontWeight] { [.ultralight, .regular, .medium, .semibold, .bold, .heavy] }
+    var supportedWeights: [Typography.FontWeight] { [.extraLight, .regular, .medium, .semibold, .bold, .extraBold] }
 
     func weightName(for weight: Typography.FontWeight) -> String {
         switch weight {
-        case .ultralight:
+        case .extraLight:
             return "UltraLight"
         case .regular:
             return "Regular"
@@ -77,10 +77,10 @@ struct AvenirNextFontFamily: FontFamily {
             return "DemiBold"
         case .bold:
             return "Bold"
-        case .heavy:
+        case .extraBold:
             return "Heavy"
-        case .thin, .light, .black:
-            return "" // these 3 weights are not installed
+        case .thin, .light, .black, .extraBlack:
+            return "" // these weights are not installed
         }
     }
 }

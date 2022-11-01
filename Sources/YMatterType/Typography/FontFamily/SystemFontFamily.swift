@@ -10,12 +10,14 @@ import UIKit
 
 public extension Typography.FontWeight {
     /// Conversion from FontWeight enum to UIFont.Weight struct
+    ///
+    /// While they adopt similar names, they do not map 1:1
     var systemWeight: UIFont.Weight {
         switch self {
-        case .ultralight:
-            return .ultraLight
-        case .thin:
+        case .extraLight:
             return .thin
+        case .thin:
+            return .ultraLight
         case .light:
             return .light
         case .regular:
@@ -26,9 +28,9 @@ public extension Typography.FontWeight {
             return .semibold
         case .bold:
             return .bold
-        case .heavy:
+        case .extraBold:
             return .heavy
-        case .black:
+        case .black, .extraBlack:
             return .black
         }
     }
@@ -80,9 +82,9 @@ public struct SystemFontFamily: FontFamily {
 
         switch weight {
         // For 3 lightest weights, move up 1 weight
-        case .ultralight:
-            boldWeight = .thin
         case .thin:
+            boldWeight = .extraLight
+        case .extraLight:
             boldWeight = .light
         case .light:
             boldWeight = .regular
@@ -93,8 +95,8 @@ public struct SystemFontFamily: FontFamily {
         case .medium:
             boldWeight = .bold
         case .semibold:
-            boldWeight = .heavy
-        case .bold, .heavy, .black:
+            boldWeight = .extraBold
+        case .bold, .extraBold, .black, .extraBlack:
             boldWeight = .black
         }
 

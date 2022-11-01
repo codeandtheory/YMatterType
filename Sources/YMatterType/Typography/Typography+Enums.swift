@@ -16,26 +16,30 @@ extension Typography {
         case italic
     }
 
-    /// The nine basic font weights. Not all fonts support all 9 weights.
+    /// The basic font weights. Not all fonts support every weight.
+    ///
+    /// The weight name to value mapping derives from [here](https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight#common_weight_name_mapping)
     public enum FontWeight: CGFloat, CaseIterable {
-        /// ultralight (aka extra light) weight (100)
-        case ultralight = 100
-        /// thin weight (200)
-        case thin = 200
-        /// light weight (300)
+        /// Thin (Hairline) weight (100)
+        case thin = 100
+        /// Extra Light (Ultra Light) weight (200)
+        case extraLight = 200
+        /// Light weight (300)
         case light = 300
-        /// regular weight (400)
+        /// Regular (Normal) weight (400)
         case regular = 400
-        /// medium weight (500)
+        /// Medium weight (500)
         case medium = 500
-        /// semibold weight (600)
+        /// Semi Bold (Demi Bold) weight (600)
         case semibold = 600
-        /// bold weight (700)
+        /// Bold weight (700)
         case bold = 700
-        /// heavy (aka extra bold) weight (800)
-        case heavy = 800
-        /// black weight (900)
+        /// Extra Bold (Ultra Bold) weight (800)
+        case extraBold = 800
+        /// Black (Heavy) weight (900)
         case black = 900
+        /// Extra Black (Ultra Black) weight (950)
+        case extraBlack = 950
 
         /// Creates a new instance from a string.
         ///
@@ -45,12 +49,12 @@ extension Typography {
         public init?(_ weightName: String) {
             switch weightName.lowercased(with: Locale(identifier: "en_US")) {
             case "ultralight", "extralight":
-                self = .ultralight
+                self = .extraLight
             case "thin":
                 self = .thin
             case "light":
                 self = .light
-            case "regular":
+            case "regular", "normal":
                 self = .regular
             case "medium":
                 self = .medium
@@ -58,10 +62,12 @@ extension Typography {
                 self = .semibold
             case "bold":
                 self = .bold
-            case "heavy", "extrabold", "ultrabold":
-                self = .heavy
-            case "black":
+            case "extrabold", "ultrabold":
+                self = .extraBold
+            case "heavy", "black":
                 self = .black
+            case "extrablack", "ultrablack":
+                self = .extraBlack
             default:
                 return nil
             }

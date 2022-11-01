@@ -21,7 +21,7 @@ extension MockTextView: FontAdjustable { }
 final class ElementFontAdjustedTests: XCTestCase {
     private let typography = Typography(
         fontFamily: Typography.systemFamily,
-        fontWeight: .heavy,
+        fontWeight: .extraBold,
         fontSize: 32,
         lineHeight: 40,
         textStyle: .title1,

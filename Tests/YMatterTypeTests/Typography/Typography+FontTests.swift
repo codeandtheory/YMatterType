@@ -163,11 +163,11 @@ struct AppleSDGothicNeoInfo: FontFamily {
     let familyName: String = "AppleSDGothicNeo"
 
     // This font family doesn't support weights higher than Bold
-    var supportedWeights: [Typography.FontWeight] = [.ultralight, .thin, .light, .regular, .medium, .semibold, .bold]
+    var supportedWeights: [Typography.FontWeight] = [.extraLight, .thin, .light, .regular, .medium, .semibold, .bold]
 
     func weightName(for weight: Typography.FontWeight) -> String {
         switch weight {
-        case .ultralight:
+        case .extraLight:
             return "UltraLight" // some fonts use ExtraLight
         case .thin:
             return "Thin"
@@ -179,7 +179,7 @@ struct AppleSDGothicNeoInfo: FontFamily {
             return "Medium"
         case .semibold:
             return "SemiBold" // some fonts use DemiBold
-        case .bold, .heavy, .black:
+        case .bold, .extraBold, .black, .extraBlack:
             // this font family doesn't support weights higher than Bold
             return "Bold"
         }

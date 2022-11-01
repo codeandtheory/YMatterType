@@ -28,15 +28,27 @@ final class TypographyEnumTests: XCTestCase {
 
     func test_fontWeightInit_acceptsSynonyms() {
         ["ExtraLight", "UltraLight"].forEach {
-            XCTAssertEqual(Typography.FontWeight($0), .ultralight)
+            XCTAssertEqual(Typography.FontWeight($0), .extraLight)
+        }
+
+        ["Normal", "Regular"].forEach {
+            XCTAssertEqual(Typography.FontWeight($0), .regular)
         }
 
         ["SemiBold", "DemiBold"].forEach {
             XCTAssertEqual(Typography.FontWeight($0), .semibold)
         }
 
-        ["Heavy", "ExtraBold", "UltraBold"].forEach {
-            XCTAssertEqual(Typography.FontWeight($0), .heavy)
+        ["ExtraBold", "UltraBold"].forEach {
+            XCTAssertEqual(Typography.FontWeight($0), .extraBold)
+        }
+
+        ["Heavy", "Black"].forEach {
+            XCTAssertEqual(Typography.FontWeight($0), .black)
+        }
+
+        ["ExtraBlack", "UltraBlack"].forEach {
+            XCTAssertEqual(Typography.FontWeight($0), .extraBlack)
         }
     }
 

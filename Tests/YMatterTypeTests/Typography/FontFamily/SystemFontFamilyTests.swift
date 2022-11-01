@@ -32,9 +32,9 @@ final class SystemFontFamilyTests: XCTestCase {
 
     func test_accessibilityWeight_deliversCorrectWeight() {
         let (sut, _, _) = makeSUT()
-        let lightWeights: [Typography.FontWeight] = [.ultralight, .thin, .light]
+        let lightWeights: [Typography.FontWeight] = [.thin, .extraLight, .light]
         let midWeights: [Typography.FontWeight] = [.regular, .medium, .semibold]
-        let heavyWeights: [Typography.FontWeight] = [.bold, .heavy, .black]
+        let heavyWeights: [Typography.FontWeight] = [.bold, .extraBold, .black]
 
         for weight in lightWeights {
             XCTAssertEqual(sut.accessibilityBoldWeight(for: weight).rawValue, weight.rawValue + 100)
@@ -106,23 +106,24 @@ private extension SystemFontFamilyTests {
             return nil
         }
 
+        // These names are Apple's UIFont.Weight names, which differ from our Typography.FontWeight names
         switch weightString.lowercased(with: Locale(identifier: "en_US")) {
-        case "ultralight", "extralight":
-            return .ultralight
-        case "thin":
+        case "ultralight":
             return .thin
+        case "thin":
+            return .extraLight
         case "light":
             return .light
         case "regular":
             return .regular
         case "medium":
             return .medium
-        case "semibold", "demibold":
+        case "semibold":
             return .semibold
         case "bold":
             return .bold
         case "heavy", "extrabold":
-            return .heavy
+            return .extraBold
         case "black":
             return .black
         default:

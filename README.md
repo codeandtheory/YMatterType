@@ -188,7 +188,7 @@ extension Typography {
 
 ## Custom Font Families
 
-Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). Or your font family might not include all 9 possible font weights. To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The `supportedWeights` property that can be overridden. If your font family does not have access to all 9 font weights, then you should override `supportedWeights` and return the weights of all fonts bundled in your project.
+Y—MatterType does its best to automatically map font family name, font style (regular or italic), and font weight (ultralight to black) into the registered name of the font so that it may be loaded using `UIFont(name:, size:)`. (This registered font name may differ from the name of the font file and from the display name for the font family.) However, some font families may require custom behavior in order to properly load the font (e.g. the semibold font weight might be named "DemiBold" instead of the more common "SemiBold"). Or your font family might not include all 9 default font weights. To support this you can declare a class or struct that conforms to the `FontFamily` protocol and use that to initialize your `Typography` instance. This protocol has four methods, each of which may be optionally overridden to customize how fonts of a given weight are loaded. The `supportedWeights` property that can be overridden. If your font family does not have access to all 9 default font weights, then you should override `supportedWeights` and return the weights of all fonts bundled in your project.
 
 The framework contains two different implementations of `FontFamily` for you to consider (`DefaultFontFamily` and `SystemFontFamily`).
 
@@ -203,7 +203,7 @@ struct AppleSDGothicNeoInfo: FontFamily {
     var supportedWeights: [Typography.FontWeight] = 
         [.ultralight, .thin, .light, .regular, .medium, .semibold, .bold]
 
-    /// Generates a weight name suffix as part of a full font name. Not all fonts support all 9 weights.
+    /// Generates a weight name suffix as part of a full font name. Not all fonts support all font weights.
     /// - Parameter weight: desired font weight
     /// - Returns: The weight name to use
     func weightName(for weight: Typography.FontWeight) -> String {
