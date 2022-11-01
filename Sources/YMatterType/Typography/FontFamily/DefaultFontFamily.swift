@@ -37,9 +37,3 @@ public struct DefaultFontFamily: FontFamily {
         (style == .italic) ? DefaultFontFamily.italicSuffix : ""
     }
 }
-
-/// Information about a font family. Default implementation of FontFamily.
-///
-/// Renamed to `DefaultFontFamily`
-@available(*, deprecated, renamed: "DefaultFontFamily")
-public typealias FontInfo = DefaultFontFamily

@@ -41,14 +41,6 @@ public extension Typography {
     static let systemFamily: FontFamily = SystemFontFamily()
 }
 
-extension DefaultFontFamily {
-    /// Information about the system font family
-    ///
-    /// Renamed to `Typography.systemFamily`
-    @available(*, deprecated, renamed: "Typography.systemFamily")
-    static var system: FontFamily { Typography.systemFamily }
-}
-
 /// Information about the system font. System font implementation of FontFamily.
 public struct SystemFontFamily: FontFamily {
     // The system font has a private font family name (literally ".SFUI"), so

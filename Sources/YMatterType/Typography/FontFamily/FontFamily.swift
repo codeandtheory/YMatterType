@@ -166,10 +166,3 @@ extension FontFamily {
         return traitCollection.legibilityWeight == .bold
     }
 }
-
-/// Information about a font family. When an app specifies a custom font, they will
-/// implement an instance of FontFamily to fully describe that font.
-///
-/// Renamed to `FontFamily`
-@available(*, deprecated, renamed: "FontFamily")
-public typealias FontRepresentable = FontFamily
