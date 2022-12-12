@@ -9,6 +9,8 @@ opt_in_rules: # some rules are turned off by default, so you need to opt-in
   - empty_count
   - first_where
   - force_unwrapping
+  - implicit_return
+  - missing_docs
   - multiline_arguments
   - multiline_arguments_brackets
   - multiline_function_chains
