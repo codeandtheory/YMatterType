@@ -92,6 +92,27 @@ label.typography = .headline
 
 What you should _not_ do, however, is set the `font` property directly. Just set the typography and the class will take care of the font.
 
+### Using Typography in SwiftUI
+To make the Typography elements work within the SwiftUI framework, we used `UIViewRepresentable`, a wrapper for a UIKit that integrates the view into your SwiftUI view hierarchy.
+
+*Rendering Single Line Label:* `TextStyleLabel` is the first wrapper component we created, it renders a single line `TypographyLabel`, and as such, has the property `numberOfLines = 1`. Setting this property to any other value is undefined behavior.
+```
+// using `TextStyleLabel` in SwiftUI
+TextStyleLabel("Another sample headline", typography: .systemLabel)
+```
+
+To add specific TypographyLabel configurations, use the `configuration` closure:
+ ```
+// using custom typography, the configuration closure and a View background modifier
+TextStyleLabel(
+    "This is a long text string that will not fit",
+    typography: .ParagraphUber.small.fontSize(28).lineHeight(45),
+    configuration: { label in
+        label.lineBreakMode = .byTruncatingMiddle
+    })
+.background(Color.yellow.opacity(0.5))
+```
+
 ## Registering Custom Fonts
 
 Any custom fonts need to be included as assets in your application and registered with the system. If you're building a simple app then you can just add them to your project and list them in your app's Info.plist file as you normally would. If, however, you want to build them into a separate Swift package, then that's fine too, and Y—MatterType has an extension on `UIFont` that makes it easier to register (and unregister) your font files. It throws an error if the font cannot be registered (and also if it has already been registered), so you'll know when you have a problem. Note that you will need to specify `subpath` if you use `.copy` for the resources in your Swift package file (and probably won't need to specify it if you use `.process`).
