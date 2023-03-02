@@ -108,7 +108,12 @@ extension FontFamily {
         let useBoldFont = isBoldTextEnabled(compatibleWith: traitCollection)
         let actualWeight = useBoldFont ? accessibilityBoldWeight(for: weight) : weight
         let weightName = weightName(for: actualWeight)
-        return "\(familyName)-\(weightName)\(fontNameSuffix)"
+        let suffix = fontNameSuffix
+        if weightName.isEmpty && suffix.isEmpty {
+            // don't use "-" if nothing will follow it
+            return familyName
+        }
+        return "\(familyName)-\(weightName)\(suffix)"
     }
 
     /// Returns default name for each weight
