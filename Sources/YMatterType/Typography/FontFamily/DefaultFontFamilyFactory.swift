@@ -15,12 +15,16 @@ public struct DefaultFontFamilyFactory {
 }
 
 extension DefaultFontFamilyFactory: FontFamilyFactory {
-    /// Given a family name and style instantiates and returns a `DefaultFontFamily`
+    /// Given a family name and style instantiates and returns an appropriate `FontFamily` to use.
     /// - Parameters:
     ///   - familyName: font family name
     ///   - style: font style
     /// - Returns: a font family matching the family name and style
     public func getFontFamily(familyName: String, style: Typography.FontStyle) -> FontFamily {
-        DefaultFontFamily(familyName: familyName, style: style)
+        if familyName == HelveticaNeueFontFamily.familyName {
+            return HelveticaNeueFontFamily(style: style)
+        }
+
+        return DefaultFontFamily(familyName: familyName, style: style)
     }
 }

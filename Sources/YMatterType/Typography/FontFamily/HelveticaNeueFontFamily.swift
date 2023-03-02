@@ -18,7 +18,9 @@ public extension Typography {
 /// Information about the Helvetica Neue family of fonts
 public struct HelveticaNeueFontFamily: FontFamily {
     /// Font family root name
-    public let familyName: String = "HelveticaNeue"
+    public static let familyName = "HelveticaNeue"
+    /// Font family root name
+    public var familyName: String { HelveticaNeueFontFamily.familyName }
 
     /// Font style, e.g. regular or italic
     public let style: Typography.FontStyle

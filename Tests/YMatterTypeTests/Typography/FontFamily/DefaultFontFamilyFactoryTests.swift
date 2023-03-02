@@ -17,6 +17,7 @@ final class DefaultFontFamilyFactoryTests: XCTestCase {
         // When
         let regular = sut.getFontFamily(familyName: "Foo", style: .regular)
         let italic = sut.getFontFamily(familyName: "Bar", style: .italic)
+        let helveticaNeue = sut.getFontFamily(familyName: "HelveticaNeue", style: .regular)
 
         // Then
         XCTAssertTrue(regular is DefaultFontFamily)
@@ -25,5 +26,7 @@ final class DefaultFontFamilyFactoryTests: XCTestCase {
         XCTAssertTrue(italic is DefaultFontFamily)
         XCTAssertEqual(italic.familyName, "Bar")
         XCTAssertEqual(italic.fontNameSuffix, "Italic")
+        XCTAssertEqual(helveticaNeue.familyName, "HelveticaNeue")
+        XCTAssertEqual(helveticaNeue.weightName(for: .regular), "")
     }
 }
