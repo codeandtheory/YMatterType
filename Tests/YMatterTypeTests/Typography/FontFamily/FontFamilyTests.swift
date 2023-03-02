@@ -112,6 +112,30 @@ final class FontFamilyTests: XCTestCase {
         // given traitCollection is nil, it should return the system setting
         XCTAssertEqual(sut.isBoldTextEnabled(compatibleWith: nil), UIAccessibility.isBoldTextEnabled)
     }
+
+    func test_fontNameWithoutWeightOrSuffix_isFamilyName() {
+        let sut = WeightlessFontFamily()
+        var name: String
+
+        // If there's a weight name then we will append it
+        sut.weightName = "Regular"
+        name = sut.fontName(for: .regular, compatibleWith: nil)
+        XCTAssertNotEqual(name, sut.familyName)
+        XCTAssertTrue(name.hasSuffix("-" + sut.weightName))
+
+        // If there's a suffix then we will append it
+        sut.weightName = ""
+        sut.fontNameSuffix = "Italic"
+        name = sut.fontName(for: .regular, compatibleWith: nil)
+        XCTAssertNotEqual(name, sut.familyName)
+        XCTAssertTrue(name.hasSuffix("-" + sut.fontNameSuffix))
+
+        // If there's neither then we just return the family name
+        sut.fontNameSuffix = ""
+        name = sut.fontName(for: .regular, compatibleWith: nil)
+        XCTAssertEqual(name, sut.familyName)
+        XCTAssertNil(name.firstIndex(of: "-"))
+    }
 }
 
 // We use large tuples in makeSUT()
@@ -145,4 +169,12 @@ final class MockFontFamily: FontFamily {
     let familyName: String = "MockSerifMono"
 
     var supportedWeights: [Typography.FontWeight] = Typography.FontWeight.allCases
+}
+
+final class WeightlessFontFamily: FontFamily {
+    let familyName: String = "Weightless"
+    var weightName: String = ""
+    var fontNameSuffix: String = ""
+
+    func weightName(for weight: Typography.FontWeight) -> String { weightName }
 }
