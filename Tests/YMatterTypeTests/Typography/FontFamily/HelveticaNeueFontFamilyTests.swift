@@ -44,7 +44,6 @@ final class HelveticaNeueFontFamilyTests: XCTestCase {
 
 private extension HelveticaNeueFontFamilyTests {
     func makeSUT() -> ([FontFamily], [UITraitCollection?]) {
-        super.setUp()
         let families: [FontFamily] = [Typography.helveticaNeue, Typography.helveticaNeueItalic]
         let traitCollections: [UITraitCollection?] = [
             nil,

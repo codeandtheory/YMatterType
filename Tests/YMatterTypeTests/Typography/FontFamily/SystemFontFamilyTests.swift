@@ -36,7 +36,6 @@ final class SystemFontFamilyTests: XCTestCase {
 
 private extension SystemFontFamilyTests {
     func makeSUT() -> (FontFamily, [CGFloat], [UITraitCollection?]) {
-        super.setUp()
         let sut = Typography.systemFamily
         let pointSizes: [CGFloat] = [10, 12, 14, 16, 18, 24, 28, 32]
         let traitCollections: [UITraitCollection?] = [
