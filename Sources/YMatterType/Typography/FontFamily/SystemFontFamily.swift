@@ -64,11 +64,40 @@ public struct SystemFontFamily: FontFamily {
         pointSize: CGFloat,
         compatibleWith traitCollection: UITraitCollection?
     ) -> UIFont {
-        // The system font cannot be retrieved using UIFont.font(name:size:), but
-        // instead must be created using UIFont.systemFont(ofSize:weight:)
-        let useBoldFont = isBoldTextEnabled(compatibleWith: traitCollection)
+        // When UIAccessibility.isBoldTextEnabled == true, then we don't need to manually
+        // adjust the weight because the system will do it for us.
+        let useBoldFont = isBoldTextEnabled(compatibleWith: traitCollection) && !UIAccessibility.isBoldTextEnabled
         let actualWeight = useBoldFont ? accessibilityBoldWeight(for: weight) : weight
 
+        // The system font cannot be retrieved using UIFont.font(name:size:), but
+        // instead must be created using UIFont.systemFont(ofSize:weight:)
         return UIFont.systemFont(ofSize: pointSize, weight: actualWeight.systemWeight)
+    }
+
+    /// Returns the next heavier supported weight (if any), otherwise the heaviest supported weight
+    public func accessibilityBoldWeight(for weight: Typography.FontWeight) -> Typography.FontWeight {
+        var boldWeight: Typography.FontWeight
+
+        switch weight {
+        // For 3 lightest weights, move up 1 weight
+        case .ultralight:
+            boldWeight = .thin
+        case .thin:
+            boldWeight = .light
+        case .light:
+            boldWeight = .regular
+
+        // For all remaining weights, move up 2 weights
+        case .regular:
+            boldWeight = .semibold
+        case .medium:
+            boldWeight = .bold
+        case .semibold:
+            boldWeight = .heavy
+        case .bold, .heavy, .black:
+            boldWeight = .black
+        }
+
+        return boldWeight
     }
 }
