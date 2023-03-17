@@ -160,7 +160,7 @@ final class TypographyButtonTests: TypographyElementTests {
             sut.typography.lineHeight * 2 + sut.contentEdgeInsets.vertical
         )
 
-        let fontFamily = DefaultFontFamily(familyName: "AvenirNext")
+        let fontFamily = AvenirNextFontFamily()
         let typography = Typography(
             fontFamily: fontFamily,
             fontWeight: .bold,
@@ -423,7 +423,7 @@ final class TypographyButtonTests: TypographyElementTests {
 private extension TypographyButtonTests {
     func makeSUT(spacing: CGFloat = 0, file: StaticString = #filePath, line: UInt = #line) -> MockButton {
         let typography = Typography(
-            familyName: "NotoSans",
+            fontFamily: Typography.notoSans,
             fontWeight: .regular,
             fontSize: 16,
             lineHeight: 24,
