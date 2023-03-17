@@ -110,6 +110,58 @@ final class TypographyLayoutTests: XCTestCase {
         // we expect it to have paragraph style
         XCTAssertNotNil(styled.attribute(.paragraphStyle, at: 0, effectiveRange: nil))
     }
+
+    func test_buildAttributes_defaultDeliversFontAttributeOnly() {
+        let sut = makeSUT()
+        let attributes = sut.buildAttributes()
+
+        XCTAssertEqual(sut.font, attributes[.font] as? UIFont)
+        XCTAssertNil(attributes[.paragraphStyle])
+        XCTAssertNil(attributes[.kern])
+        XCTAssertNil(attributes[.underlineStyle])
+        XCTAssertNil(attributes[.strikethroughStyle])
+        XCTAssertNil(attributes[.baselineOffset])
+    }
+
+    func test_buildAttributes_singleLineDeliversNoParagraphStyles() {
+        let sut = makeSUT()
+        let attributes = sut.buildAttributes(lineMode: .single)
+
+        XCTAssertNil(attributes[.paragraphStyle])
+    }
+
+    func test_buildAttributes_multiLineDeliversParagraphStyles() throws {
+        let sut = makeSUT()
+        let attributes = sut.buildAttributes(lineMode: .multi(alignment: .natural, lineBreakMode: .byWordWrapping))
+
+        let paragraphStyle = try XCTUnwrap(attributes[.paragraphStyle] as? NSParagraphStyle)
+        XCTAssertEqual(paragraphStyle.minimumLineHeight, sut.lineHeight)
+        XCTAssertEqual(paragraphStyle.maximumLineHeight, sut.lineHeight)
+        XCTAssertEqual(paragraphStyle.lineBreakMode, .byWordWrapping)
+        XCTAssertEqual(sut.baselineOffset, attributes[.baselineOffset] as? CGFloat)
+    }
+
+    func test_buildAttributes_deliversKernAttribute() {
+        let letterSpacing = CGFloat(Int.random(in: 1...24)) / 10.0
+        let sut = makeSUT(letterSpacing: letterSpacing)
+        let attributes = sut.buildAttributes()
+
+        XCTAssertEqual(letterSpacing, attributes[.kern] as? CGFloat)
+    }
+
+    func test_buildAttributes_deliversUnderlineAttributes() {
+        let sut = makeSUT(textDecoration: .underline)
+        let attributes = sut.buildAttributes()
+
+        XCTAssertEqual(NSUnderlineStyle.single.rawValue, attributes[.underlineStyle] as? Int)
+    }
+
+    func test_buildAttributes_deliversStrikethroughAttributes() {
+        let sut = makeSUT(textDecoration: .strikethrough)
+        let attributes = sut.buildAttributes()
+
+        XCTAssertEqual(NSUnderlineStyle.single.rawValue, attributes[.strikethroughStyle] as? Int)
+    }
 }
 
 private extension TypographyLayoutTests {

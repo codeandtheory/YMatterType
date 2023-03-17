@@ -79,7 +79,7 @@ public extension TypographyLayout {
     /// Style plain text using this layout
     /// - Parameters:
     ///   - text: the text to style
-    ///   - isSingleLine: `true` for single line text, `false` for potentially multi-line text.
+    ///   - lineMode: line mode of the text.
     ///    Paragraph styles will not be applied to single line text.
     ///   - additionalAttributes: any additional attributes to apply
     ///   (e.g. `UITextView` requires `.foregroundColor`), default = `[:]`
@@ -98,8 +98,8 @@ public extension TypographyLayout {
 
     /// Style attributed text using this layout
     /// - Parameters:
-    ///   - text: the text to style
-    ///   - isSingleLine: `true` for single line text, `false` for potentially multi-line text.
+    ///   - attributedText: the attrubuted text to style
+    ///   - lineMode: line mode of the text.
     ///    Paragraph styles will not be applied to single line text.
     ///   - additionalAttributes: any additional attributes to apply
     ///   (e.g. `UITextView` requires `.foregroundColor`), default = `[:]`
@@ -112,12 +112,20 @@ public extension TypographyLayout {
         let attributes = buildAttributes(startingWith: additionalAttributes, lineMode: lineMode)
         return attributedText.textCase(textCase).attributedString(with: attributes)
     }
-}
 
-private extension TypographyLayout {
+    /// Generates the text attributes needed to apply this typographical layout.
+    ///
+    /// These attributes may change (because the font may change) any time there is a change in
+    /// content size category (Dynamic Type) or legibility weight (Accessibility Bold Text).
+    /// - Parameters:
+    ///   - additionalAttributes: any additional attributes to combine with the typographical attributes.
+    ///   	Default = `[:]`
+    ///   - lineMode: line mode of the text. Default = `.single`.
+    ///    Paragraph styles will not be applied to single line text.
+    /// - Returns: the dictionary of attributes needed to style the text.
     func buildAttributes(
-        startingWith additionalAttributes: [NSAttributedString.Key: Any],
-        lineMode: Typography.LineMode
+        startingWith additionalAttributes: [NSAttributedString.Key: Any] = [:],
+        lineMode: Typography.LineMode = .single
     ) -> [NSAttributedString.Key: Any] {
         var attributes = additionalAttributes
         if case let .multi(textAlignment, lineBreakMode) = lineMode {
