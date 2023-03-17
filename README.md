@@ -102,7 +102,7 @@ TextStyleLabel("Another sample headline", typography: .systemLabel)
 ```
 
 To add specific TypographyLabel configurations, use the `configuration` closure:
- ```
+```
 // using custom typography, the configuration closure and a View background modifier
 TextStyleLabel(
     "This is a long text string that will not fit",
@@ -385,7 +385,7 @@ Prior to submitting a pull request you should:
 
 When submitting a pull request:
 
-* Use the [provided pull request template](PULL_REQUEST_TEMPLATE.md) and populate the Introduction, Purpose, and Scope fields at a minimum.
+* Use the [provided pull request template](.github/pull_request_template.md) and populate the Introduction, Purpose, and Scope fields at a minimum.
 * If you're submitting before and after screenshots, movies, or GIF's, enter them in a two-column table so that they can be viewed side-by-side.
 
 When merging a pull request:
