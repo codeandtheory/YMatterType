@@ -36,6 +36,36 @@ extension Typography {
         case heavy = 800
         /// black weight (900)
         case black = 900
+
+        /// Creates a new instance from a string.
+        ///
+        /// This will be useful for converting Figma tokens to `Typography` objects.
+        /// Common synonyms will be accepted, e.g. both "SemiBold" and "DemiBold" map to `.semibold`.
+        /// - Parameter weightName: the case-insensitive weight name, e.g. "Bold"
+        init?(_ weightName: String) {
+            switch weightName.lowercased(with: Locale(identifier: "en_US")) {
+            case "ultralight", "extralight":
+                self = .ultralight
+            case "thin":
+                self = .thin
+            case "light":
+                self = .light
+            case "regular":
+                self = .regular
+            case "medium":
+                self = .medium
+            case "semibold", "demibold":
+                self = .semibold
+            case "bold":
+                self = .bold
+            case "heavy", "extrabold", "ultrabold":
+                self = .heavy
+            case "black":
+                self = .black
+            default:
+                return nil
+            }
+        }
     }
 
     /// Capitalization to be applied to user-facing text
