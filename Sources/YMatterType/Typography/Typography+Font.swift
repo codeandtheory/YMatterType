@@ -127,6 +127,14 @@ extension Typography {
 
 private extension Typography {
     func generateFixedFont(compatibleWith traitCollection: UITraitCollection?) -> UIFont {
-        fontFamily.font(for: fontWeight, pointSize: fontSize, compatibleWith: traitCollection)
+        var traits = traitCollection
+        if !isFixed && fontFamily is SystemFontFamily {
+            // System font already considers accessibility BoldText when
+            // we get the scaled font via `UIFontMetrics.scaledFont(for:compatibleWith:)`,
+            // so we pass a non-bold trait collection when generating the fixed font, so
+            // as not to increase the font weight twice.
+            traits = UITraitCollection(legibilityWeight: .regular)
+        }
+        return fontFamily.font(for: fontWeight, pointSize: fontSize, compatibleWith: traits)
     }
 }
