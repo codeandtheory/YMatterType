@@ -47,6 +47,15 @@ extension Typography {
                 )
                 scaledLineHeight = metrics.scaledValue(for: lineHeight, compatibleWith: traitCollection)
             }
+        } else if fontFamily is SystemFontFamily {
+            // In case of a fixed System font, we still need to "scale" the font
+            // to adjust it to the correct traits.
+            let metrics = UIFontMetrics(forTextStyle: textStyle)
+            font = metrics.scaledFont(
+                for: font,
+                maximumPointSize: fontSize, // no change in size
+                compatibleWith: traitCollection
+            )
         }
 
         // We need to adjust the baseline so that the text will appear vertically centered
@@ -128,7 +137,7 @@ extension Typography {
 private extension Typography {
     func generateFixedFont(compatibleWith traitCollection: UITraitCollection?) -> UIFont {
         var traits = traitCollection
-        if !isFixed && fontFamily is SystemFontFamily {
+        if fontFamily is SystemFontFamily {
             // System font already considers accessibility BoldText when
             // we get the scaled font via `UIFontMetrics.scaledFont(for:compatibleWith:)`,
             // so we pass a non-bold trait collection when generating the fixed font, so
