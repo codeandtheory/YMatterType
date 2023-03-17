@@ -144,7 +144,7 @@ final class TypographyLabelTests: TypographyElementTests {
         // we expect label height to be a multiple of the old lineHeight
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight * 2)
 
-        let fontFamily = DefaultFontFamily(familyName: "AvenirNext")
+        let fontFamily = AvenirNextFontFamily()
         let typography = Typography(
             fontFamily: fontFamily,
             fontWeight: .bold,
@@ -364,7 +364,7 @@ private extension TypographyLabelTests {
         line: UInt = #line
     ) -> MockLabel {
         let typography = Typography(
-            familyName: "NotoSans",
+            fontFamily: Typography.notoSans,
             fontWeight: .regular,
             fontSize: 24,
             lineHeight: 32,

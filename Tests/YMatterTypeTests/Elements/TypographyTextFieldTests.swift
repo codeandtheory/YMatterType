@@ -83,7 +83,7 @@ final class TypographyTextFieldTests: TypographyElementTests {
         // we expect text field height to equal the old lineHeight
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight)
 
-        let fontFamily = DefaultFontFamily(familyName: "AvenirNext")
+        let fontFamily = AvenirNextFontFamily()
         let typography = Typography(
             fontFamily: fontFamily,
             fontWeight: .bold,
@@ -211,7 +211,7 @@ final class TypographyTextFieldTests: TypographyElementTests {
         XCTAssertEqual(sut.intrinsicContentSize.height, sut.typography.lineHeight)
 
         // changing the typograhy will restyle the attributed text
-        let fontFamily = DefaultFontFamily(familyName: "AvenirNext")
+        let fontFamily = AvenirNextFontFamily()
         sut.typography = Typography(
             fontFamily: fontFamily,
             fontWeight: .bold,
@@ -299,7 +299,7 @@ final class TypographyTextFieldTests: TypographyElementTests {
 private extension TypographyTextFieldTests {
     func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> MockTextField {
         let typography = Typography(
-            familyName: "NotoSans",
+            fontFamily: Typography.notoSans,
             fontWeight: .regular,
             fontSize: 13,
             lineHeight: 20,
