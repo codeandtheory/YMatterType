@@ -42,7 +42,7 @@ extension Typography {
         /// This will be useful for converting Figma tokens to `Typography` objects.
         /// Common synonyms will be accepted, e.g. both "SemiBold" and "DemiBold" map to `.semibold`.
         /// - Parameter weightName: the case-insensitive weight name, e.g. "Bold"
-        init?(_ weightName: String) {
+        public init?(_ weightName: String) {
             switch weightName.lowercased(with: Locale(identifier: "en_US")) {
             case "ultralight", "extralight":
                 self = .ultralight
