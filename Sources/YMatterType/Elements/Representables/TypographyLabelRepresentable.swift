@@ -9,7 +9,7 @@
 import SwiftUI
 
 /// A wrapper for a UIKit TypographyLabel view that allows to integrate that view into a SwiftUI view hierarchy.
-struct TypographyLabelRepresentable: UIViewRepresentable {
+struct TypographyLabelRepresentable {
     /// The type of view to present.
     typealias UIViewType = TypographyLabel
 
@@ -21,7 +21,9 @@ struct TypographyLabelRepresentable: UIViewRepresentable {
     
     /// A closure that gets called on the init and refresh of the View
     var configureTextStyleLabel: ((TypographyLabel) -> Void)?
+}
 
+extension TypographyLabelRepresentable: UIViewRepresentable {
     /// Creates the view object and configures its initial state.
     ///
     /// - Parameter context: A context structure containing information about
@@ -29,6 +31,10 @@ struct TypographyLabelRepresentable: UIViewRepresentable {
     ///
     /// - Returns: `TypographyLabel` view configured with the provided information.
     func makeUIView(context: Context) -> TypographyLabel {
+        getLabel()
+    }
+
+    func getLabel() -> TypographyLabel {
         let label = TypographyLabel(typography: typography)
         label.text = text
         
@@ -49,8 +55,12 @@ struct TypographyLabelRepresentable: UIViewRepresentable {
     ///   - context: A context structure containing information about the current
     ///     state of the system.
     func updateUIView(_ uiView: TypographyLabel, context: Context) {
-        uiView.typography = typography
-        uiView.text = text
-        configureTextStyleLabel?(uiView)
+        updateLabel(uiView)
+    }
+
+    func updateLabel(_ label: TypographyLabel) {
+        label.typography = typography
+        label.text = text
+        configureTextStyleLabel?(label)
     }
 }

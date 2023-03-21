@@ -15,10 +15,9 @@ final class TextStyleLabelTests: XCTestCase {
         static let fontSize = CGFloat.random(in: 10...60)
     }
     
-    func testTextStyleLabelSingleLine() throws {
-        let fontSize = Constants.fontSize
-        let expectedTypography = Typography.systemLabel.fontSize(fontSize)
+    func testTextStyleLabelSingleLine() {
         let expectedText = Constants.helloWorldText
+        let expectedTypography = Typography.systemLabel.fontSize(Constants.fontSize)
 
         // Given a TextStyleLabel with a single line of text
         let sut = TextStyleLabel(
@@ -36,8 +35,8 @@ final class TextStyleLabelTests: XCTestCase {
         XCTAssertEqual(sut.text, expectedText)
         
         // we expect the font to match the expected
-        XCTAssertEqual(sut.typography.fontSize, fontSize)
-        
+        XCTAssertTypographyEqual(sut.typography, expectedTypography)
+
         // we expect the configuration closusure to update the label
         let labelToUpdate = TypographyLabel(typography: expectedTypography)
         XCTAssertNotEqual(labelToUpdate.lineBreakMode, .byTruncatingMiddle)
@@ -46,34 +45,21 @@ final class TextStyleLabelTests: XCTestCase {
         XCTAssertEqual(labelToUpdate.lineBreakMode, .byTruncatingMiddle)
     }
 
-    func testTypographyLabelRepresentable() throws {
-        let fontSize = Constants.fontSize
-
-        let expectedTypography = Typography.systemLabel.fontSize(fontSize)
+    func test_getLabel_deliversRepresentable() throws {
         let expectedText = Constants.helloWorldText
+        let expectedTypography = Typography.systemLabel.fontSize(Constants.fontSize)
 
-        // Given a TypographyLabelRepresentable with a single line of text
-        let sut = TypographyLabelRepresentable(
-            text: expectedText,
-            typography: expectedTypography,
-            configureTextStyleLabel: { (label: TypographyLabel) in
-                label.textColor = .yellow
-            }
+        // Given a TextStyleLabel with a single line of text
+        let sut = TextStyleLabel(
+            expectedText,
+            typography: expectedTypography
         )
-        // we expect a value
-        XCTAssertNotNil(sut)
-        
-        // we expect the text to match the expected
-        XCTAssertEqual(sut.text, expectedText)
-        
-        // we expect the font to match the expected
-        XCTAssertEqual(sut.typography.fontSize, fontSize)
-        
-        // we expect the configuration closusure to update the label
-        let labelToUpdate = TypographyLabel(typography: expectedTypography)
-        XCTAssertNotEqual(labelToUpdate.textColor, .yellow)
-        
-        sut.configureTextStyleLabel?(labelToUpdate)
-        XCTAssertEqual(labelToUpdate.textColor, .yellow)
+
+        // When
+        let label = try XCTUnwrap(sut.getLabel() as? TypographyLabelRepresentable)
+
+        // Then
+        XCTAssertEqual(label.text, expectedText)
+        XCTAssertTypographyEqual(label.typography, expectedTypography)
     }
 }
