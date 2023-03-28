@@ -7,14 +7,13 @@
 //
 
 import UIKit
-import Foundation
 
 extension String {
-    /// Returns size of the string
+    /// Calculates the size of the string rendered with the specified typography.
     /// - Parameters:
-    ///   - typography: Typography to be used to calculate string size
-    ///   - traitCollection: Trait collection to apply
-    /// - Returns: Size of the string
+    ///   - typography: the typography to be used to calculate the string size
+    ///   - traitCollection: the trait collection to apply
+    /// - Returns: the size of the string
     public func size(
         withTypography typography: Typography,
         compatibleWith traitCollection: UITraitCollection?
@@ -27,8 +26,25 @@ extension String {
         )
     }
 
-    private func size(withFont font: UIFont) -> CGSize {
-        let scale = UIScreen.main.scale
+    /// Calculates the size of the string rendered with the specified font.
+    ///
+    /// The returned size will be rounded up to the nearest pixel in both width and height.
+    /// - Parameters:
+    ///   - font: the font to be used to calculate the string size
+    ///   - traitCollection: the trait collection to apply (used for `displayScale`)
+    /// - Returns: the size of the string
+    public func size(
+        withFont font: UIFont,
+        compatibleWith traitCollection: UITraitCollection? = nil
+    ) -> CGSize {
+        let scale: CGFloat
+        if let displayScale = traitCollection?.displayScale,
+           displayScale != 0.0 {
+            scale = displayScale
+        } else {
+            scale = UIScreen.main.scale
+        }
+        
         let fontAttributes = [NSAttributedString.Key.font: font]
         let size = size(withAttributes: fontAttributes)
         return CGSize(
