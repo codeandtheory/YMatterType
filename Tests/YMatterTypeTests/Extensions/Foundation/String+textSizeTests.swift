@@ -16,7 +16,7 @@ final class StringTextSizeTests: XCTestCase {
             fontWeight: .bold,
             fontSize: 24,
             lineHeight: 32,
-            textStyle: .largeTitle
+            textStyle: .callout
         )
         let sut = "testString"
         // When
@@ -33,12 +33,12 @@ final class StringTextSizeTests: XCTestCase {
             fontWeight: .bold,
             fontSize: 24,
             lineHeight: 32,
-            textStyle: .largeTitle
+            textStyle: .body
         )
         let sut1 = "testString1"
         let sut2 = "testString"
         // When
-        let sutSize1 = sut1.size(withTypography: typography, compatibleWith: nil)
+        let sutSize1 = sut1.size(withTypography: typography, compatibleWith: UITraitCollection.default)
         let sutSize2 = sut2.size(withTypography: typography, compatibleWith: nil)
         // Then
         XCTAssertGreaterThan(sutSize1.height, 0)
@@ -54,7 +54,7 @@ final class StringTextSizeTests: XCTestCase {
             fontWeight: .bold,
             fontSize: 24,
             lineHeight: 32,
-            textStyle: .largeTitle
+            textStyle: .caption1
         )
         let sut = ""
         // When
