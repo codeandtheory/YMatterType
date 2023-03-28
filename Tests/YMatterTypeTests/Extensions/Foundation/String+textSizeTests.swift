@@ -11,7 +11,7 @@ import XCTest
 final class StringTextSizeTests: XCTestCase {
     func test_sizeWithFont_deliversRoundedValues() {
         // Given
-        let scale = CGFloat(Int.random(in: 1...3))
+        let scale = getScale()
         let pointSize = CGFloat(Int.random(in: 10...24))
         let traits = UITraitCollection(displayScale: scale)
         let font = UIFont.systemFont(ofSize: pointSize, weight: .regular)
@@ -29,7 +29,7 @@ final class StringTextSizeTests: XCTestCase {
 
     func test_sizeWithTypography_deliversRoundedValues() throws {
         // Given
-        let scale = CGFloat(Int.random(in: 1...3))
+        let scale = getScale()
         let traits = UITraitCollection(displayScale: scale)
         let typography = try XCTUnwrap(getTypographies().randomElement())
         let sut = "Hello"
@@ -63,6 +63,7 @@ final class StringTextSizeTests: XCTestCase {
         XCTAssertEqual(size.height, typography.lineHeight)
     }
 
+#if !os(tvOS)
     func test_sizeWithTypography_deliversScaledSize() throws {
         // Given
         let typography = try XCTUnwrap(getTypographies().randomElement())
@@ -75,6 +76,7 @@ final class StringTextSizeTests: XCTestCase {
         // Then
         XCTAssertGreaterThan(size.height, typography.lineHeight)
     }
+#endif
 
     func test_longerStrings_deliverGreaterWidths() {
         // Given
@@ -120,6 +122,16 @@ final class StringTextSizeTests: XCTestCase {
 }
 
 extension StringTextSizeTests {
+    func getScale() -> CGFloat {
+        let scale: CGFloat
+#if os(tvOS)
+        scale = UIScreen.main.scale
+#else
+        scale = CGFloat(Int.random(in: 1...3))
+#endif
+        return scale
+    }
+
     func getTypographies() -> [Typography] {
         var typographies: [Typography] = [.systemButton, .systemLabel]
 #if !os(tvOS)
