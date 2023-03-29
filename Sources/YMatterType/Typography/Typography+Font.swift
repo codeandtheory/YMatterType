@@ -27,7 +27,7 @@ extension Typography {
         if !isFixed {
             let metrics = UIFontMetrics(forTextStyle: textStyle)
 
-            if let maximumPointSize = maximumPointSize {
+            if let maximumPointSize = getMaximumPointSize(maximumPointSize) {
                 font = metrics.scaledFont(
                     for: font,
                     maximumPointSize: maximumPointSize,
@@ -131,6 +131,32 @@ extension Typography {
         }
 
         return generateLayout(maximumPointSize: maximumPointSize, compatibleWith: traitCollection)
+    }
+
+    /// Maximum point size (if any).
+    ///
+    /// Calculated from `maximumScaleFactor` (if any) multiplied by `fontSize` or else `nil`
+    public var maximumPointSize: CGFloat? {
+        guard let maximumScaleFactor = maximumScaleFactor else {
+            return nil
+        }
+
+        return maximumScaleFactor * fontSize
+    }
+
+    /// Returns the minimum of the point size (if any) or `maximumPointSize` (if any).
+    /// - Parameter pointSize: optional point size to evaluate
+    /// - Returns: the minimum of point size or maximumPointSize
+    internal func getMaximumPointSize(_ pointSize: CGFloat?) -> CGFloat? {
+        guard let maximumPointSize = maximumPointSize else {
+            return pointSize
+        }
+
+        guard let pointSize = pointSize else {
+            return maximumPointSize
+        }
+
+        return min(pointSize, maximumPointSize)
     }
 }
 

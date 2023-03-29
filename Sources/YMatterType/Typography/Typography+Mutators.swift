@@ -27,6 +27,7 @@ public extension Typography {
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: isFixed
         )
     }
@@ -58,6 +59,7 @@ public extension Typography {
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: isFixed
         )
     }
@@ -79,6 +81,7 @@ public extension Typography {
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: isFixed
         )
     }
@@ -100,6 +103,7 @@ public extension Typography {
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: isFixed
         )
     }
@@ -119,6 +123,7 @@ public extension Typography {
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: true
         )
     }
@@ -140,6 +145,7 @@ public extension Typography {
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: isFixed
         )
     }
@@ -161,6 +167,7 @@ public extension Typography {
             textCase: value,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: isFixed
         )
     }
@@ -182,6 +189,29 @@ public extension Typography {
             textCase: textCase,
             textDecoration: value,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
+            isFixed: isFixed
+        )
+    }
+
+    /// Returns a copy of the Typography but with the new `maximumScaleFactor` applied.
+    /// - Parameter value: the maximum scale factor to apply
+    /// - Returns: an updated copy of the Typography
+    func maximumScaleFactor(_ value: CGFloat?) -> Typography {
+        if maximumScaleFactor == value { return self }
+
+        return Typography(
+            fontFamily: fontFamily,
+            fontWeight: fontWeight,
+            fontSize: fontSize,
+            lineHeight: lineHeight,
+            letterSpacing: letterSpacing,
+            paragraphIndent: paragraphIndent,
+            paragraphSpacing: paragraphSpacing,
+            textCase: textCase,
+            textDecoration: textDecoration,
+            textStyle: textStyle,
+            maximumScaleFactor: value,
             isFixed: isFixed
         )
     }

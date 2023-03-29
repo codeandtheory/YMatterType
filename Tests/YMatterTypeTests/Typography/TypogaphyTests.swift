@@ -50,6 +50,7 @@ final class TypogaphyTests: XCTestCase {
         // Confirm default init parameter values
         XCTAssertEqual(typography.letterSpacing, 0)
         XCTAssertEqual(typography.textStyle, UIFont.TextStyle.body)
+        XCTAssertNil(typography.maximumScaleFactor)
         XCTAssertFalse(typography.isFixed)
     }
 }

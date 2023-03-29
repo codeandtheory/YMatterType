@@ -87,7 +87,7 @@ final class TypographyFontTests: XCTestCase {
             
             // The returned font should not exceed the requested maximum
             XCTAssertEqual(layout.font.pointSize, $0.fontSize * 2)
-            // The returned line height should not exceed th requested maximum
+            // The returned line height should not exceed the requested maximum
             XCTAssertEqual(layout.lineHeight, $0.lineHeight * 2)
             // baselineOffset should be >= 0 and pixel-aligned
             XCTAssertGreaterThanOrEqual(layout.baselineOffset, 0)
@@ -117,7 +117,37 @@ final class TypographyFontTests: XCTestCase {
 
                 // The returned font should not exceed the requested maximum
                 XCTAssertEqual(layout.font.pointSize, size.fontSize * scaleFactor)
-                // The returned line height should not exceed th requested maximum
+                // The returned line height should not exceed the requested maximum
+                XCTAssertEqual(layout.lineHeight, size.lineHeight * scaleFactor)
+                // baselineOffset should be >= 0 and pixel-aligned
+                XCTAssertGreaterThanOrEqual(layout.baselineOffset, 0)
+                XCTAssertEqual(layout.baselineOffset.ceiled(), layout.baselineOffset)
+            }
+        }
+    }
+
+    func testIntrinsicMaximumScaleFactor() {
+        let fontFamily = DefaultFontFamily(familyName: "Menlo")
+        let traits = UITraitCollection(preferredContentSizeCategory: .accessibilityExtraExtraExtraLarge)
+
+        sizes.forEach { size in
+            scaleFactors.forEach { scaleFactor in
+                // Given we build a typography with a built-in max scale factor
+                let typography = Typography(
+                    fontFamily: fontFamily,
+                    fontWeight: .bold,
+                    fontSize: size.fontSize,
+                    lineHeight: size.lineHeight,
+                    maximumScaleFactor: scaleFactor
+                )
+
+               // When we request a layout without specifying any further max
+                // (at the largest supported Dynamic Type size)
+                let layout = typography.generateLayout(compatibleWith: traits)
+
+                // The returned font should not exceed the requested maximum
+                XCTAssertEqual(layout.font.pointSize, size.fontSize * scaleFactor)
+                // The returned line height should not exceed the requested maximum
                 XCTAssertEqual(layout.lineHeight, size.lineHeight * scaleFactor)
                 // baselineOffset should be >= 0 and pixel-aligned
                 XCTAssertGreaterThanOrEqual(layout.baselineOffset, 0)
@@ -157,6 +187,64 @@ final class TypographyFontTests: XCTestCase {
         }
     }
 #endif
+
+    func test_maximumPointSize() {
+        // Given
+        let factors: [CGFloat?] = [nil, 1.5, 2.0, 2.5]
+
+        factors.forEach {
+            let pointSize = CGFloat(Int.random(in: 10...32))
+            let sut = Typography(
+                fontFamily: AppleSDGothicNeoInfo(),
+                fontWeight: .bold,
+                fontSize: pointSize,
+                lineHeight: ceil(pointSize * 1.4),
+                maximumScaleFactor: $0
+            )
+
+            let maximumPointSize = sut.maximumPointSize
+            if let factor = $0 {
+                XCTAssertEqual(maximumPointSize, pointSize * factor)
+            } else {
+                XCTAssertNil(maximumPointSize)
+            }
+        }
+    }
+
+    func test_getMaximumPointSize_withoutMaximumScaleFactor() {
+        // Given
+        let sut = Typography(
+            fontFamily: AppleSDGothicNeoInfo(),
+            fontWeight: .bold,
+            fontSize: 12,
+            lineHeight: 24
+        )
+        let maximumPointSize = CGFloat(Int.random(in: 16...48))
+
+        // Then
+        XCTAssertNil(sut.maximumPointSize)
+        XCTAssertNil(sut.getMaximumPointSize(nil))
+        XCTAssertEqual(sut.getMaximumPointSize(maximumPointSize), maximumPointSize)
+    }
+
+    func test_getMaximumPointSize_withMaximumScaleFactor() {
+        // Given
+        let sut = Typography(
+            fontFamily: AppleSDGothicNeoInfo(),
+            fontWeight: .bold,
+            fontSize: 12,
+            lineHeight: 24,
+            maximumScaleFactor: 2
+        )
+        let lowerPointSize = CGFloat(Int.random(in: 13..<24))
+        let higherPointSize = CGFloat(Int.random(in: 25...48))
+
+        // Then
+        XCTAssertEqual(sut.maximumPointSize, 24)
+        XCTAssertEqual(sut.getMaximumPointSize(nil), sut.maximumPointSize)
+        XCTAssertEqual(sut.getMaximumPointSize(lowerPointSize), lowerPointSize)
+        XCTAssertEqual(sut.getMaximumPointSize(higherPointSize), sut.maximumPointSize)
+    }
 }
 
 struct AppleSDGothicNeoInfo: FontFamily {

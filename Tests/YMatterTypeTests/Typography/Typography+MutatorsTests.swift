@@ -101,6 +101,15 @@ final class TypographyMutatorsTests: XCTestCase {
         }
     }
 
+    func testMaximumScaleFactor() {
+        let factors: [CGFloat?] = [nil, 1.5, 2.0, 2.5]
+        types.forEach {
+            for factor in factors {
+                _test(original: $0, modified: $0.maximumScaleFactor(factor), maximumScaleFactor: factor)
+            }
+        }
+    }
+
     private func _test(
         original: Typography,
         modified: Typography,
@@ -111,7 +120,8 @@ final class TypographyMutatorsTests: XCTestCase {
         isFixed: Bool? = nil,
         letterSpacing: CGFloat? = nil,
         textCase: Typography.TextCase? = nil,
-        textDecoration: Typography.TextDecoration? = nil
+        textDecoration: Typography.TextDecoration? = nil,
+        maximumScaleFactor: CGFloat? = nil
     ) {
         let familyName = familyName ?? original.fontFamily.familyName
         let weight = weight ?? original.fontWeight
@@ -121,6 +131,7 @@ final class TypographyMutatorsTests: XCTestCase {
         let kerning = letterSpacing ?? original.letterSpacing
         let textCase = textCase ?? original.textCase
         let textDecoration = textDecoration ?? original.textDecoration
+        let maximumScaleFactor = maximumScaleFactor ?? original.maximumScaleFactor
 
         // familyName, fontWeight, fontSize, lineHeight, isFixed,
         // letterSpacing, textCase, and textDecoration should be as expected
@@ -132,6 +143,7 @@ final class TypographyMutatorsTests: XCTestCase {
         XCTAssertEqual(modified.letterSpacing, kerning)
         XCTAssertEqual(modified.textCase, textCase)
         XCTAssertEqual(modified.textDecoration, textDecoration)
+        XCTAssertEqual(modified.maximumScaleFactor, maximumScaleFactor)
 
         // the other variables should be the same
         XCTAssertEqual(modified.textStyle, original.textStyle)
