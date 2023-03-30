@@ -31,6 +31,11 @@ public struct Typography {
     /// The text style (e.g. Body or Title) that this font most closely represents.
     /// Used for Dynamic Type scaling of the font
     public let textStyle: UIFont.TextStyle
+    /// Maximum scale factor to apply for this typography. `nil` means no limit.
+    ///
+    /// Will not be considered if `isFixed == true`.
+    /// Do not set to `1.0`, but set `isFixed = true` to disable Dynamic Type scaling.
+    public let maximumScaleFactor: CGFloat?
     /// Whether this font is fixed in size or should be scaled through Dynamic Type
     public let isFixed: Bool
 
@@ -54,6 +59,7 @@ public struct Typography {
     ///   - textCase: text case to apply (defaults to `.none`)
     ///   - textDecoration: text decoration to apply (defaults to `.none`)
     ///   - textStyle: text style to use for scaling (defaults to `.body`)
+    ///   - maximumScaleFactor: maximum scale factor to apply (defaults to `nil`)
     ///   - isFixed: `true` if this font should never scale, `false` if it should scale (defaults to `.false`)
     public init(
         fontFamily: FontFamily,
@@ -66,6 +72,7 @@ public struct Typography {
         textCase: TextCase = .none,
         textDecoration: TextDecoration = .none,
         textStyle: UIFont.TextStyle = .body,
+        maximumScaleFactor: CGFloat? = nil,
         isFixed: Bool = false
     ) {
         self.fontFamily = fontFamily
@@ -78,6 +85,7 @@ public struct Typography {
         self.textCase = textCase
         self.textDecoration = textDecoration
         self.textStyle = textStyle
+        self.maximumScaleFactor = maximumScaleFactor
         self.isFixed = isFixed
     }
 
@@ -94,6 +102,7 @@ public struct Typography {
     ///   - textCase: text case to apply (defaults to `.none`)
     ///   - textDecoration: text decoration to apply (defaults to `.none`)
     ///   - textStyle: text style to use for scaling (defaults to `.body`)
+    ///   - maximumScaleFactor: maximum scale factor to apply (defaults to `nil`)
     ///   - isFixed: `true` if this font should never scale, `false` if it should scale (defaults to `.false`)
     public init(
         familyName: String,
@@ -107,6 +116,7 @@ public struct Typography {
         textCase: TextCase = .none,
         textDecoration: TextDecoration = .none,
         textStyle: UIFont.TextStyle = .body,
+        maximumScaleFactor: CGFloat? = nil,
         isFixed: Bool = false
     ) {
         self.init(
@@ -120,6 +130,7 @@ public struct Typography {
             textCase: textCase,
             textDecoration: textDecoration,
             textStyle: textStyle,
+            maximumScaleFactor: maximumScaleFactor,
             isFixed: isFixed
         )
     }
