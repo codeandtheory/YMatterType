@@ -64,10 +64,6 @@ public protocol FontFamily {
     func accessibilityBoldWeight(for weight: Typography.FontWeight) -> Typography.FontWeight
 }
 
-extension Typography {
-    fileprivate static let logger = Logger(subsystem: "YMatterType", category: "fonts")
-}
-
 // MARK: - Default implementations
 
 /// Default implementations
@@ -88,7 +84,9 @@ extension FontFamily {
         let name = fontName(for: weight, compatibleWith: traitCollection)
         guard let font = UIFont(name: name, size: pointSize) else {
             // Fallback to system font and log a message.
-            Typography.logger.warning("Custom font \(name) not properly installed.")
+            if YMatterType.isLoggingEnabled {
+                YMatterType.fontLogger.warning("Custom font \(name) not properly installed.")
+            }
             return Typography.systemFamily.font(
                 for: weight,
                 pointSize: pointSize,
