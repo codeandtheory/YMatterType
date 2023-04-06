@@ -92,7 +92,7 @@ extension Typography {
 
 struct NotoSansFactory: FontFamilyFactory {
     // Always returns Noto Sans font family
-    func getFontFamily(familyName: String, style: YMatterType.Typography.FontStyle) -> YMatterType.FontFamily {
+    func getFontFamily(familyName: String, style: Typography.FontStyle) -> FontFamily {
         Typography.notoSans
     }
 }
