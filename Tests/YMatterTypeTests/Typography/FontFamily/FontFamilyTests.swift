@@ -178,3 +178,4 @@ final class WeightlessFontFamily: FontFamily {
 
     func weightName(for weight: Typography.FontWeight) -> String { weightName }
 }
+// swiftlint:enable large_tuple

@@ -132,3 +132,4 @@ private final class NonMutableParagraphStyle: NSParagraphStyle {
         return self
     }
 }
+// swiftlint:enable large_tuple

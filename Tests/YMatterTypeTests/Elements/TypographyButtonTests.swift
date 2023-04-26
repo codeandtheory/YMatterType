@@ -442,3 +442,5 @@ extension String {
         replacingOccurrences(of: " ", with: "")
     }
 }
+// swiftlint:enable type_body_length
+// swiftlint:enable file_length
