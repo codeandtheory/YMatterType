@@ -87,3 +87,4 @@ private extension UITraitCollectionFontAppearanceTests {
         ].map({ UITraitCollection(traitsFrom: [.default, $0]) })
     }
 }
+// swiftlint:enable large_tuple

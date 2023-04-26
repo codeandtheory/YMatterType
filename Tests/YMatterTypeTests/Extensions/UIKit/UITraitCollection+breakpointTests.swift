@@ -91,3 +91,4 @@ private extension UITraitCollectionBreakpointTests {
         ].map({ UITraitCollection(traitsFrom: [startingTraits, $0]) })
     }
 }
+// swiftlint:enable large_tuple
